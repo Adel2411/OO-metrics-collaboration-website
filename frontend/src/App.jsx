@@ -10,9 +10,9 @@ import {ToastContainer, Slide} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 //Components :
-import Dashboard from "./components/Dashboard";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Dashboard from "./main-components/Dashboard";
+import Login from "./main-components/Login";
+import Register from "./main-components/Register";
 
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
     return ( <Fragment>
         <Router>
             <div className="container">
-                <ToastContainer theme="colored" transition={Slide} position="top-center"/>
+                <ToastContainer theme="colored" transition={Slide} position="bottom-right"/>
                 <Routes>
                     <Route path="/dashboard" element={isAuthenticated ? <Dashboard setAuth={setAuth}/> : <Navigate to={'/login'} />} />
                     <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setAuth={setAuth} />} />

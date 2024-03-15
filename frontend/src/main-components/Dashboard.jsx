@@ -24,7 +24,7 @@ const Dashboard = ({setAuth}) => {
         e.preventDefault();
         localStorage.removeItem("token");
         setAuth(false);
-        toast.success("Logout successfully");
+        toast.success("Logout successfully, goodbye !");
     }
 
     useEffect(() => {
