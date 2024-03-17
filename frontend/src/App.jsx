@@ -42,14 +42,15 @@ function App() {
         isAuthorized();
     }, []);
 
-    return ( <Fragment>
+    return (<Fragment>
         <Router>
-            <div className="container">
+            <div className="Router bg-second text-fourth">
                 <ToastContainer theme="colored" transition={Slide} position="bottom-right"/>
                 <Routes>
                     <Route path="/dashboard" element={isAuthenticated ? <Dashboard setAuth={setAuth}/> : <Navigate to={'/login'} />} />
                     <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setAuth={setAuth} />} />
                     <Route path="/register" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register setAuth={setAuth}/>} />
+                    <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
                 </Routes>
             </div>
         </Router>
