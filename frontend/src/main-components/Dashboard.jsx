@@ -2,10 +2,10 @@ import React, {Fragment, useEffect, useState} from "react";
 import {toast} from "react-toastify";
 
 //Dashboard component
-import Documentation from "../dashboard-components/documentation.jsx";
-import Implement from "../dashboard-components/implement.jsx";
-import Search from "../dashboard-components/search.jsx";
-import Navbar from "../dashboard-components/navbar.jsx";
+import Documentation from "../dashboard-components/Documentation.jsx";
+import Implement from "../dashboard-components/Implement.jsx";
+import Search from "../dashboard-components/Search.jsx";
+import Navbar from "../dashboard-components/Navbar.jsx";
 
 const Dashboard = ({setAuth}) => {
     const [name, setName] = useState("");
@@ -17,7 +17,7 @@ const Dashboard = ({setAuth}) => {
 
     const navbar = document.querySelector(".navbar");
     window.addEventListener("scroll", (e) => {
-        if (window.scrollY > 100) {
+        if (window.scrollY > 0) {
             navbar.classList.add("fixed");
         } else {
             navbar.classList.remove("fixed");
