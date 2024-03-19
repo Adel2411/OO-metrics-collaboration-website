@@ -48,7 +48,7 @@ const Register = ({setAuth}) => {
     return (
         <Fragment>
             <div className="flex items-center justify-center h-screen">
-                <div className="card w-2/5 bg-first shadow-xl">
+                <div className="card sm:w-1/2 xl:w-1/3 bg-first shadow-xl">
                     <div className="card-body flex justify-center items-center">
                         <h1 className="my-5 title">Register</h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
@@ -83,7 +83,7 @@ const Register = ({setAuth}) => {
                                 onChange={handleChange}
                             />
                             <div className="flex items-center justify-center my-5">
-                                <button className="btn btn-accent">Sign up</button>
+                                <button className="btn border-none bg-fourth text-white hover:bg-third">Sign up</button>
                             </div>
                             <div className="my-5 flex flex-row">
                                 <p>Already have an account ?</p>

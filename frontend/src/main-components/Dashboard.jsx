@@ -15,6 +15,15 @@ const Dashboard = ({setAuth}) => {
         setCurrentPage(page);
     }
 
+    const navbar = document.querySelector(".navbar");
+    window.addEventListener("scroll", (e) => {
+        if (window.scrollY > 100) {
+            navbar.classList.add("fixed");
+        } else {
+            navbar.classList.remove("fixed");
+        }
+    })
+
     async function getName() {
         try {
             const response = await fetch("http://localhost:8000/dashboard", {
