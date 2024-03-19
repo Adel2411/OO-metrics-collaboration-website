@@ -44,7 +44,7 @@ function App() {
 
     return (<Fragment>
         <Router>
-            <div className="Router bg-second text-fourth">
+            <div className="Router bg-third text-white">
                 <ToastContainer theme="colored" transition={Slide} position="bottom-right"/>
                 <Routes>
                     <Route path="/dashboard" element={isAuthenticated ? <Dashboard setAuth={setAuth}/> : <Navigate to={'/login'} />} />

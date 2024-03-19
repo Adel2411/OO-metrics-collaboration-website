@@ -61,7 +61,7 @@ const Login = ({setAuth}) => {
                                 type="email"
                                 name="email"
                                 placeholder="email"
-                                className="input input-bordered w-full my-2"
+                                className="input input-bordered w-full my-2 bg-second"
                                 value={email}
                                 onChange={handleChange}
                             />
@@ -69,7 +69,7 @@ const Login = ({setAuth}) => {
                                 type="password"
                                 name="password"
                                 placeholder="password"
-                                className="input input-bordered w-full my-2"
+                                className="input input-bordered w-full my-2 bg-second"
                                 value={password}
                                 onChange={handleChange}
                             />

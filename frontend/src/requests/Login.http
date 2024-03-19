@@ -1,8 +1,7 @@
-POST https://spring-vzht.onrender.com/api/v1/tmp_user/add
+POST https://spring-vzht.onrender.com/api/v1/tmp_user/login
 Content-Type: application/json
 
 {
-  "email": "dfjiwo@gjoi.com",
   "username": "walido",
   "password": "tiri brk"
 }

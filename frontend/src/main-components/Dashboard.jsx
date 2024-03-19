@@ -1,8 +1,19 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {toast} from "react-toastify";
 
+//Dashboard component
+import Documentation from "../dashboard-components/documentation.jsx";
+import Implement from "../dashboard-components/implement.jsx";
+import Search from "../dashboard-components/search.jsx";
+import Navbar from "../dashboard-components/navbar.jsx";
+
 const Dashboard = ({setAuth}) => {
     const [name, setName] = useState("");
+
+    const [currentPage, setCurrentPage] = useState(1);
+    function setPage(page) {
+        setCurrentPage(page);
+    }
 
     async function getName() {
         try {
@@ -34,8 +45,12 @@ const Dashboard = ({setAuth}) => {
 
     return (
         <Fragment>
-            <h1 className="my-5 text-center">Welcome {name}</h1>
-            <button className="btn btn-block btn-info" onClick={Logout}>Log out</button>
+            <div className="h-screen">
+               <Navbar name={name} logout={Logout} setPage={setPage}/>
+                {currentPage === 1 && <Documentation/>}
+                {currentPage === 2 && <Search/>}
+                {currentPage === 3 && <Implement/>}
+            </div>
         </Fragment>
     );
 }
