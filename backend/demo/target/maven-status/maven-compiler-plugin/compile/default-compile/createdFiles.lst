@@ -7,6 +7,8 @@ com/example/demo/auth/AuthenticationResponse.class
 com/example/demo/Requests/CodeImplementationRequest.class
 com/example/demo/repository/codeImplementationRepository.class
 com/example/demo/Service/CodeImplementationService.class
+com/example/demo/Requests/TokenRequest.class
+com/example/demo/token/JwtVerificationController.class
 com/example/demo/Model/CodeImplementation$CodeImplementationBuilder.class
 com/example/demo/auth/AuthenticationService.class
 com/example/demo/config/ModelConfig.class
