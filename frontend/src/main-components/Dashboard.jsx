@@ -6,6 +6,7 @@ import Documentation from "../dashboard-components/Documentation.jsx";
 import Implement from "../dashboard-components/Implement.jsx";
 import Search from "../dashboard-components/Search.jsx";
 import Navbar from "../dashboard-components/Navbar.jsx";
+import Metric from "../dashboard-components/Metric.jsx";
 
 const Dashboard = ({setAuth}) => {
     const [name, setName] = useState("");
@@ -57,8 +58,9 @@ const Dashboard = ({setAuth}) => {
             <div className="h-screen">
                <Navbar name={name} logout={Logout} setPage={setPage}/>
                 {currentPage === 1 && <Documentation/>}
-                {currentPage === 2 && <Search/>}
-                {currentPage === 3 && <Implement/>}
+                {currentPage === 2 && <Metric/>}
+                {currentPage === 3 && <Search/>}
+                {currentPage === 4 && <Implement/>}
             </div>
         </Fragment>
     );

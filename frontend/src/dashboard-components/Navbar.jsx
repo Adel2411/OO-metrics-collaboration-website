@@ -13,8 +13,9 @@ function Navbar({name, logout, setPage}) {
               <ul tabIndex={0}
                   className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-second rounded-box w-52">
                   <li><a onClick={(e) => setPage(1)} className="menu-link">Documentation</a></li>
-                  <li><a onClick={(e) => setPage(2)} className="menu-link">Search</a></li>
-                  <li><a onClick={(e) => setPage(3)} className="menu-link">Implementation</a></li>
+                    <li><a onClick={(e) => setPage(2)} className="menu-link">Metric</a></li>
+                  <li><a onClick={(e) => setPage(3)} className="menu-link">Search</a></li>
+                  <li><a onClick={(e) => setPage(4)} className="menu-link">Implementation</a></li>
               </ul>
           </div>
           <div className="flex-1">

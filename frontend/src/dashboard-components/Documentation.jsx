@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import MathJax from 'react-mathjax2';
@@ -6,6 +6,7 @@ import {findReturnStatement} from "eslint-plugin-react/lib/util/ast.js";
 
 function Documentation() {
     const [copy, setCopy] = useState(false);
+    const [documents, setDocuments] = useState([]);
 
     function handleCopy() {
         navigator.clipboard.writeText(codeString);
@@ -14,6 +15,14 @@ function Documentation() {
             setCopy(false);
         }, 3000);
     }
+
+    // needs to be fixed with CORS
+    // useEffect(async () => {
+    //     const response = await fetch("http://localhost:8080/api/v1/app/documents");
+    //     response.then(res => res.json()).then(data => {
+    //         console.log(data);
+    //     });
+    // }, []);
 
     const displayListElementLink = (id, title) => {
         id = "#" + id;
