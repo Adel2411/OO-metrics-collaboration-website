@@ -5,11 +5,11 @@ import {toast} from "react-toastify";
 const Login = ({setAuth}) => {
 
     const [inputs, setInputs] = useState({
-        email: "",
+        username: "",
         password: ""
     });
 
-    const {email, password} = inputs;
+    const {username, password} = inputs;
     const handleChange = (e) => {
         setInputs({
             ...inputs,
@@ -20,9 +20,9 @@ const Login = ({setAuth}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const body = {email, password}
+            const body = {username, password}
 
-            const response = await fetch("http://localhost:8000/auth/login", {
+            const response = await fetch("http://localhost:8080/api/v1/auth/login", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
@@ -30,13 +30,13 @@ const Login = ({setAuth}) => {
 
             const jsonResponse = await response.json();
 
-            if(jsonResponse.token){
-                localStorage.setItem("token", jsonResponse.token);
+            if(jsonResponse.status === 200){
+                localStorage.setItem("token", jsonResponse.response);
                 setAuth(true);
                 toast.success("Login successfully");
             } else {
                 setAuth(false);
-                toast.error(jsonResponse);
+                toast.error(jsonResponse.response);
             }
 
         } catch(err) {
@@ -58,11 +58,11 @@ const Login = ({setAuth}) => {
                         </svg>
                         <form onSubmit={handleSubmit}>
                             <input
-                                type="email"
-                                name="email"
-                                placeholder="email"
+                                type="text"
+                                name="username"
+                                placeholder="username"
                                 className="input input-bordered w-full my-2 bg-second"
-                                value={email}
+                                value={username}
                                 onChange={handleChange}
                             />
                             <input

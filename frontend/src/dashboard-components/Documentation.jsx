@@ -16,19 +16,17 @@ function Documentation() {
         }, 3000);
     }
 
-    // needs to be fixed with CORS
-    // useEffect(async () => {
-    //     const response = await fetch("http://localhost:8080/api/v1/app/documents");
-    //     response.then(res => res.json()).then(data => {
-    //         console.log(data);
-    //     });
-    // }, []);
+    useEffect( () => {
+       fetch("http://localhost:8080/api/v1/app/documents")
+              .then(response => response.json())
+                .then(data => setDocuments(data));
+    }, []);
 
     const displayListElementLink = (id, title) => {
         id = "#" + id;
         return (
             <div className="flex justify-center link link-hover decoration-0 rounded-box hover:bg-third">
-                <li className="py-3"><a href={id} className="subtitle">{title}</a></li>
+                <li className=""><a href={id} className="subtitle">{title}</a></li>
             </div>
         );
     }
@@ -141,14 +139,12 @@ function Documentation() {
     return (
         <div className="z-0">
             <div className="h-fit relative">
-                <div className=" w-1/4 bg-fourth flex flex-col justify-center items-center h-screen fixed">
+                <div className=" w-1/4 bg-fourth flex py-20 flex-col items-center h-screen fixed">
                     <h1>Available Metrics</h1>
-                    <ul className="flex flex-col gap-y-3 w-screen">
-                        {displayListElementLink("1", "Documentation1")}
-                        {displayListElementLink("2", "Documentation2")}
-                        {displayListElementLink("3", "Documentation3")}
-                        {displayListElementLink("4", "Documentation4")}
-                        {displayListElementLink("5", "Documentation5")}
+                    <ul className="flex flex-col w-screen">
+                        {documents.map((document, index) => {
+                            return displayListElementLink(index, document.metricName);
+                        })}
                     </ul>
                 </div>
                 <div className="w-3/4 bg-second flex flex-col absolute right-0">
@@ -156,11 +152,9 @@ function Documentation() {
                         <h1 className="title py-10 underline underline-offset-8">Documentation</h1>
                     </div>
                     <ul className="flex flex-col gap-y-3 py-20 ">
-                        {displayListElement("1", "Documentation 1", description, tex, codeString)}
-                        {displayListElement("2", "Documentation 2", description, tex, codeString2)}
-                        {displayListElement("3", "Documentation 3", description, tex, codeString)}
-                        {displayListElement("4", "Documentation 4", description, tex, codeString2)}
-                        {displayListElement("5", "Documentation 5", description, tex, codeString)}
+                        {documents.map((document, index) => {
+                            return displayListElement(index, document.metricName, document.researchDescription, document.metricMathFormula, document.code);
+                        })}
                     </ul>
               </div>
           </div>

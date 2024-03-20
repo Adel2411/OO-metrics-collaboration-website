@@ -27,14 +27,19 @@ const Dashboard = ({setAuth}) => {
 
     async function getName() {
         try {
-            const response = await fetch("http://localhost:8000/dashboard", {
-                method: "GET",
-                headers: {token: localStorage.getItem("token")}
+            const response = await fetch("http://localhost:8080/api/v1/auth/getuser", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({token: localStorage.getItem("token")})
             });
 
             const jsonResponse = await response.json();
 
-            setName(jsonResponse.user_name);
+            if (jsonResponse.status !== 200) {
+                toast.error(jsonResponse.response);
+            } else {
+                setName(jsonResponse.response);
+            }
 
         } catch (err) {
             console.error(err.message)

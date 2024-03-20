@@ -24,17 +24,23 @@ function App() {
 
     async function isAuthorized() {
         try {
-            const response = await fetch("http://localhost:8000/auth/is-verify", {
-                method: "GET",
-                headers: {token: localStorage.getItem("token")}
+            const response = await fetch("http://localhost:8080/api/v1/auth/verify", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({token: localStorage.getItem("token")}),
             });
 
             const jsonResponse = await response.json();
 
-            setAuth(jsonResponse);
+            if (!jsonResponse || jsonResponse.status !== 200) {
+                localStorage.removeItem("token");
+            } else {
+                setAuth(true);
+            }
 
         } catch (err) {
             console.error(err.message)
+            localStorage.removeItem("token");
         }
     }
 

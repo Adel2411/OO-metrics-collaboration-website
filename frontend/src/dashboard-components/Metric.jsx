@@ -1,14 +1,46 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 function Metric() {
     const [showModal, setShowModal] = React.useState(false);
+    const [metrics, setMetrics] = React.useState([]);
+
+    useEffect( () => {
+        fetch("http://localhost:8080/api/v1/app/metrics")
+            .then(response => response.json())
+            .then(data => setMetrics(data));
+    }, [metrics]);
+
+    function handleAddMetric() {
+        // const metricName = document.querySelector("input[name='name']").value;
+        // setMetrics([...metrics, metricName]);
+        // setShowModal(false);
+        try {
+            const metricName = document.querySelector("input[name='name']").value;
+            const body = {name: metricName};
+
+            fetch("http://localhost:8080/api/v1/app/add/metric", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            })
+                .then(response => response.json()).then(data => setShowModal(false));
+
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+    function handleDeleteMetric(e) {
+        // e.preventDefault();
+        // const index = metrics.indexOf(e.target.parentElement.parentElement.firstChild.textContent);
+        // setMetrics(metrics.filter((_, i) => i !== index));
+    }
 
     const displayListElement = (text) => {
         return (
             <div className=" py-3 shadow shadow-black  flex justify-between rounded-box bg-second my-5">
                 <li className="px-10 flex items-center">{text}</li>
                 <span className="px-10">
-                    <button className="btn btn-ghost btn-square text-red-600" onClick={() => setShowModal(true)}>
+                    <button className="btn btn-ghost btn-square text-red-600" onClick={(e) => handleDeleteMetric(e)}>
                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             className="w-6 h-6">
   <path fillRule="evenodd"
@@ -27,22 +59,11 @@ function Metric() {
             <div className="flex flex-col items-center gap-10">
                 <h1 className="title underline">Metrics</h1>
                 <ul className="w-full">
-                    {displayListElement("Cyclomatic Complexity")}
-                    {displayListElement("Lines of Code")}
-                    {displayListElement("Number of Methods")}
-                    {displayListElement("Number of Classes")}
-                    {displayListElement("Number of Attributes")}
-                    {displayListElement("Number of Comments")}
-                    {displayListElement("Number of Packages")}
-                    {displayListElement("Number of Interfaces")}
-                    {displayListElement("Number of Enums")}
-                    {displayListElement("Number of Abstract Classes")}
-                    {displayListElement("Number of Concrete Classes")}
-                    {displayListElement("Number of Static Methods")}
-                    {displayListElement("Number of Public Methods")}
-                    {displayListElement("Number of Private Methods")}
-                    {displayListElement("Number of Protected Methods")}
-                    {displayListElement("Number of Default Methods")}
+                    {metrics.map((metric) => (
+                        <div key={metric.id}>
+                            {displayListElement(metric.name)}
+                        </div>
+                    ))}
                 </ul>
             </div>
             <div className="flex justify-end">
@@ -103,7 +124,7 @@ function Metric() {
                                     <button
                                         className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => setShowModal(false)}
+                                        onClick={handleAddMetric}
                                     >
                                         Add
                                     </button>

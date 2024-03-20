@@ -5,12 +5,12 @@ import {toast} from "react-toastify";
 const Register = ({setAuth}) => {
 
     const [inputs, setInputs] = useState({
-        name: "",
+        username: "",
         email: "",
         password: ""
     });
 
-    const {name, email, password} = inputs;
+    const {username, email, password} = inputs;
     const handleChange = (e) => {
         setInputs({
             ...inputs,
@@ -21,9 +21,9 @@ const Register = ({setAuth}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const body = {name, email, password};
+            const body = {username, email, password};
 
-            const response = await fetch("http://localhost:8000/auth/register", {
+            const response = await fetch("http://localhost:8080/api/v1/auth/register", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
@@ -31,13 +31,13 @@ const Register = ({setAuth}) => {
 
             const jsonResponse = await response.json();
 
-            if (jsonResponse.token) {
-                localStorage.setItem("token", jsonResponse.token);
+            if (jsonResponse.status === 200) {
+                localStorage.setItem("token", jsonResponse.response);
                 setAuth(true);
                 toast.success("successfully registered!");
             } else {
                 setAuth(false);
-                toast.error(jsonResponse);
+                toast.error(jsonResponse.response);
             }
 
         }catch(err){
@@ -60,10 +60,10 @@ const Register = ({setAuth}) => {
                         <form onSubmit={handleSubmit}>
                             <input
                                 type="text"
-                                name="name"
-                                placeholder="user name"
+                                name="username"
+                                placeholder="username"
                                 className="input input-bordered w-full my-2 bg-second"
-                                value={name}
+                                value={username}
                                 onChange={handleChange}
                             />
                             <input
