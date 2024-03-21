@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import MathJax from "react-mathjax2";
-import { findReturnStatement } from "eslint-plugin-react/lib/util/ast.js";
 
 function Documentation() {
   const [copy, setCopy] = useState({});
