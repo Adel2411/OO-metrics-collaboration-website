@@ -24,4 +24,7 @@ public class Research {
     private Metric metricId;
     private String description;
     private String MathFormula;
+
+    @Transient
+    private int status;
 }

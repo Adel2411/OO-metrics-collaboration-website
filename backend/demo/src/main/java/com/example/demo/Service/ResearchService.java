@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.Model.Metric;
 import com.example.demo.Model.Research;
+import com.example.demo.Requests.ResearchPutRequest;
 import com.example.demo.Requests.ResearchRequest;
 import com.example.demo.repository.metricRepository;
 import com.example.demo.repository.researchRepository;
@@ -37,5 +38,16 @@ public class ResearchService {
 
         research.setMetricId(metric);
         return researchRepository.save(research);
+    }
+
+
+    public Research updateResearch(ResearchPutRequest research) {
+        Research researchToUpdate = researchRepository.findById(UUID.fromString(research.getId()))
+                .orElseThrow(() -> new RuntimeException("Research not found"));
+
+        researchToUpdate.setDescription(research.getDescription());
+        researchToUpdate.setMathFormula(research.getMathFormula());
+
+        return researchRepository.save(researchToUpdate);
     }
 }

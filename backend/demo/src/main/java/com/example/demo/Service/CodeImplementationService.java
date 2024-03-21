@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.Model.CodeImplementation;
 import com.example.demo.Model.Research;
+import com.example.demo.Requests.CodeImplementationPutRequest;
 import com.example.demo.Requests.CodeImplementationRequest;
 import com.example.demo.repository.codeImplementationRepository;
 import com.example.demo.repository.researchRepository;
@@ -35,5 +36,13 @@ public class CodeImplementationService {
 
         newCodeImplementation.setReseach_id(research);
         return codeImplementationRepository.save(newCodeImplementation);
+    }
+
+    public CodeImplementation update(CodeImplementationPutRequest codeImplementation) {
+        CodeImplementation codeImplementationToUpdate = codeImplementationRepository.findById(UUID.fromString(codeImplementation.getId()))
+                .orElseThrow(() -> new RuntimeException("Code Implementation not found"));
+
+        codeImplementationToUpdate.setCode(codeImplementation.getCode());
+        return codeImplementationRepository.save(codeImplementationToUpdate);
     }
 }
