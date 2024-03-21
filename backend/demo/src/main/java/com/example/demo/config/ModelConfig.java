@@ -20,7 +20,6 @@ import java.util.List;
 @RequestMapping("/api/v1/app")
 @CrossOrigin(origins = "http://localhost:5173")
 public class ModelConfig {
-
     private DocumentService documentService;
     private ModelService modelService;
 

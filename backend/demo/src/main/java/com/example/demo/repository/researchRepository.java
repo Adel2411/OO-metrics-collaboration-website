@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface researchRepository extends JpaRepository<Research , UUID> {
 
-    @Query
-    List<Object> findReseachWithStatus();
+//    @Query
+//    List<Object> findReseachWithStatus();
 }
