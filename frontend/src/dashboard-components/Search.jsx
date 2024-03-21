@@ -18,30 +18,26 @@ function Search() {
       .then((data) => setMetrics(data));
   }, [metrics]);
 
-  function handleAddResearch() {
+  function handleAddResearch(id) {
     // const metricName = document.querySelector("input[name='name']").value;
     // setMetrics([...metrics, metricName]);
     // setShowModal(false);
     try {
-      const metricName = document.querySelector("input[name='name']").value;
-      const body = { name: metricName };
+      const researchDescription = document.querySelector("textarea[name='description']").value;
+        const researchFormula = document.querySelector("input[name='formula']").value;
+        const body = { metricId: id, description: researchDescription, mathFormula: researchFormula };
 
-      fetch("http://localhost:8080/api/v1/app/add/metric", {
+      fetch("http://localhost:8080/api/v1/app/add/research", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
-        .then((data) => setShowModal(false));
-      toast.success("Metric added successfully !");
+        .then((data) => setActiveModal(null));
+      toast.success("Research added successfully ! you can check it in the Metrics tab.");
     } catch (err) {
       console.error(err.message);
     }
-  }
-  function handleDeleteMetric(e) {
-    // e.preventDefault();
-    // const index = metrics.indexOf(e.target.parentElement.parentElement.firstChild.textContent);
-    // setMetrics(metrics.filter((_, i) => i !== index));
   }
 
   const displayListElement = (metric) => {
@@ -68,13 +64,13 @@ function Search() {
         <h1 className="title underline pt-20">Researches</h1>
         <ul className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
           {metrics
-            .filter((metric) => metric.status)
+            .filter((metric) => !metric.status)
             .map((metric) => (
               <div key={metric.id}>{displayListElement(metric)}</div>
             ))}
         </ul>
         {metrics
-          .filter((metric) => metric.status)
+          .filter((metric) => !metric.status)
           .map((metric) => (
             <div>
               {activeModal === metric.id ? (
@@ -130,7 +126,7 @@ function Search() {
                               <button
                                   className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
-                            onClick={handleAddResearch}
+                            onClick={() => handleAddResearch(metric.id)}
                           >
                             Add
                           </button>
