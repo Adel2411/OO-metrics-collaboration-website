@@ -10,6 +10,10 @@ import java.util.UUID;
 @Repository
 public interface researchRepository extends JpaRepository<Research , UUID> {
 
-//    @Query
-//    List<Object> findReseachWithStatus();
+
+    @Query(value = "SELECT m.*, " +
+            "CASE WHEN EXISTS (SELECT 1 FROM codeimplementation r WHERE r.research_id = m.id) " +
+            "THEN 1 ELSE 0 END AS status " +
+            "FROM research m", nativeQuery = true)
+    List<Object []> findResearchWithStatus();
 }

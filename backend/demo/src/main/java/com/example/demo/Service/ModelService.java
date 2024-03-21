@@ -43,7 +43,7 @@ public class ModelService {
     }
 
     public List<Research> getResearch() {
-        return researchRepository.findAll();
+        return researchService.getAllResearchWithStatus();
     }
 
     public List<CodeImplementation> getCodeImplementation() {

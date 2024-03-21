@@ -9,6 +9,8 @@ import com.example.demo.repository.researchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -49,5 +51,22 @@ public class ResearchService {
         researchToUpdate.setMathFormula(research.getMathFormula());
 
         return researchRepository.save(researchToUpdate);
+    }
+
+    public List<Research> getAllResearchWithStatus() {
+        List<Object[]> researchWithStatus = researchRepository.findResearchWithStatus();
+        List<Research> researchList = new ArrayList<>();
+        for (Object[] research : researchWithStatus) {
+            Research newResearch = Research
+                    .builder()
+                    .id(UUID.fromString(research[0].toString()))
+                    .metricId(metricRepository.findById(UUID.fromString(research[1].toString())).orElseThrow())
+                    .description(research[2].toString())
+                    .MathFormula(research[3].toString())
+                    .status(Integer.parseInt(research[4].toString()))
+                    .build();
+            researchList.add(newResearch);
+        }
+        return researchList;
     }
 }
