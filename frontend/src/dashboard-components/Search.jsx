@@ -107,9 +107,7 @@ function Search() {
                                 <label htmlFor="description" className="label">
                                     Description :
                                 </label>
-                                <textarea name="description" rows="5" cols="10" className="w-full textarea bg-second text-white">
-                                  {metric.description}
-                              </textarea>
+                                <textarea name="description" rows="5" cols="10" className="w-full textarea bg-second text-white"></textarea>
                                 <label htmlFor="formula" className="label">
                                     Formula :
                                 </label>

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {toast} from "react-toastify";
+import MathJax from "react-mathjax2";
 
 function Implement() {
     const [activeModal, setActiveModal] = useState(null);
@@ -18,41 +19,43 @@ function Implement() {
             .then((data) => setResearch(data));
     }, [researches]);
 
-    function handleAddResearch(id) {
+    function handleAddImplementation(id) {
         // const metricName = document.querySelector("input[name='name']").value;
         // setMetrics([...metrics, metricName]);
         // setShowModal(false);
         try {
-            const researchDescription = document.querySelector("textarea[name='description']").value;
-            const researchFormula = document.querySelector("input[name='formula']").value;
-            const body = { metricId: id, description: researchDescription, mathFormula: researchFormula };
+            const metricImplementation = document.querySelector("textarea[name='code']").value;
+            const body = { research_id: id, code: metricImplementation };
 
-            fetch("http://localhost:8080/api/v1/app/add/research", {
+            fetch("http://localhost:8080/api/v1/app/add/codeimplementation", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),
             })
                 .then((response) => response.json())
-                .then((data) => setActiveModal(null));
-            toast.success("Research added successfully ! you can check it in the Metrics tab.");
+                .then((data) => {
+                     console.log(data);
+                    setActiveModal(null);
+                });
+            toast.success("Implementation added successfully ! you can check it in the Metrics tab.");
         } catch (err) {
             console.error(err.message);
         }
     }
 
-    const displayListElement = (metric) => {
+    const displayListElement = (research) => {
         return (
             <div
-                id={metric.id}
+                id={research.id}
                 className="h-24 shadow shadow-black bg-second btn btn-ghost flex justify-around rounded-box"
             >
                 <li
                     onClick={(e) => {
-                        activateModal(metric.id);
+                        activateModal(research.id);
                     }}
                     className="w-full h-full flex justify-center items-center"
                 >
-                    {metric.name}
+                    {research.metricId.name}
                 </li>
             </div>
         );
@@ -63,23 +66,31 @@ function Implement() {
             <div className="overflow-y-auto h-screen w-full fixed flex flex-col items-center gap-32">
                 <h1 className="title underline pt-20">Researches</h1>
                 <ul className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
-                    {metrics
-                        .filter((metric) => !metric.status)
-                        .map((metric) => (
-                            <div key={metric.id}>{displayListElement(metric)}</div>
+                    {researches
+                        .filter((research) => !research.status)
+                        .map((research) => (
+                            <div key={research.id}>{displayListElement(research)}</div>
                         ))}
                 </ul>
-                {metrics
-                    .filter((metric) => !metric.status)
-                    .map((metric) => (
+                {researches
+                    .filter((research) => !research.status)
+                    .map((research) => (
                         <div>
-                            {activeModal === metric.id ? (
+                            {activeModal === research.id ? (
                                 <>
                                     <div className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                                         <div className="relative w-full my-6 mx-auto max-w-sm">
                                             <div className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                                                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                                                    <h3 className="text-3xl title">{metric.name}</h3>
+                                                    <div className="flex flex-col justify-center gap-5">
+                                                        <h3 className="text-3xl title">{research.metricId.name}</h3>
+                                                        <h3>{research.description}</h3>
+                                                        <MathJax.Context input="tex">
+                                                            <div>
+                                                                <MathJax.Node>{research.mathFormula}</MathJax.Node>
+                                                            </div>
+                                                        </MathJax.Context>
+                                                    </div>
                                                     <button
                                                         className="p-1 ml-auto text-red-600 border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                                                         onClick={() => {
@@ -104,21 +115,10 @@ function Implement() {
                                                 </div>
                                                 <div className="relative p-6 flex-auto">
                                                     <form>
-                                                        <label htmlFor="description" className="label">
-                                                            Description :
+                                                        <label htmlFor="code" className="label">
+                                                            Java code :
                                                         </label>
-                                                        <textarea name="description" rows="5" cols="10" className="w-full textarea bg-second text-white">
-                                  {metric.description}
-                              </textarea>
-                                                        <label htmlFor="formula" className="label">
-                                                            Formula :
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            name="formula"
-                                                            placeholder="Formula (LaTeX)"
-                                                            className="input input-bordered w-full my-2 bg-second"
-                                                        />
+                                                        <textarea name="code" rows="5" cols="10" className="w-full textarea bg-second text-white"></textarea>
                                                     </form>
                                                 </div>
                                                 <div
@@ -126,7 +126,7 @@ function Implement() {
                                                     <button
                                                         className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                                         type="button"
-                                                        onClick={() => handleAddResearch(metric.id)}
+                                                        onClick={() => handleAddImplementation(research.id)}
                                                     >
                                                         Add
                                                     </button>
