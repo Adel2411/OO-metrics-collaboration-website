@@ -23,9 +23,17 @@ function Search() {
     // setMetrics([...metrics, metricName]);
     // setShowModal(false);
     try {
-      const researchDescription = document.querySelector("textarea[name='description']").value;
-        const researchFormula = document.querySelector("input[name='formula']").value;
-        const body = { metricId: id, description: researchDescription, mathFormula: researchFormula };
+      const researchDescription = document.querySelector(
+        "textarea[name='description']",
+      ).value;
+      const researchFormula = document.querySelector(
+        "input[name='formula']",
+      ).value;
+      const body = {
+        metricId: id,
+        description: researchDescription,
+        mathFormula: researchFormula,
+      };
 
       fetch("http://localhost:8080/api/v1/app/add/research", {
         method: "POST",
@@ -34,7 +42,9 @@ function Search() {
       })
         .then((response) => response.json())
         .then((data) => setActiveModal(null));
-      toast.success("Research added successfully ! you can check it in the Metrics tab.");
+      toast.success(
+        "Research added successfully ! you can check it in the Metrics tab.",
+      );
     } catch (err) {
       console.error(err.message);
     }
@@ -103,26 +113,30 @@ function Search() {
                           </button>
                         </div>
                         <div className="relative p-6 flex-auto">
-                            <form>
-                                <label htmlFor="description" className="label">
-                                    Description :
-                                </label>
-                                <textarea name="description" rows="5" cols="10" className="w-full textarea bg-second text-white"></textarea>
-                                <label htmlFor="formula" className="label">
-                                    Formula :
-                                </label>
-                                <input
-                                    type="text"
-                                    name="formula"
-                                    placeholder="Formula (LaTeX)"
-                                    className="input input-bordered w-full my-2 bg-second"
-                                />
-                            </form>
+                          <form>
+                            <label htmlFor="description" className="label">
+                              Description :
+                            </label>
+                            <textarea
+                              name="description"
+                              rows="5"
+                              cols="10"
+                              className="w-full textarea bg-second text-white"
+                            ></textarea>
+                            <label htmlFor="formula" className="label">
+                              Formula :
+                            </label>
+                            <input
+                              type="text"
+                              name="formula"
+                              placeholder="Formula (LaTeX)"
+                              className="input input-bordered w-full my-2 bg-second"
+                            />
+                          </form>
                         </div>
-                          <div
-                              className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                              <button
-                                  className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                          <button
+                            className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
                             onClick={() => handleAddResearch(metric.id)}
                           >

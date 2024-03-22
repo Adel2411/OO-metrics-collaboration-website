@@ -47,8 +47,8 @@ const Login = ({setAuth}) => {
     return (
         <Fragment>
             <div className="flex items-center justify-center h-screen">
-                <div className="card sm:w-1/2 xl:w-1/3 bg-first shadow-xl">
-                    <div className="card-body flex justify-center items-center">
+                <div className="flex justify-center w-screen h-screen md:card md:w-1/2 xl:w-1/3 md:h-1/2 bg-first shadow-xl">
+                    <div className="flex flex-col justify-center items-center md:card-body">
                         <h1 className="my-5 title">Log in</h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
                              className="bi bi-person-circle my-3" viewBox="0 0 16 16">

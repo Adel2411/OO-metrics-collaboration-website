@@ -18,10 +18,7 @@ function Documentation() {
   useEffect(() => {
     fetch("http://localhost:8080/api/v1/app/documents")
       .then((response) => response.json())
-      .then((data) => {
-        setDocuments(data);
-        console.log(data);
-      });
+      .then((data) => setDocuments(data));
   }, []);
 
   const displayListElementLink = (id, title) => {
