@@ -8,8 +8,10 @@ function Metric() {
   useEffect(() => {
     fetch("http://localhost:8080/api/v1/app/metrics")
       .then((response) => response.json())
-      .then((data) => setMetrics(data));
-  }, [metrics]);
+      .then((data) =>
+            setMetrics(data.data)
+  )
+  }, []);
 
   function handleAddMetric() {
     try {
