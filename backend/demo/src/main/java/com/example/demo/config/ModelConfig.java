@@ -1,9 +1,8 @@
 package com.example.demo.config;
 
-import com.example.demo.Model.CodeImplementation;
-import com.example.demo.Model.Document;
-import com.example.demo.Model.Metric;
-import com.example.demo.Model.Research;
+import com.example.demo.DTO.MetricDTO;
+import com.example.demo.DTO.ResearchDTO;
+import com.example.demo.Model.*;
 import com.example.demo.Requests.CodeImplementationPutRequest;
 import com.example.demo.Requests.CodeImplementationRequest;
 import com.example.demo.Requests.ResearchPutRequest;
@@ -15,94 +14,158 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/app")
 @CrossOrigin(origins = "http://localhost:5173")
 public class ModelConfig {
-    private DocumentService documentService;
+
     private ModelService modelService;
 
     @Autowired
-    public ModelConfig(DocumentService documentService , ModelService modelService) {
-        this.documentService = documentService;
+    public ModelConfig(ModelService modelService) {
         this.modelService = modelService;
     }
 
 
 
     @GetMapping("/metrics")
-    List<Metric> getMetrics(){
-        return modelService.getMetrics();
+    ResponseEntity<?> getMetrics(){
+        ResponseModel responseModel ;
+        try {
+            List<MetricDTO> metrics = modelService.getMetrics();
+            responseModel = ResponseModelBuilder.okResponse(metrics);
+        }
+        catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
     @PostMapping("/add/metric")
     ResponseEntity<?> addMetric(@RequestBody Metric metric){
-        Metric newMetric = modelService.addMetric(metric);
-        return ResponseEntity.ok(newMetric.getId());
+        ResponseModel responseModel ;
+        try{
+            modelService.addMetric(metric);
+            responseModel = ResponseModelBuilder.okResponse("Metric added");
+        }catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
     @PutMapping("/update/metric")
     ResponseEntity<?> updateMetric(@RequestBody Metric metric){
-        Metric updatedMetric = modelService.updateMetric(metric);
-        return ResponseEntity.ok(updatedMetric.getId());
+        ResponseModel responseModel ;
+        try{
+            modelService.updateMetric(metric);
+            responseModel = ResponseModelBuilder.okResponse("Metric updated");
+        }catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
     @DeleteMapping("/delete/metric/{id}")
     ResponseEntity<?> deleteMetric(@PathVariable String id){
-        modelService.deleteMetric(id);
-        return ResponseEntity.ok("Metric deleted");
+        ResponseModel responseModel ;
+        try{
+            modelService.deleteMetric(id);
+            responseModel = ResponseModelBuilder.okResponse("Metric deleted");
+        }catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
-    @GetMapping("/research")
-    List<Research> getResearch(){
-        return  modelService.getResearch();
+    @GetMapping("research/{id}")
+    ResponseEntity<?> getResearch(@PathVariable String id){
+        ResponseModel responseModel ;
+        try {
+            ResearchDTO research = modelService.getResearchByID(id);
+            responseModel = ResponseModelBuilder.okResponse(research);
+        }
+        catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
     @PostMapping("/add/research")
     ResponseEntity<?> addResearch(@RequestBody ResearchRequest research){
-        Research newResearch = modelService.addResearch(research);
-        return ResponseEntity.ok(newResearch.getId());
+        ResponseModel responseModel ;
+        try {
+            Research newResearch = modelService.addResearch(research);
+            responseModel = ResponseModelBuilder.okResponse(newResearch.getId());
+        }catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
     @PutMapping("/update/research")
     ResponseEntity<?> updateResearch(@RequestBody ResearchPutRequest research){
-        Research updatedResearch = modelService.updateResearch(research);
-        return ResponseEntity.ok(updatedResearch.getId());
+        ResponseModel responseModel ;
+        try{
+            Research updatedResearch = modelService.updateResearch(research);
+            responseModel = ResponseModelBuilder.okResponse(updatedResearch.getId());
+        }catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
-    @DeleteMapping("/delete/research/{id}")
-    ResponseEntity<?> deleteResearch(@PathVariable String id){
-        modelService.deleteResearch(id);
-        return ResponseEntity.ok("Research deleted");
+
+    @GetMapping("codeimplementation/{id}")
+    ResponseEntity<?> getCodeImplementation(@PathVariable String id){
+        ResponseModel responseModel ;
+        try {
+            CodeImplementation codeImplementation = modelService.getCodeImplementationByID(id);
+            responseModel = ResponseModelBuilder.okResponse(codeImplementation);
+        }
+        catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
-    @GetMapping("/codeimplementation")
-    List<CodeImplementation> getCodeImplementation(){
-        return modelService.getCodeImplementation();
-    }
-
-    @PostMapping("/add/codeimplementation")
+      @PostMapping("/add/codeimplementation")
     ResponseEntity<?> addCodeImplementation(@RequestBody CodeImplementationRequest codeImplementation){
-        CodeImplementation newCodeImplementation = modelService.addCodeImplementation(codeImplementation);
-        return ResponseEntity.ok(newCodeImplementation.getId());
+        ResponseModel responseModel ;
+        try {
+            CodeImplementation newCodeImplementation = modelService.addCodeImplementation(codeImplementation);
+            responseModel = ResponseModelBuilder.okResponse(newCodeImplementation.getId());
+        }catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
     @PutMapping("/update/codeimplementation")
     ResponseEntity<?> updateCodeImplementation(@RequestBody CodeImplementationPutRequest codeImplementation){
-        CodeImplementation updatedCodeImplementation = modelService.updateCodeImplementation(codeImplementation);
-        return ResponseEntity.ok(updatedCodeImplementation.getId());
+        ResponseModel responseModel ;
+        try {
+            CodeImplementation updatedCodeImplementation = modelService.updateCodeImplementation(codeImplementation);
+            responseModel = ResponseModelBuilder.okResponse(updatedCodeImplementation.getId());
+        }catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
-    @DeleteMapping("/delete/codeimplementation/{id}")
-    ResponseEntity<?> deleteCodeImplementation(@PathVariable String id){
-        modelService.deleteCodeImplementation(id);
-        return ResponseEntity.ok("CodeImplementation deleted");
-    }
 
     @GetMapping ("/documents")
-    List<Document> getDocuments(){
-        return documentService.getDocuments();
+    ResponseEntity<?> getDocuments(){
+        ResponseModel responseModel ;
+        try {
+            List<Document> documents = modelService.getDocuments();
+            responseModel = ResponseModelBuilder.okResponse(documents);
+        }
+        catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
 

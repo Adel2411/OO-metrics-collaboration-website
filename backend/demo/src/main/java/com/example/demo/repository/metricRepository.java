@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.UUID;
 @Repository
 public interface metricRepository extends JpaRepository<Metric, UUID> {
-    @Query(value = "SELECT m.*, " +
-            "CASE WHEN EXISTS (SELECT 1 FROM research r WHERE r.metric_id = m.id) " +
-            "THEN 1 ELSE 0 END AS status " +
-            "FROM metrics m", nativeQuery = true)
-    List<Object[]> getAllMetricsWithStatus();
+    @Query("DELETE FROM Metric m WHERE m.id = ?1")
+    void deleteAllrelated(UUID uuid);
+
+
+//    @Query("SELECT m, r, c FROM Metric m LEFT JOIN m. r LEFT JOIN r.implementation c")
+//    List<Object[]> getAllMetricsWithDetails();
 }

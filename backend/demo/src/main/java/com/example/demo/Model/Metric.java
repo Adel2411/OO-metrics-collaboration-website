@@ -20,6 +20,5 @@ public class Metric {
     @GeneratedValue
     private UUID id ;
     private String name;
-    @Transient
-    private int status;
+
 }

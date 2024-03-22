@@ -11,14 +11,6 @@ public class CodeImplementationPutRequest {
     private String id;
     private String code;
 
-    public CodeImplementationPutRequest(String id, String code) {
-        this.id = id;
-        this.code = code;
-    }
-
-    public CodeImplementationPutRequest() {
-    }
-
     @Override
     public String toString() {
         return "CodeImplementationPutRequest{" +

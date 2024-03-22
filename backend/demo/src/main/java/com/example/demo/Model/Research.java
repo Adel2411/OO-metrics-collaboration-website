@@ -25,6 +25,4 @@ public class Research {
     private String description;
     private String MathFormula;
 
-    @Transient
-    private int status;
 }

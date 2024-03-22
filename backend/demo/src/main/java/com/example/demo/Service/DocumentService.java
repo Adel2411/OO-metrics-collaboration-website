@@ -17,7 +17,7 @@ public class DocumentService {
         String jpql = "SELECT NEW com.example.demo.Model.Document (m.name, r.description, r.MathFormula , c.code) " +
                 "FROM Metric m " +
                 "JOIN Research r ON m.id = r.metricId.id " +
-                "JOIN CodeImplementation c ON r.id = c.reseach_id.id";
+                "JOIN CodeImplementation c ON r.id = c.researchId.id";
         TypedQuery<Document> query = entityManager.createQuery(jpql, Document.class);
         return query.getResultList();
     }

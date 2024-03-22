@@ -19,6 +19,6 @@ public class CodeImplementation {
     private UUID id ;
     @OneToOne
     @JoinColumn(name= "research_id")
-    private Research reseach_id;
+    private Research researchId;
     private String code;
 }

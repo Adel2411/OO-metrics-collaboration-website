@@ -34,7 +34,7 @@ public class CodeImplementationService {
         Research research = researchRepository.findById(researchId)
                 .orElseThrow(() -> new RuntimeException("Research not found"));
 
-        newCodeImplementation.setReseach_id(research);
+        newCodeImplementation.setResearchId(research);
         return codeImplementationRepository.save(newCodeImplementation);
     }
 

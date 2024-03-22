@@ -8,22 +8,12 @@ import lombok.*;
 
 
 
-@Getter
-@Setter
+@Builder
+@Data
 public class ResearchRequest {
     String Description;
     String MathFormula;
     String MetricId;
-
-    public ResearchRequest(String Description, String MathFormula, String MetricId) {
-        this.Description = Description;
-        this.MathFormula = MathFormula;
-        this.MetricId = MetricId;
-    }
-
-    public ResearchRequest() {
-    }
-
 
     @Override
     public String toString() {

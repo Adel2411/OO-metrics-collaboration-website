@@ -16,4 +16,9 @@ public interface researchRepository extends JpaRepository<Research , UUID> {
             "THEN 1 ELSE 0 END AS status " +
             "FROM research m", nativeQuery = true)
     List<Object []> findResearchWithStatus();
+
+    @Query(value = "SELECT id FROM research WHERE metric_id = ?1", nativeQuery = true)
+    UUID findIdByMetricId(UUID metricId);
+
+
 }

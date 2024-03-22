@@ -1,5 +1,7 @@
 package com.example.demo.Service;
 
+import com.example.demo.DTO.ResearchDTO;
+import com.example.demo.DTO.ResearchToResearchDTO;
 import com.example.demo.Model.Metric;
 import com.example.demo.Model.Research;
 import com.example.demo.Requests.ResearchPutRequest;
@@ -17,13 +19,14 @@ import java.util.UUID;
 public class ResearchService {
 
     private final researchRepository researchRepository;
-    private final metricRepository metricRepository; // Assuming you have a MetricRepository
+    private final metricRepository metricRepository;
 
+    private final ResearchToResearchDTO entityToDTOMapper;
     @Autowired
-    public ResearchService( researchRepository researchRepository, metricRepository metricRepository) {
-
+    public ResearchService( researchRepository researchRepository, metricRepository metricRepository  , ResearchToResearchDTO entityToDTOMapper) {
         this.researchRepository = researchRepository;
         this.metricRepository = metricRepository;
+        this.entityToDTOMapper = entityToDTOMapper;
     }
 
     public Research addResearch(ResearchRequest request) {
@@ -33,7 +36,6 @@ public class ResearchService {
                 .MathFormula(request.getMathFormula())
                 .build();
 
-        // Find the Metric entity by its ID
         UUID metricId = UUID.fromString(request.getMetricId());
         Metric metric = metricRepository.findById(metricId)
                 .orElseThrow(() -> new RuntimeException("Metric not found"));
@@ -53,20 +55,11 @@ public class ResearchService {
         return researchRepository.save(researchToUpdate);
     }
 
-    public List<Research> getAllResearchWithStatus() {
-        List<Object[]> researchWithStatus = researchRepository.findResearchWithStatus();
-        List<Research> researchList = new ArrayList<>();
-        for (Object[] research : researchWithStatus) {
-            Research newResearch = Research
-                    .builder()
-                    .id(UUID.fromString(research[0].toString()))
-                    .metricId(metricRepository.findById(UUID.fromString(research[1].toString())).orElseThrow())
-                    .description(research[2].toString())
-                    .MathFormula(research[3].toString())
-                    .status(Integer.parseInt(research[4].toString()))
-                    .build();
-            researchList.add(newResearch);
-        }
-        return researchList;
+    public ResearchDTO getResearchById(String id) {
+        Research research = researchRepository.findById(UUID.fromString(id))
+                .orElseThrow(() -> new RuntimeException("Research not found"));
+
+        return entityToDTOMapper.apply(research);
     }
+
 }
