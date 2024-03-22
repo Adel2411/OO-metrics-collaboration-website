@@ -19,9 +19,6 @@ function Search() {
   }, [metrics]);
 
   function handleAddResearch(id) {
-    // const metricName = document.querySelector("input[name='name']").value;
-    // setMetrics([...metrics, metricName]);
-    // setShowModal(false);
     try {
       const researchDescription = document.querySelector(
         "textarea[name='description']",

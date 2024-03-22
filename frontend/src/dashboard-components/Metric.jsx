@@ -12,9 +12,6 @@ function Metric() {
   }, [metrics]);
 
   function handleAddMetric() {
-    // const metricName = document.querySelector("input[name='name']").value;
-    // setMetrics([...metrics, metricName]);
-    // setShowModal(false);
     try {
       const metricName = document.querySelector("input[name='name']").value;
       const body = { name: metricName };
@@ -31,62 +28,125 @@ function Metric() {
       console.error(err.message);
     }
   }
-  function handleDeleteMetric(e) {
-    // e.preventDefault();
-    // const index = metrics.indexOf(e.target.parentElement.parentElement.firstChild.textContent);
-    // setMetrics(metrics.filter((_, i) => i !== index));
+  function handleDeleteMetric(id) {
+    fetch(`http://localhost:8080/api/v1/app/delete/metric/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+    setMetrics(metrics.filter((metric) => metric.id !== id));
   }
 
-  const displayListElement = (name, status) => {
-    return (
-      <div className="py-3 shadow shadow-black grid grid-cols-3 rounded-box bg-second">
-        <li className="px-10 flex items-center">{name}</li>
-        <div
-          className={
-            status
-              ? "text-green-500 flex justify-center items-center"
-              : "text-red-500 flex flex-row justify-center items-center"
-          }
-        >
-          {status ? (
+
+ function displayStatus(metric) {
+  if (metric.researchId) {
+    if (metric.codeImplementationId) {
+      return (
+          <div className="flex flex-col justify-center items-center text-green-500">
             <div className="flex gap-2">
+            <p>Researched</p>
+                 <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M9 1.5H5.625c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5Zm6.61 10.936a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 14.47a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                    clipRule="evenodd"
+                  />
+                  <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                </svg>
+              </div>
+              <div className="flex gap-2">
+                <p>Implemented</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M9 1.5H5.625c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5Zm6.61 10.936a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 14.47a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                    clipRule="evenodd"
+                  />
+                  <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                </svg>
+              </div>
+          </div>
+      );
+    }
+      return (
+          <div className="flex flex-col justify-center items-center">
+            <div className="flex gap-2 text-green-500">
               <p>Researched</p>
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-6 h-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
               >
                 <path
-                  fillRule="evenodd"
-                  d="M9 1.5H5.625c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5Zm6.61 10.936a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 14.47a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
-                  clipRule="evenodd"
+                    fillRule="evenodd"
+                    d="M9 1.5H5.625c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5Zm6.61 10.936a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 14.47a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                    clipRule="evenodd"
                 />
-                <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
-              </svg>
-            </div>
-          ) : (
-            <div className="flex gap-2">
-              <p>Not researched</p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-6 h-6"
-              >
                 <path
-                  fillRule="evenodd"
-                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
-                  clipRule="evenodd"
-                />
+                    d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"/>
               </svg>
             </div>
-          )}
-        </div>
+            <div className="flex gap-2 text-red-500">
+              <p>Not implemented</p>
+                 <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+            </div>
+          </div>
+      );
+  }
+   return (
+       <div className="flex flex-col justify-center items-center">
+         <div className="flex gap-2 text-red-500">
+           <p>Not researched</p>
+           <svg
+               xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 24 24"
+               fill="currentColor"
+               className="w-6 h-6"
+           >
+             <path
+                 fillRule="evenodd"
+                 d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                 clipRule="evenodd"
+             />
+           </svg>
+         </div>
+       </div>
+   );
+ }
+
+  const displayListElement = (metric) => {
+    return (
+        <div className="py-3 shadow shadow-black grid grid-cols-3 rounded-box bg-second">
+          <li className="px-10 flex items-center">{metric.name}</li>
+          {displayStatus(metric)}
         <span className="px-10">
           <button
             className="btn btn-ghost btn-square text-red-600"
-            onClick={(e) => handleDeleteMetric(e)}
+            onClick={() => handleDeleteMetric(metric.id)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +173,7 @@ function Metric() {
         <ul className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
           {metrics.map((metric) => (
             <div key={metric.id}>
-              {displayListElement(metric.name, metric.status)}
+              {displayListElement(metric)}
             </div>
           ))}
         </ul>
