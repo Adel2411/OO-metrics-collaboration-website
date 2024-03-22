@@ -1,3 +1,4 @@
+
 # Authentication
 
 ## Login
@@ -99,13 +100,18 @@
 
 ### Return Structure
 
-    [
-    	{
-    		"id" :  "",
-    		"name":  ""
-    	}
-    ]
-
+	{
+		"status":  200,
+		"data":  
+		[
+			{
+				"id":  "",
+				"name":  "",
+				"researchId":  "",
+				"codeImplementationId":  ""
+			},
+		]
+	}
 ## Add a Metric
 
     POST  http://localhost:8080/api/v1/app/add/metric
@@ -116,43 +122,77 @@
 
 ### Return Structure
 
-    {
-    	"status" :
-    	"response" : ""
-    }
+	{
+	  "status": ,
+	  "data": ""
+	}
 
 #### Type of responses
 
-| Status | Response                   |
+| Status | data                   |
 | ------ | -------------------------- |
-| 200    | id                         |
-| 403    | Metric name already exists |
+| 200    | Metric added	                    |
+| 403    | metric cannot be added |
 
-# Implementations
-
-## Get all Implementations
-
-    GET  http://localhost:8080/api/v1/app/codeimplementation
-
+## Delete
+	DELETE http://localhost:8080/api/v1/app/delete/metric/{id}
+	
 ### Return Structure
 
-    [
-    	{
-    		"id": "",
-    		"reseach_id":
-    		{
-    			"id": "",
-    			"metricId":
-    			{
-    				"id": "",
-    				"name": ""
-    			},
-    			"description": "",
-    			"mathFormula": ""
-    		},
-    		"code": ""
-    	}
-    ]
+	{
+	  "status": ,
+	  "data": ""
+	}
+
+#### Type of responses
+
+| Status | data                   |
+| ------ | -------------------------- |
+| 200    | Metric deleted                   |
+| 403    |failed deleting this metric|
+
+
+## Update
+	PUT http://localhost:8080/api/v1/app/update/metric
+	Content-Type: application/json
+
+	{
+	  "id": "",
+	  "name": ""
+	}
+	
+### Return Structure
+
+	{
+	  "status": ,
+	  "data": ""
+	}
+
+#### Type of responses
+
+| Status | data                   |
+| ------ | -------------------------- |
+| 200    | Metric updated                  |
+| 403    |failed updating this metric|
+
+	
+# Implementations
+
+## Get Implementation From Id
+
+    GET  http://localhost:8080/api/v1/app/codeimplementation/{id}
+
+### Return Structure
+		
+	"status" : 
+	"data" :
+
+#### Type of responses
+
+| Status | data                                      |
+| ------ | ----------------------------------------------- |
+| 200    | [    {        "id": "",        "code": ""    }]                                      |
+| 403    | implementation for this research already exists |
 
 ## Add an Implementation
 
@@ -160,63 +200,113 @@
     Content-Type: application/json
     {
       "research_id": "",
-      "code": ""
+      "data": ""
     }
 
 ### Return Structure
 
     {
     	"status" :
-    	"response" : ""
+    	"data" : ""
     }
 
 #### Type of responses
 
-| Status | Response                                        |
+| Status | data                                      |
 | ------ | ----------------------------------------------- |
 | 200    | id                                              |
 | 403    | implementation for this research already exists |
 
+## Update
+	PUT http://localhost:8080/api/v1/app/update/codeimplementation
+	Content-Type: application/json
+
+	{
+	  "id": "",
+	  "name": ""
+	}
+	
+### Return Structure
+
+	{
+	  "status": ,
+	  "data": ""
+	}
+
+#### Type of responses
+
+| Status | data                   |
+| ------ | -------------------------- |
+| 200    | codeimplementation updated                  |
+| 403    |failed updating this codeimplementation|
+
 # Researches
 
-## Get all Researches
+## Get Research by id
 
     GET  http://localhost:8080/api/v1/app/research
 
 ### Return Structure
 
-    [
-    	{
-    		"metricName":  "",
-    		"researchDescription":  "",
-    		"metricMathFormula":  "",
-    		"code":  ""
-    	}
-    ]
+	{
+		"status": ,
+		"data": 
+			
+	}
+
+#### Type of responses
+
+| Status | data                            |
+| ------ | -------------------------------------- |
+| 200   	|"id": ""   ,"description": ""  ,"mathFormula": ""                                     |
+| 403    | failed getting research|
 
 ## Add a Research
 
     POST  http://localhost:8080/api/v1/app/add/research
     Content-Type: application/json
-    {
-    	"metricId": "",
-    	"mathFormula": "",
-    	"description": ""
-    }
+	{
+	  "Description": "",
+	  "MathFormula": "",
+	  "MetricId": ""
+	}
 
 ### Return Structure
 
     {
     	"status" :
-    	"response" : ""
+    	"data" : 
     }
+    
+   ### Type of Response
+
+| Status | data                            |
+| ------ | -------------------------------------- |
+| 200   	|Research added Successfully                                    |
+| 403    | failed getting research|
+
+## Update
+	PUT http://localhost:8080/api/v1/app/update/research
+	Content-Type: application/json
+
+	{
+	  "id": "",
+	  "name": ""
+	}
+	
+### Return Structure
+
+	{
+	  "status": ,
+	  "data": ""
+	}
 
 #### Type of responses
 
-| Status | Response                               |
-| ------ | -------------------------------------- |
-| 200    | id                                     |
-| 403    | Research for this metric already exist |
+| Status | data                   |
+| ------ | -------------------------- |
+| 200    | research updated                  |
+| 403    |failed updating this research|
 
 # Document
 
@@ -225,12 +315,13 @@
     GET  http://localhost:8080/api/v1/app/documents
 
 ### Return Structure
+	
+	"stataus" : 
+	"data" : 
+   ### Type of Response
 
-    [
-    	{
-    		"metricName":  "",
-    		"researchDescription":  "",
-    		"metricMathFormula":  "",
-    		"code":  ""
-    	}
-    ]
+| Status | data                            |
+| ------ | -------------------------------------- |
+| 200   	|[{ "metricName":  "", "researchDescription":  "", "metricMathFormula":  "",  "code":  ""  }  ]                                    |
+| 403    | failed getting documents|
+

@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import com.example.demo.DTO.CodeImplementationDTO;
 import com.example.demo.DTO.MetricDTO;
 import com.example.demo.DTO.ResearchDTO;
 import com.example.demo.Model.CodeImplementation;
@@ -50,7 +51,9 @@ public class ModelService {
     }
 
     public void addMetric(Metric metric) {
-        metricRepository.save(metric);
+
+            metricRepository.save(metric);
+
     }
 
     public void updateMetric(Metric metric) {
@@ -85,9 +88,8 @@ public class ModelService {
     }
 
 
-    public CodeImplementation getCodeImplementationByID(String id) {
-        return codeImplementationRepository.findById(UUID.fromString(id))
-                .orElseThrow(() -> new RuntimeException("Code Implementation not found"));
+    public CodeImplementationDTO getCodeImplementationByID (String id) {
+        return codeImplementationService.getCodeImplementationDTO(UUID.fromString(id));
     }
 
     public CodeImplementation addCodeImplementation(CodeImplementationRequest codeImplementation) {

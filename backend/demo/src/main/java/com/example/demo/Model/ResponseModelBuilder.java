@@ -6,6 +6,6 @@ public class ResponseModelBuilder {
     }
 
     public static ResponseModel badRequestResponse(Object message) {
-        return ResponseModel.builder().status(400).data(message).build();
+        return ResponseModel.builder().status(403).data(message).build();
     }
 }

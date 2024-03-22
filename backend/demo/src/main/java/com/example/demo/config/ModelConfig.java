@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.DTO.CodeImplementationDTO;
 import com.example.demo.DTO.MetricDTO;
 import com.example.demo.DTO.ResearchDTO;
 import com.example.demo.Model.*;
@@ -50,7 +51,7 @@ public class ModelConfig {
             modelService.addMetric(metric);
             responseModel = ResponseModelBuilder.okResponse("Metric added");
         }catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("metric cannot be added");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
@@ -62,7 +63,7 @@ public class ModelConfig {
             modelService.updateMetric(metric);
             responseModel = ResponseModelBuilder.okResponse("Metric updated");
         }catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("failed updating this metric");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
@@ -74,7 +75,7 @@ public class ModelConfig {
             modelService.deleteMetric(id);
             responseModel = ResponseModelBuilder.okResponse("Metric deleted");
         }catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("failed deleting this metric");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
@@ -87,7 +88,7 @@ public class ModelConfig {
             responseModel = ResponseModelBuilder.okResponse(research);
         }
         catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("failed getting research");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
@@ -97,9 +98,9 @@ public class ModelConfig {
         ResponseModel responseModel ;
         try {
             Research newResearch = modelService.addResearch(research);
-            responseModel = ResponseModelBuilder.okResponse(newResearch.getId());
+            responseModel = ResponseModelBuilder.okResponse("Research added Successfully");
         }catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("failed adding research");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
@@ -111,7 +112,7 @@ public class ModelConfig {
             Research updatedResearch = modelService.updateResearch(research);
             responseModel = ResponseModelBuilder.okResponse(updatedResearch.getId());
         }catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("failed updating research");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
@@ -121,11 +122,11 @@ public class ModelConfig {
     ResponseEntity<?> getCodeImplementation(@PathVariable String id){
         ResponseModel responseModel ;
         try {
-            CodeImplementation codeImplementation = modelService.getCodeImplementationByID(id);
+            CodeImplementationDTO codeImplementation = modelService.getCodeImplementationByID(id);
             responseModel = ResponseModelBuilder.okResponse(codeImplementation);
         }
         catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("failed getting code implementation");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
@@ -137,7 +138,7 @@ public class ModelConfig {
             CodeImplementation newCodeImplementation = modelService.addCodeImplementation(codeImplementation);
             responseModel = ResponseModelBuilder.okResponse(newCodeImplementation.getId());
         }catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("failed adding code implementation");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
@@ -149,7 +150,7 @@ public class ModelConfig {
             CodeImplementation updatedCodeImplementation = modelService.updateCodeImplementation(codeImplementation);
             responseModel = ResponseModelBuilder.okResponse(updatedCodeImplementation.getId());
         }catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("failed updating code implementation");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
@@ -163,7 +164,7 @@ public class ModelConfig {
             responseModel = ResponseModelBuilder.okResponse(documents);
         }
         catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+            responseModel = ResponseModelBuilder.badRequestResponse("failed getting documents");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }

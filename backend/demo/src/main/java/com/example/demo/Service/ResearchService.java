@@ -40,6 +40,9 @@ public class ResearchService {
         Metric metric = metricRepository.findById(metricId)
                 .orElseThrow(() -> new RuntimeException("Metric not found"));
 
+        if(researchRepository.findIdByMetricId(metric.getId()) != null){
+            throw new RuntimeException("Research already exists for this metric");
+        }
         research.setMetricId(metric);
         return researchRepository.save(research);
     }

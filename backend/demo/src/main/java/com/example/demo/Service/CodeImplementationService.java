@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import com.example.demo.DTO.CodeImplementationDTO;
 import com.example.demo.Model.CodeImplementation;
 import com.example.demo.Model.Research;
 import com.example.demo.Requests.CodeImplementationPutRequest;
@@ -8,7 +9,7 @@ import com.example.demo.repository.codeImplementationRepository;
 import com.example.demo.repository.researchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.example.demo.DTO.implementionToImplementDTO;
 import java.util.UUID;
 
 @Service
@@ -16,14 +17,18 @@ public class CodeImplementationService {
 
     private final codeImplementationRepository codeImplementationRepository;
     private final researchRepository researchRepository;
+    private  final  implementionToImplementDTO entityToDTOMapper;
+
 
     @Autowired
     public CodeImplementationService(
             codeImplementationRepository codeImplementationRepository
-            , researchRepository researchRepository
+            , researchRepository researchRepository ,
+            implementionToImplementDTO entityToDTOMapper
     ) {
         this.codeImplementationRepository = codeImplementationRepository;
         this.researchRepository = researchRepository;
+        this.entityToDTOMapper = entityToDTOMapper;
     }
     public CodeImplementation save(CodeImplementationRequest codeImplementation) {
         CodeImplementation newCodeImplementation = CodeImplementation.builder()
@@ -45,4 +50,12 @@ public class CodeImplementationService {
         codeImplementationToUpdate.setCode(codeImplementation.getCode());
         return codeImplementationRepository.save(codeImplementationToUpdate);
     }
+
+    public CodeImplementationDTO getCodeImplementationDTO(UUID id) {
+        CodeImplementation codeImplementation = codeImplementationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Code Implementation not found"));
+        return entityToDTOMapper.apply(codeImplementation);
+    }
+
+
 }
