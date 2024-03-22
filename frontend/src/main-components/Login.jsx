@@ -47,11 +47,11 @@ const Login = ({setAuth}) => {
     return (
         <Fragment>
             <div className="flex items-center justify-center h-screen">
-                <div className="flex justify-center w-screen h-screen md:card md:w-1/2 xl:w-1/3 md:h-1/2 bg-first shadow-xl">
-                    <div className="flex flex-col justify-center items-center md:card-body">
-                        <h1 className="my-5 title">Log in</h1>
+                <div className="fixed flex justify-center sm:flex-none overflow-auto w-screen h-screen bg-first lg:shadow-2xl lg:w-1/2 lg:h-auto xl:w-1/3 lg:rounded-box">
+                    <div className="sm:mt-20 w-full flex flex-col justify-center items-center gap-5 md:mt-0 px-5 py-10">
+                        <h1 className="title">Log in</h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                             className="bi bi-person-circle my-3" viewBox="0 0 16 16">
+                             className="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                             <path fillRule="evenodd"
                                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -76,7 +76,7 @@ const Login = ({setAuth}) => {
                             <div className="flex items-center justify-center my-5">
                                 <button className="btn border-none bg-fourth text-white hover:bg-third">Sign in</button>
                             </div>
-                            <div className="my-5 flex flex-row">
+                            <div className="my-5 flex flex-row gap-3">
                                 <p>Don't have an account ?</p>
                                 <Link className="link link-info" to="/register">Register</Link>
                             </div>
