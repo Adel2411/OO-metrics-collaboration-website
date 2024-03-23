@@ -119,7 +119,7 @@ function Implement() {
               console.log(activeModal);
             }}
         >
-          <li>
+          <li className="implementations-title">
             {metric.name}
           </li>
           {metric.codeImplementationId ? (
@@ -167,7 +167,7 @@ function Implement() {
               <div className="relative w-full my-6 mx-auto max-w-sm">
                 <div className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                   <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                    <h3 className="text-3xl title">{metric.name}</h3>
+                    <h3 className="text-3xl modal-title">{metric.name}</h3>
                     <button
                         className="p-1 ml-auto text-red-600 border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => {
@@ -192,14 +192,14 @@ function Implement() {
                   </div>
                   <div className="relative p-6 flex-auto">
                     <form>
-                      <label htmlFor="description" className="label">
+                      <label htmlFor="description" className="label label-text modal-subtitle">
                         Code implementation :
                       </label>
                       <textarea
                           name="code"
                           rows="5"
                           cols="10"
-                          className="w-full textarea bg-second text-white"
+                          className="w-full textarea bg-second text-white modal-input"
                           placeholder="java implementation..."
                             onChange={handleInputChange}
                           value={code}
@@ -208,7 +208,7 @@ function Implement() {
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
-                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        className="modal-button bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={() => handleAddCode(metric.researchId)}
                     >
@@ -233,7 +233,7 @@ function Implement() {
               <div className="relative w-full my-6 mx-auto max-w-sm">
                 <div className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                   <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                    <h3 className="text-3xl title">{metric.name}</h3>
+                    <h3 className="text-3xl modal-title">{metric.name}</h3>
                     <button
                         className="p-1 ml-auto text-red-600 border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => {
@@ -256,24 +256,26 @@ function Implement() {
                             </span>
                     </button>
                   </div>
-                  <div className="relative p-6 flex-auto">
-                    <div>
-                      <SyntaxHighlighter
-                          language="java"
-                          style={atomOneDark}
-                          customStyle={{
-                            padding: "10px",
-                          }}
-                          wrapLongLines={true}
-                          showLineNumbers={true}
-                      >
-                        {implement.code}
-                      </SyntaxHighlighter>
+                    <div className="relative p-6 flex-auto">
+                        <h3 className="modal-subtitle">Code :</h3>
+                        <div>
+                            <SyntaxHighlighter
+                                language="java"
+                                style={atomOneDark}
+                                customStyle={{
+                                    padding: "10px",
+                                }}
+                                wrapLongLines={true}
+                                showLineNumbers={true}
+                            >
+                                {implement.code}
+                            </SyntaxHighlighter>
+                        </div>
                     </div>
-                  </div>
-                  <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <div
+                        className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
-                        className="bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={() => setEditMode(true)}
                     >
@@ -301,7 +303,7 @@ function Implement() {
                     className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                   <div
                       className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                    <h3 className="text-3xl title">{metric.name}</h3>
+                    <h3 className="text-3xl modal-title">{metric.name}</h3>
                     <button
                         className="p-1 ml-auto text-red-600 border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => {
@@ -327,24 +329,23 @@ function Implement() {
                   </div>
                   <div className="relative p-6 flex-auto">
                     <form>
-                      <label htmlFor="description" className="label">
+                      <label htmlFor="description" className="label label-text modal-subtitle">
                         Code implementation :
                       </label>
                       <textarea
                           name="code"
                           rows="5"
                           cols="10"
-                          className="w-full textarea bg-second text-white"
+                          className="modal-input w-full textarea bg-second text-white"
                           placeholder="New code implementation..."
                             value={editCode}
                             onChange={handleEditInputChange}
-
                       ></textarea>
                     </form>
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
-                        className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        className="modal-button bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={() => {
                           handleEditCode(implement.id);

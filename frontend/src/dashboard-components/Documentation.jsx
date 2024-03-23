@@ -47,7 +47,7 @@ function Documentation() {
           <h1 className="documentation-right-title">{title}</h1>
           <div>
             <h1 className="documentation-right-subtitle">Description :</h1>
-            <p className="documentation-right-text">{description}</p>
+            <p className="documentation-right-description">{description}</p>
             <MathJax.Context input="tex">
               <div>
                 <MathJax.Node>{formula}</MathJax.Node>
@@ -114,7 +114,6 @@ function Documentation() {
               }}
               wrapLongLines={true}
               showLineNumbers={true}
-              useInlineStyles={false}
             >
               {code}
             </SyntaxHighlighter>

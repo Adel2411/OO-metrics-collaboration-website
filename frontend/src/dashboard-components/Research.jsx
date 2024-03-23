@@ -126,7 +126,7 @@ function Research() {
           console.log(activeModal);
         }}
       >
-        <li>
+        <li className="researches-title">
           {metric.name}
         </li>
         {metric.researchId ? (
@@ -174,7 +174,7 @@ function Research() {
               <div className="relative w-full my-6 mx-auto max-w-sm">
                 <div className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                   <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                    <h3 className="text-3xl title">{metric.name}</h3>
+                    <h3 className="text-3xl modal-title">{metric.name}</h3>
                     <button
                         className="p-1 ml-auto text-red-600 border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => {
@@ -199,27 +199,27 @@ function Research() {
                   </div>
                   <div className="relative p-6 flex-auto">
                     <form>
-                      <label htmlFor="description" className="label">
+                      <label htmlFor="description" className="label label-text modal-subtitle">
                         Description :
                       </label>
                       <textarea
                           name="Description"
                           rows="5"
                           cols="10"
-                          className="w-full textarea bg-second text-white"
+                          className="w-full textarea bg-second text-white modal-input"
                           placeholder="description"
                           defaultValue=""
                           value={Description}
                           onChange={handleInputChange}
                       ></textarea>
-                      <label htmlFor="formula" className="label">
+                      <label htmlFor="formula" className="label label-text modal-subtitle">
                         Formula :
                       </label>
                       <input
                           type="text"
                           name="MathFormula"
                           placeholder="Formula (LaTeX)"
-                          className="input input-bordered w-full my-2 bg-second"
+                          className="input input-bordered w-full my-2 bg-second modal-input"
                           defaultValue=""
                             value={MathFormula}
                             onChange={handleInputChange}
@@ -228,7 +228,7 @@ function Research() {
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
-                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        className="modal-button bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={() => handleAddResearch(metric.id)}
                     >
@@ -253,7 +253,7 @@ function Research() {
               <div className="relative w-full my-6 mx-auto max-w-sm">
                 <div className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                   <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                    <h3 className="text-3xl title">{metric.name}</h3>
+                    <h3 className="text-3xl modal-title">{metric.name}</h3>
                     <button
                         className="p-1 ml-auto text-red-600 border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => {
@@ -278,8 +278,8 @@ function Research() {
                   </div>
                   <div className="relative p-6 flex-auto">
                     <div>
-                      <p>
-                        <span className="font-bold">Description :</span>
+                      <span className="font-bold modal-subtitle">Description :</span>
+                      <p className="documentation-right-description">
                         {research.description}
                       </p>
                       <MathJax.Context input="tex">
@@ -291,7 +291,7 @@ function Research() {
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
-                        className="bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={() => setEditMode(true)}
                     >
