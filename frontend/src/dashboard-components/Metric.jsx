@@ -4,6 +4,16 @@ import { toast } from "react-toastify";
 function Metric() {
   const [showModal, setShowModal] = React.useState(false);
   const [metrics, setMetrics] = React.useState([]);
+  const [inputs, setInputs] = React.useState({
+    name: "",
+  });
+  let {name} = inputs;
+
+  const handleInputChange = (e) => {
+    setInputs({
+      name: e.target.value
+    });
+  }
 
   useEffect(() => {
     fetch("http://localhost:8080/api/v1/app/metrics")
@@ -11,12 +21,11 @@ function Metric() {
       .then((data) =>
             setMetrics(data.data)
   )
-  }, []);
+  }, [metrics]);
 
   function handleAddMetric() {
     try {
-      const metricName = document.querySelector("input[name='name']").value;
-      const body = { name: metricName };
+        const body = {name};
 
       fetch("http://localhost:8080/api/v1/app/add/metric", {
         method: "POST",
@@ -24,8 +33,15 @@ function Metric() {
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
-        .then((data) => setShowModal(false));
-      toast.success("Metric added successfully !");
+        .then((data) => {
+            setShowModal(false);
+            if (data.status === 200) {
+                toast.success(data.data);
+            } else {
+                toast.error(data.data);
+            }
+        })
+        name = "";
     } catch (err) {
       console.error(err.message);
     }
@@ -36,7 +52,11 @@ function Metric() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        if (data.status === 200) {
+          toast.success(data.data);
+        } else {
+            toast.error(data.data);
+        }
       });
     setMetrics(metrics.filter((metric) => metric.id !== id));
   }
@@ -236,7 +256,9 @@ function Metric() {
                     <input
                       type="text"
                       name="name"
-                      placeholder="Metric Name"
+                      placeholder="Metric Name..."
+                        value={name}
+                        onChange={handleInputChange}
                       className="input input-bordered w-full my-2 bg-second"
                     />
                   </form>

@@ -7,8 +7,30 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 function Implement() {
   const [activeModal, setActiveModal] = useState({});
   const [metrics, setMetrics] = useState([]);
-  const [code, setCode] = useState([]);
+  const [implement, setImplement] = useState([]);
   const [editMode, setEditMode] = useState(false);
+  const [inputs, setInputs] = useState({
+    code: "",
+  });
+  const [editInputs, setEditInputs] = useState({
+    code: "",
+  });
+
+
+  let {code} = inputs;
+  let {code: editCode} = editInputs;
+
+  const handleInputChange = (e) => {
+    setInputs({
+      code: e.target.value
+    });
+  }
+  const handleEditInputChange = (e) => {
+    setEditInputs({
+      code: e.target.value
+    });
+  }
+
 
   function activateModal(metric) {
     setActiveModal(metric);
@@ -29,7 +51,7 @@ function Implement() {
       fetch(`http://localhost:8080/api/v1/app/codeimplementation/${activeModal.codeImplementationId}`)
           .then((response) => response.json())
           .then((data) => {
-            setCode(data.data);
+            setImplement(data.data);
           });
     }
   }, [activeModal]);
@@ -37,28 +59,25 @@ function Implement() {
 
   function handleAddCode(id) {
     try {
-      const researchDescription = document.querySelector(
-          "textarea[name='description']",
-      ).value;
-      const researchFormula = document.querySelector(
-          "input[name='formula']",
-      ).value;
-      const body = {
-        metricId: id,
-        description: researchDescription,
-        mathFormula: researchFormula,
-      };
+      const body = {research_id: id,
+        code: code};
+      console.log(body);
 
-      fetch("http://localhost:8080/api/v1/app/add/research", {
+      fetch("http://localhost:8080/api/v1/app/add/codeimplementation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       })
           .then((response) => response.json())
-          .then((data) => setActiveModal({}));
-      toast.success(
-          "Research added successfully ! you can check it in the Metrics tab.",
-      );
+          .then((data) => {
+            setActiveModal({})
+            if (data.status === 200) {
+              toast.success(data.data);
+            } else {
+              toast.error(data.data);
+            }
+            code = "";
+          });
     } catch (err) {
       console.error(err.message);
     }
@@ -66,28 +85,25 @@ function Implement() {
 
   function handleEditCode(id) {
     try {
-      const researchDescription = document.querySelector(
-          "textarea[name='description']",
-      ).value;
-      const researchFormula = document.querySelector(
-          "input[name='formula']",
-      ).value;
-      const body = {
-        metricId: id,
-        description: researchDescription,
-        mathFormula: researchFormula,
-      };
+      const body = {id: id,
+        code: editCode};
+      console.log(body);
 
-      fetch(`http://localhost:8080/api/v1/app/edit/research/${id}`, {
+      fetch("http://localhost:8080/api/v1/app/update/codeimplementation", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       })
           .then((response) => response.json())
-          .then((data) => setActiveModal({}));
-      toast.success(
-          "Research edited successfully ! you can check it in the Metrics tab.",
-      );
+          .then((data) => {
+            setActiveModal({})
+            if (data.status === 200) {
+              toast.success(data.data);
+            } else {
+              toast.error(data.data);
+            }
+            editCode = "";
+          });
     } catch (err) {
       console.error(err.message);
     }
@@ -185,6 +201,8 @@ function Implement() {
                           cols="10"
                           className="w-full textarea bg-second text-white"
                           placeholder="java implementation..."
+                            onChange={handleInputChange}
+                          value={code}
                       ></textarea>
                     </form>
                   </div>
@@ -208,7 +226,7 @@ function Implement() {
   }
 
   function displayReadModal(metric) {
-    if (code && metric === activeModal) {
+    if (implement && metric === activeModal) {
       return (
           <div>
             <div className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -249,7 +267,7 @@ function Implement() {
                           wrapLongLines={true}
                           showLineNumbers={true}
                       >
-                        {code.code}
+                        {implement.code}
                       </SyntaxHighlighter>
                     </div>
                   </div>
@@ -273,7 +291,7 @@ function Implement() {
   }
 
   function displayEditModal(metric) {
-    if (code && metric === activeModal) {
+    if (implement && metric === activeModal) {
       return (
           <div>
             <div
@@ -318,14 +336,21 @@ function Implement() {
                           cols="10"
                           className="w-full textarea bg-second text-white"
                           placeholder="New code implementation..."
-                      >{code.code}</textarea>
+                            value={editCode}
+                            onChange={handleEditInputChange}
+
+                      ></textarea>
                     </form>
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
                         className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
-                        onClick={() => handleEditCode(code.id)}
+                        onClick={() => {
+                          handleEditCode(implement.id);
+                          setEditMode(false);
+                        }}
+
                     >
                       Edit
                     </button>

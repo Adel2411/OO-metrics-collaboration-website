@@ -7,6 +7,39 @@ function Search() {
   const [metrics, setMetrics] = useState([]);
   const [research, setResearch] = useState([]);
   const [editMode, setEditMode] = useState(false);
+  const [inputs, setInputs] = useState({
+    Description: "",
+    MathFormula: ""
+  });
+  const [editInputs, setEditInputs] = useState({
+    description: "",
+    mathFormula: ""
+  });
+
+  let {Description, MathFormula} = inputs;
+  let {description: editDescription, mathFormula: editMathFormula} = editInputs;
+
+  const handleInputChange = (e) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value
+    });
+  }
+  const handleEditInputChange = (e) => {
+    setEditInputs({
+      ...editInputs,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  useEffect(() => {
+    if (research && research.id && editMode) {
+      setEditInputs({
+        description: research.description,
+        mathFormula: research.mathFormula
+      });
+    }
+  }, [research, editMode]);
 
   function activateModal(metric) {
     setActiveModal(metric);
@@ -16,6 +49,7 @@ function Search() {
   }
 
   useEffect(() => {
+    console.log("fetching metrics");
     fetch("http://localhost:8080/api/v1/app/metrics")
       .then((response) => response.json())
       .then((data) => setMetrics(data.data));
@@ -23,11 +57,9 @@ function Search() {
 
   useEffect(() => {
     if (activeModal.researchId) {
-      console.log(activeModal.researchId)
       fetch(`http://localhost:8080/api/v1/app/research/${activeModal.researchId}`)
         .then((response) => response.json())
         .then((data) => {
-
           setResearch(data.data);
         });
     }
@@ -36,17 +68,7 @@ function Search() {
 
   function handleAddResearch(id) {
     try {
-      const researchDescription = document.querySelector(
-        "textarea[name='description']",
-      ).value;
-      const researchFormula = document.querySelector(
-        "input[name='formula']",
-      ).value;
-      const body = {
-        metricId: id,
-        description: researchDescription,
-        mathFormula: researchFormula,
-      };
+      const body = {Description: Description, MathFormula: MathFormula, MetricId: id};
 
       fetch("http://localhost:8080/api/v1/app/add/research", {
         method: "POST",
@@ -54,10 +76,16 @@ function Search() {
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
-        .then((data) => setActiveModal({}));
-      toast.success(
-        "Research added successfully ! you can check it in the Metrics tab.",
-      );
+        .then((data) => {
+          setActiveModal({})
+          if (data.status === 200) {
+            toast.success(data.data + ", Refresh the page to see the result");
+          } else {
+            toast.error(data.data);
+          }
+        Description = "";
+          MathFormula = "";
+        });
     } catch (err) {
       console.error(err.message);
     }
@@ -65,28 +93,24 @@ function Search() {
 
   function handleEditResearch(id) {
     try {
-      const researchDescription = document.querySelector(
-        "textarea[name='description']",
-      ).value;
-      const researchFormula = document.querySelector(
-        "input[name='formula']",
-      ).value;
-      const body = {
-        metricId: id,
-        description: researchDescription,
-        mathFormula: researchFormula,
-      };
-
-      fetch(`http://localhost:8080/api/v1/app/edit/research/${id}`, {
+      const body = {id: id, description: editDescription, mathFormula: editMathFormula};
+      fetch("http://localhost:8080/api/v1/app/update/research", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
-        .then((data) => setActiveModal({}));
-      toast.success(
-        "Research edited successfully ! you can check it in the Metrics tab.",
-      );
+        .then((data) => {
+          console.log(data)
+          setActiveModal({})
+          if (data.status === 200) {
+            toast.success(data.data);
+          } else {
+            toast.error(data.data);
+          }
+          editDescription = "";
+            editMathFormula = "";
+        });
     } catch (err) {
       console.error(err.message);
     }
@@ -179,20 +203,26 @@ function Search() {
                         Description :
                       </label>
                       <textarea
-                          name="description"
+                          name="Description"
                           rows="5"
                           cols="10"
                           className="w-full textarea bg-second text-white"
                           placeholder="description"
+                          defaultValue=""
+                          value={Description}
+                          onChange={handleInputChange}
                       ></textarea>
                       <label htmlFor="formula" className="label">
                         Formula :
                       </label>
                       <input
                           type="text"
-                          name="formula"
+                          name="MathFormula"
                           placeholder="Formula (LaTeX)"
                           className="input input-bordered w-full my-2 bg-second"
+                          defaultValue=""
+                            value={MathFormula}
+                            onChange={handleInputChange}
                       />
                     </form>
                   </div>
@@ -324,16 +354,19 @@ function Search() {
                           cols="10"
                           className="w-full textarea bg-second text-white"
                           placeholder="New description"
-                      >{research.description}</textarea>
+                          defaultValue={research.description}
+                            onChange={handleEditInputChange}
+                      ></textarea>
                       <label htmlFor="formula" className="label">
                         Formula :
                       </label>
                       <input
                           type="text"
-                          name="formula"
+                          name="mathFormula"
                           placeholder="New formula (LaTeX)"
                           className="input input-bordered w-full my-2 bg-second"
-                          value={research.mathFormula}
+                            defaultValue={research.mathFormula}
+                            onChange={handleEditInputChange}
                       />
                     </form>
                   </div>
@@ -341,7 +374,10 @@ function Search() {
                     <button
                         className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
-                        onClick={() => handleEditResearch(research.id)}
+                        onClick={() => {
+                          handleEditResearch(research.id);
+                            setEditMode(false);
+                        }}
                     >
                       Edit
                     </button>
