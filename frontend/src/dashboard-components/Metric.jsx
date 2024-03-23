@@ -17,7 +17,7 @@ function Metric() {
   }
 
   useEffect(() => {
-    fetch( `${url.local}/app/metrics`)
+    fetch( `${url.host}/app/metrics`)
       .then((response) => response.json())
       .then((data) =>
             setMetrics(data.data)
@@ -28,7 +28,7 @@ function Metric() {
     try {
         const body = {name};
 
-      fetch(`${url.local}/app/add/metric`, {
+      fetch(`${url.host}/app/add/metric`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -48,7 +48,7 @@ function Metric() {
     }
   }
   function handleDeleteMetric(id) {
-    fetch(`${url.local}/app/delete/metric/${id}`, {
+    fetch(`${url.host}/app/delete/metric/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

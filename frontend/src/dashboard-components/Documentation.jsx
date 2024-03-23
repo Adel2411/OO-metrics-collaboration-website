@@ -17,7 +17,7 @@ function Documentation() {
   }
 
   useEffect(() => {
-    fetch(`${url.local}/app/documents`)
+    fetch(`${url.host}/app/documents`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

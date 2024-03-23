@@ -51,14 +51,14 @@ function Research() {
 
   useEffect(() => {
     console.log("fetching metrics");
-    fetch(`${url.local}/app/metrics`)
+    fetch(`${url.host}/app/metrics`)
       .then((response) => response.json())
       .then((data) => setMetrics(data.data));
   }, []);
 
   useEffect(() => {
     if (activeModal.researchId) {
-      fetch(`${url.local}/app/research/${activeModal.researchId}`)
+      fetch(`${url.host}/app/research/${activeModal.researchId}`)
         .then((response) => response.json())
         .then((data) => {
           setResearch(data.data);
@@ -71,7 +71,7 @@ function Research() {
     try {
       const body = {Description: Description, MathFormula: MathFormula, MetricId: id};
 
-      fetch(`${url.local}/app/add/research`, {
+      fetch(`${url.host}/app/add/research`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -95,7 +95,7 @@ function Research() {
   function handleEditResearch(id) {
     try {
       const body = {id: id, description: editDescription, mathFormula: editMathFormula};
-      fetch(`${url.local}/app/update/research`, {
+      fetch(`${url.host}/app/update/research`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

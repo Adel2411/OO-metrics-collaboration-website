@@ -20,7 +20,7 @@ const Dashboard = ({ setAuth }) => {
   async function getName() {
     try {
       const response = await fetch(
-        `${url.local}/auth/getuser`,
+        `${url.host}/auth/getuser`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

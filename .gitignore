@@ -1,0 +1,6 @@
+.idea/*
+/backend/.idea/*
+/frontend/.idea/*
+
+
+/backend/demo/src/main/resources/secrets.properties

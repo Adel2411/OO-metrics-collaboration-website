@@ -24,7 +24,7 @@ const Register = ({setAuth}) => {
         try {
             const body = {username, email, password};
 
-            const response = await fetch(`${url.local}/auth/register`, {
+            const response = await fetch(`${url.host}/auth/register`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)

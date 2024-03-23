@@ -23,7 +23,7 @@ const Login = ({setAuth}) => {
         try {
             const body = {username, password}
 
-            const response = await fetch(`${url.local}/auth/login`, {
+            const response = await fetch(`${url.host}/auth/login`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
