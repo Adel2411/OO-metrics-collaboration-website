@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 //Dashboard component
 import Documentation from "../dashboard-components/Documentation.jsx";
 import Implement from "../dashboard-components/Implement.jsx";
-import Search from "../dashboard-components/Search.jsx";
 import Navbar from "../dashboard-components/Navbar.jsx";
 import Metric from "../dashboard-components/Metric.jsx";
+import Research from "../dashboard-components/Research.jsx";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
@@ -56,7 +56,7 @@ const Dashboard = ({ setAuth }) => {
         <Navbar name={name} logout={Logout} setPage={setPage} />
         {currentPage === 1 && <Documentation />}
         {currentPage === 2 && <Metric />}
-        {currentPage === 3 && <Search />}
+        {currentPage === 3 && <Research />}
         {currentPage === 4 && <Implement />}
       </div>
     </Fragment>
