@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/app")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://oo-metrics-collaboration-website-frontend.onrender.com")
 public class ModelConfig {
 
     private ModelService modelService;
