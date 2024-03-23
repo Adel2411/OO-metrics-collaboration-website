@@ -31,6 +31,13 @@ function Implement() {
     });
   }
 
+    useEffect(() => {
+        if (implement && implement.id && editMode) {
+            setEditInputs({
+                code: implement.code
+            });
+        }
+    }, [implement, editMode]);
 
   function activateModal(metric) {
     setActiveModal(metric);
@@ -258,7 +265,7 @@ function Implement() {
                   </div>
                     <div className="relative p-6 flex-auto">
                         <h3 className="modal-subtitle">Code :</h3>
-                        <div>
+                        <div className="h-60 overflow-y-auto">
                             <SyntaxHighlighter
                                 language="java"
                                 style={atomOneDark}
@@ -338,7 +345,7 @@ function Implement() {
                           cols="10"
                           className="modal-input w-full textarea bg-second text-white"
                           placeholder="New code implementation..."
-                            value={editCode}
+                            defaultValue={implement.code}
                             onChange={handleEditInputChange}
                       ></textarea>
                     </form>
