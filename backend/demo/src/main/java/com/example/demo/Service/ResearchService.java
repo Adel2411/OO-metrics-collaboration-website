@@ -8,10 +8,12 @@ import com.example.demo.Requests.ResearchPutRequest;
 import com.example.demo.Requests.ResearchRequest;
 import com.example.demo.repository.metricRepository;
 import com.example.demo.repository.researchRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +24,9 @@ public class ResearchService {
     private final metricRepository metricRepository;
 
     private final ResearchToResearchDTO entityToDTOMapper;
+
+    @PersistenceContext
+    private  EntityManager entityManager;
     @Autowired
     public ResearchService( researchRepository researchRepository, metricRepository metricRepository  , ResearchToResearchDTO entityToDTOMapper) {
         this.researchRepository = researchRepository;
@@ -48,21 +53,50 @@ public class ResearchService {
     }
 
 
-    public Research updateResearch(ResearchPutRequest research) {
-        Research researchToUpdate = researchRepository.findById(UUID.fromString(research.getId()))
+    public void updateResearch(ResearchPutRequest research) {
+        Research research1 =  researchRepository.findById(UUID.fromString(research.getId()))
                 .orElseThrow(() -> new RuntimeException("Research not found"));
+        research1.setDescription(research.getDescription());
+        research1.setMathFormula(research.getMathFormula());
+        researchRepository.save(research1);
 
-        researchToUpdate.setDescription(research.getDescription());
-        researchToUpdate.setMathFormula(research.getMathFormula());
-
-        return researchRepository.save(researchToUpdate);
     }
 
     public ResearchDTO getResearchById(String id) {
-        Research research = researchRepository.findById(UUID.fromString(id))
-                .orElseThrow(() -> new RuntimeException("Research not found"));
-
+        Object[] research = (Object[]) getResearches(UUID.fromString(id)).get(0);
         return entityToDTOMapper.apply(research);
     }
+
+    public  List<?> getResearches(UUID id) {
+        Query query = entityManager.createQuery("SELECT r.id , r.description , r.MathFormula  FROM Research r where r.id = :id");
+        query.setParameter("id", id);
+        List<?> researches = query.getResultList();
+        if(researches.isEmpty()){
+            throw new RuntimeException("Research not found");
+        }
+
+        return  researches;
+    }
+
+    private void updateResearchQUERY(ResearchPutRequest research) {
+        try {
+            Query query = entityManager.createQuery("UPDATE Research r SET r.description = :description, r.MathFormula = :mathFormula WHERE r.id = :id");
+            query.setParameter("description", research.getDescription());
+            query.setParameter("mathFormula", research.getMathFormula());
+            query.setParameter("id", UUID.fromString(research.getId()));
+
+            int updatedCount = query.executeUpdate();
+
+            if (updatedCount == 1) {
+                System.out.println("Research updated successfully");
+            } else {
+                System.out.println("No research updated");
+            }
+        } catch (Exception e) {
+            System.out.println("Error updating research: " + e.getMessage());
+            throw new RuntimeException("Failed updating research", e);
+        }
+    }
+
 
 }

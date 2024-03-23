@@ -5,17 +5,18 @@ import com.example.demo.Model.CodeImplementation;
 import com.example.demo.Model.Research;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
 import java.util.function.Function;
 
 @Component
-public class implementionToImplementDTO implements Function<CodeImplementation, CodeImplementationDTO> {
+public class implementionToImplementDTO implements Function<Object[], CodeImplementationDTO> {
 
     @Override
 
-    public CodeImplementationDTO apply(CodeImplementation codeImplementation) {
+    public CodeImplementationDTO apply(Object[] codeImplementation) {
         return CodeImplementationDTO.builder()
-                .id(codeImplementation.getId())
-                .code(codeImplementation.getCode())
+                .id(UUID.fromString(codeImplementation[0].toString()))
+                .code(codeImplementation[1].toString())
                 .build();
     }
 }

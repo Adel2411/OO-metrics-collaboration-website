@@ -83,8 +83,8 @@ public class ModelService {
         return researchService.addResearch(request);
     }
 
-    public Research updateResearch(ResearchPutRequest research) {
-        return researchService.updateResearch(research);
+    public void  updateResearch(ResearchPutRequest research) {
+        researchService.updateResearch(research);
     }
 
 
@@ -104,5 +104,14 @@ public class ModelService {
 
     public List<Document> getDocuments() {
         return documentService.getDocuments();
+    }
+
+
+    public List<CodeImplementation> getCodeImplementations() {
+        return codeImplementationRepository.findAllWithAssociations();
+    }
+
+    public List<?> getRe(String id){
+        return List.of(researchService.getResearches(UUID.fromString(id)));
     }
 }

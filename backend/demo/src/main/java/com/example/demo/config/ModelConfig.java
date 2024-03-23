@@ -109,8 +109,8 @@ public class ModelConfig {
     ResponseEntity<?> updateResearch(@RequestBody ResearchPutRequest research){
         ResponseModel responseModel ;
         try{
-            Research updatedResearch = modelService.updateResearch(research);
-            responseModel = ResponseModelBuilder.okResponse(updatedResearch.getId());
+            modelService.updateResearch(research);
+            responseModel = ResponseModelBuilder.okResponse("Research updated");
         }catch (Exception e){
             responseModel = ResponseModelBuilder.badRequestResponse("failed updating research");
         }
@@ -136,7 +136,7 @@ public class ModelConfig {
         ResponseModel responseModel ;
         try {
             CodeImplementation newCodeImplementation = modelService.addCodeImplementation(codeImplementation);
-            responseModel = ResponseModelBuilder.okResponse(newCodeImplementation.getId());
+            responseModel = ResponseModelBuilder.okResponse("Code Implementation added Successfully");
         }catch (Exception e){
             responseModel = ResponseModelBuilder.badRequestResponse("failed adding code implementation");
         }
@@ -148,7 +148,7 @@ public class ModelConfig {
         ResponseModel responseModel ;
         try {
             CodeImplementation updatedCodeImplementation = modelService.updateCodeImplementation(codeImplementation);
-            responseModel = ResponseModelBuilder.okResponse(updatedCodeImplementation.getId());
+            responseModel = ResponseModelBuilder.okResponse("Code Implementation updated Successfully");
         }catch (Exception e){
             responseModel = ResponseModelBuilder.badRequestResponse("failed updating code implementation");
         }
@@ -170,4 +170,30 @@ public class ModelConfig {
     }
 
 
+    @GetMapping ("/codeimplementations")
+    ResponseEntity<?> getCodeImplementations(){
+        ResponseModel responseModel ;
+        try {
+            List<CodeImplementation> codeImplementations = modelService.getCodeImplementations();
+            responseModel = ResponseModelBuilder.okResponse(codeImplementations);
+        }
+        catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse("failed getting code implementations");
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
+    }
+
+
+    @GetMapping("/re/{id}")
+    ResponseEntity<?> getResearches(@PathVariable String id){
+        ResponseModel responseModel ;
+        try {
+            List<?> research = modelService.getRe(id);
+            responseModel = ResponseModelBuilder.okResponse(research);
+        }
+        catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse("failed getting research");
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
+    }
 }
