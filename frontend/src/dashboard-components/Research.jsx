@@ -320,7 +320,7 @@ function Research() {
                     className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                   <div
                       className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                    <h3 className="text-3xl title">{metric.name}</h3>
+                    <h3 className="text-3xl modal-title">{metric.name}</h3>
                     <button
                         className="p-1 ml-auto text-red-600 border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => {
@@ -346,26 +346,26 @@ function Research() {
                   </div>
                   <div className="relative p-6 flex-auto">
                     <form>
-                      <label htmlFor="description" className="label">
+                      <label htmlFor="description" className="label label-text modal-subtitle">
                         Description :
                       </label>
                       <textarea
                           name="description"
                           rows="5"
                           cols="10"
-                          className="w-full textarea bg-second text-white"
+                          className="w-full textarea bg-second text-white modal-input"
                           placeholder="New description"
                           defaultValue={research.description}
                             onChange={handleEditInputChange}
                       ></textarea>
-                      <label htmlFor="formula" className="label">
+                      <label htmlFor="formula" className="label label-text modal-subtitle">
                         Formula :
                       </label>
                       <input
                           type="text"
                           name="mathFormula"
                           placeholder="New formula (LaTeX)"
-                          className="input input-bordered w-full my-2 bg-second"
+                          className="input input-bordered w-full my-2 bg-second modal-input"
                             defaultValue={research.mathFormula}
                             onChange={handleEditInputChange}
                       />
@@ -373,7 +373,7 @@ function Research() {
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
-                        className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        className="modal-button bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={() => {
                           handleEditResearch(research.id);
