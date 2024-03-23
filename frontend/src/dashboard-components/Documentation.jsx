@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import MathJax from "react-mathjax2";
+import url from "../url.json";
 
 function Documentation() {
   const [copy, setCopy] = useState({});
@@ -16,7 +17,7 @@ function Documentation() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/app/documents")
+    fetch(`${url.local}/app/documents`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

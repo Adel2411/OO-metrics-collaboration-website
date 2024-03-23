@@ -1,6 +1,7 @@
 import React, {Fragment, useState} from "react";
 import {Link} from "react-router-dom";
 import {toast} from "react-toastify";
+import url from "../url.json";
 
 const Login = ({setAuth}) => {
 
@@ -22,7 +23,7 @@ const Login = ({setAuth}) => {
         try {
             const body = {username, password}
 
-            const response = await fetch("http://localhost:8080/api/v1/auth/login", {
+            const response = await fetch(`${url.local}/auth/login`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)

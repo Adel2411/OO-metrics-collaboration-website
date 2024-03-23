@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
+import url from "../url.json";
 
 function Metric() {
   const [showModal, setShowModal] = React.useState(false);
@@ -16,7 +17,7 @@ function Metric() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/app/metrics")
+    fetch( `${url.local}/app/metrics`)
       .then((response) => response.json())
       .then((data) =>
             setMetrics(data.data)
@@ -27,7 +28,7 @@ function Metric() {
     try {
         const body = {name};
 
-      fetch("http://localhost:8080/api/v1/app/add/metric", {
+      fetch(`${url.local}/app/add/metric`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -47,7 +48,7 @@ function Metric() {
     }
   }
   function handleDeleteMetric(id) {
-    fetch(`http://localhost:8080/api/v1/app/delete/metric/${id}`, {
+    fetch(`${url.local}/app/delete/metric/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

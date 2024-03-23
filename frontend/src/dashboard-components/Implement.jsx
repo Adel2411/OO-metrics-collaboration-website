@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import MathJax from "react-mathjax2";
 import {atomOneDark} from "react-syntax-highlighter/dist/cjs/styles/hljs/index.js";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import url from "../url.json";
 
 function Implement() {
   const [activeModal, setActiveModal] = useState({});
@@ -47,7 +47,7 @@ function Implement() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/app/metrics")
+    fetch(`${url.local}/app/metrics`)
         .then((response) => response.json())
         .then((data) => setMetrics(data.data));
   }, []);
@@ -55,7 +55,7 @@ function Implement() {
   useEffect(() => {
     if (activeModal.codeImplementationId) {
       console.log(activeModal.codeImplementationId);
-      fetch(`http://localhost:8080/api/v1/app/codeimplementation/${activeModal.codeImplementationId}`)
+      fetch(`${url.local}/app/codeimplementation/${activeModal.codeImplementationId}`)
           .then((response) => response.json())
           .then((data) => {
             setImplement(data.data);
@@ -70,7 +70,7 @@ function Implement() {
         code: code};
       console.log(body);
 
-      fetch("http://localhost:8080/api/v1/app/add/codeimplementation", {
+      fetch(`${url.local}/app/add/codeimplementation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -96,7 +96,7 @@ function Implement() {
         code: editCode};
       console.log(body);
 
-      fetch("http://localhost:8080/api/v1/app/update/codeimplementation", {
+      fetch(`${url.local}/app/update/codeimplementation`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -265,7 +265,7 @@ function Implement() {
                   </div>
                     <div className="relative p-6 flex-auto">
                         <h3 className="modal-subtitle">Code :</h3>
-                        <div className="h-60 overflow-y-auto">
+                        <div className="max-h-60 overflow-y-auto">
                             <SyntaxHighlighter
                                 language="java"
                                 style={atomOneDark}

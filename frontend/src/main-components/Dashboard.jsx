@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import url from "../url.json";
 
 //Dashboard component
 import Documentation from "../dashboard-components/Documentation.jsx";
@@ -19,7 +20,7 @@ const Dashboard = ({ setAuth }) => {
   async function getName() {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/auth/getuser",
+        `${url.local}/auth/getuser`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
