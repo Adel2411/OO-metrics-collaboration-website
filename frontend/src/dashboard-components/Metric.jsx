@@ -21,7 +21,7 @@ function Metric() {
       .then((data) =>
             setMetrics(data.data)
   )
-  }, [metrics]);
+  }, []);
 
   function handleAddMetric() {
     try {
