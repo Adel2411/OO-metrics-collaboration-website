@@ -1,9 +1,13 @@
 package com.example.demo.configuration;
 
+import com.example.demo.config.secretsConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +17,11 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private static final String SIGN_KEY = "IYl+p8YSriqqxqtjyq2p2rBkOqkC9Rwldt0JjYBe2dUUqKVdwsm0f8Zok8Af4kvQ";
+
+
+
+    @Value("${sign}")
+    private String SIGN_KEY ;
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     }
@@ -26,6 +34,7 @@ public class JwtService {
     public String generateToken(
            UserDetails userDetails
     ){
+        System.out.println("SIGN :" +SIGN_KEY );
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
