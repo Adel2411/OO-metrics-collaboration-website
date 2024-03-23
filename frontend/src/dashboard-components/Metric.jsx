@@ -36,7 +36,7 @@ function Metric() {
         .then((data) => {
             setShowModal(false);
             if (data.status === 200) {
-                toast.success(data.data);
+                toast.success(data.data + ", Refresh the page to see the result");
             } else {
                 toast.error(data.data);
             }
@@ -53,7 +53,7 @@ function Metric() {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 200) {
-          toast.success(data.data);
+          toast.success(data.data + ", Refresh the page to see the result");
         } else {
             toast.error(data.data);
         }
@@ -68,7 +68,7 @@ function Metric() {
       return (
           <div className="flex flex-col justify-center items-center text-green-500">
             <div className="flex gap-2">
-            <p>Researched</p>
+            <p className="metrics-status">Researched</p>
                  <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -84,7 +84,7 @@ function Metric() {
                 </svg>
               </div>
               <div className="flex gap-2">
-                <p>Implemented</p>
+                <p className="metrics-status">Implemented</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -105,7 +105,7 @@ function Metric() {
       return (
           <div className="flex flex-col justify-center items-center">
             <div className="flex gap-2 text-green-500">
-              <p>Researched</p>
+              <p className="metrics-status">Researched</p>
               <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -122,7 +122,7 @@ function Metric() {
               </svg>
             </div>
             <div className="flex gap-2 text-red-500">
-              <p>Not implemented</p>
+              <p className="metrics-status">Not implemented</p>
                  <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -142,7 +142,7 @@ function Metric() {
    return (
        <div className="flex flex-col justify-center items-center">
          <div className="flex gap-2 text-red-500">
-           <p>Not researched</p>
+           <p className="metrics-status">Not researched</p>
            <svg
                xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 24 24"
@@ -163,7 +163,7 @@ function Metric() {
   const displayListElement = (metric) => {
     return (
         <div className="py-3 shadow shadow-black grid grid-cols-3 rounded-box bg-second">
-          <li className="px-10 flex items-center">{metric.name}</li>
+          <li className="px-10 flex items-center metrics-title">{metric.name}</li>
           {displayStatus(metric)}
         <span className="px-10">
           <button
@@ -191,7 +191,7 @@ function Metric() {
   return (
     <div className=" bg-third">
       <div className="overflow-y-auto h-screen w-full fixed flex flex-col items-center gap-10">
-        <h1 className="title underline pt-20">Metrics</h1>
+        <h1 className="component-title underline pt-20">Metrics</h1>
         <ul className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
           {metrics.map((metric) => (
             <div key={metric.id}>
@@ -216,7 +216,7 @@ function Metric() {
                 clipRule="evenodd"
               />
             </svg>
-            <span>Add</span>
+            <span className="metrics-add-button">Add</span>
           </button>
         </div>
       </div>

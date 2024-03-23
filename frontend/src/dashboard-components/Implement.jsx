@@ -72,7 +72,7 @@ function Implement() {
           .then((data) => {
             setActiveModal({})
             if (data.status === 200) {
-              toast.success(data.data);
+              toast.success(data.data + ", Refresh the page to see the result");
             } else {
               toast.error(data.data);
             }
@@ -98,7 +98,7 @@ function Implement() {
           .then((data) => {
             setActiveModal({})
             if (data.status === 200) {
-              toast.success(data.data);
+              toast.success(data.data + ", Refresh the page to see the result");
             } else {
               toast.error(data.data);
             }
@@ -383,7 +383,7 @@ function Implement() {
   return (
       <div className="bg-third">
         <div className="overflow-y-auto h-screen w-full fixed flex flex-col items-center gap-32">
-          <h1 className="title underline pt-20">Implementations</h1>
+          <h1 className="component-title underline pt-20">Implementations</h1>
           <ul className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
             {metrics.map((metric) => (
                 <div key={metric.id}>

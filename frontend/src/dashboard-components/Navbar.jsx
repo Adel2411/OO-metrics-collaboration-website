@@ -6,7 +6,7 @@ function Navbar({ name, logout, setPage }) {
       <li className="h-full">
         <a
           onClick={(e) => setPage(page)}
-          className="border-2 btn btn-ghost menu-link"
+          className="border-2 btn btn-ghost navbar-options"
         >
           {title}
         </a>
@@ -39,22 +39,22 @@ function Navbar({ name, logout, setPage }) {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-second rounded-box w-52"
           >
             <li>
-              <a onClick={(e) => setPage(1)} className="menu-link">
+              <a onClick={(e) => setPage(1)} className="navbar-options">
                 Documentation
               </a>
             </li>
             <li>
-              <a onClick={(e) => setPage(2)} className="menu-link">
+              <a onClick={(e) => setPage(2)} className="navbar-options">
                 Metrics
               </a>
             </li>
             <li>
-              <a onClick={(e) => setPage(3)} className="menu-link">
-                Searches
+              <a onClick={(e) => setPage(3)} className="navbar-options">
+                Researches
               </a>
             </li>
             <li>
-              <a onClick={(e) => setPage(4)} className="menu-link">
+              <a onClick={(e) => setPage(4)} className="navbar-options">
                 Implementations
               </a>
             </li>
@@ -64,7 +64,7 @@ function Navbar({ name, logout, setPage }) {
         <div>
           <a
             onClick={(e) => setPage(1)}
-            className="btn btn-ghost text-xl subtitle"
+            className="btn btn-ghost text-xl navbar-logo"
           >
             OO-Metrics
           </a>
@@ -75,7 +75,7 @@ function Navbar({ name, logout, setPage }) {
         <ul className="flex h-full items-center gap-5">
           {displayListElement(1, "Documentation")}
           {displayListElement(2, "Metrics")}
-          {displayListElement(3, "Searches")}
+          {displayListElement(3, "Researches")}
           {displayListElement(4, "Implementations")}
         </ul>
       </div>
@@ -103,14 +103,14 @@ function Navbar({ name, logout, setPage }) {
             className="menu menu-sm dropdown-content z-[1] p-2 shadow bg-red-500 rounded-box w-34"
           >
             <li>
-              <button onClick={logout} className="menu-link">
+              <button onClick={logout} className="navbar-options">
                 Logout
               </button>
             </li>
           </ul>
         </div>
 
-        <p className="hidden lg:flex">{name}</p>
+        <p className="hidden lg:flex navbar-options">{name}</p>
       </div>
     </div>
   );

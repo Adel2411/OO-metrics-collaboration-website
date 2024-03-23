@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import MathJax from "react-mathjax2";
 
-function Search() {
+function Research() {
   const [activeModal, setActiveModal] = useState({});
   const [metrics, setMetrics] = useState([]);
   const [research, setResearch] = useState([]);
@@ -104,7 +104,7 @@ function Search() {
           console.log(data)
           setActiveModal({})
           if (data.status === 200) {
-            toast.success(data.data);
+            toast.success(data.data + ", Refresh the page to see the result");
           } else {
             toast.error(data.data);
           }
@@ -410,7 +410,7 @@ function Search() {
   return (
       <div className="bg-third">
         <div className="overflow-y-auto h-screen w-full fixed flex flex-col items-center gap-32">
-          <h1 className="title underline pt-20">Researches</h1>
+          <h1 className="component-title underline pt-20">Researches</h1>
           <ul className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
             {metrics.map((metric) => (
                 <div key={metric.id}>
@@ -424,4 +424,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default Research;

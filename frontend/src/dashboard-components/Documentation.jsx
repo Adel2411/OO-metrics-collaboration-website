@@ -31,7 +31,7 @@ function Documentation() {
         <li className="w-full">
           <a
             href={id}
-            className="w-full md:h-10 lg:h-16 btn btn-ghost subtitle rounded-box bg-third hover:bg-second"
+            className="documentation-left-content w-full md:h-10 lg:h-16 btn btn-ghost subtitle rounded-box bg-third hover:bg-second"
           >
             {title}
           </a>
@@ -44,10 +44,10 @@ function Documentation() {
     return (
       <div>
         <li id={id} className="px-3 md:px-16 flex flex-col gap-10">
-          <h1 className="title">{title}</h1>
+          <h1 className="documentation-right-title">{title}</h1>
           <div>
-            <h1>Description :</h1>
-            <p className="text">{description}</p>
+            <h1 className="documentation-right-subtitle">Description :</h1>
+            <p className="documentation-right-text">{description}</p>
             <MathJax.Context input="tex">
               <div>
                 <MathJax.Node>{formula}</MathJax.Node>
@@ -56,7 +56,7 @@ function Documentation() {
           </div>
           <div className="max-w-xl min-w-sm rounded-md overflow-hidden shadow-2xl">
             <div className="flex justify-between px-4 bg-first text-white text-xs items-center">
-              <p className="text-sm">Implementation</p>
+              <p className="documentation-right-subtitle">Implementation :</p>
               {copy[id] ? (
                 <button className="py-1 inline-flex items-center gap-1">
                   <span>
@@ -110,9 +110,11 @@ function Documentation() {
               style={atomOneDark}
               customStyle={{
                 padding: "10px",
+                fontSize: "15px",
               }}
               wrapLongLines={true}
               showLineNumbers={true}
+              useInlineStyles={false}
             >
               {code}
             </SyntaxHighlighter>
@@ -127,7 +129,7 @@ function Documentation() {
     <div className="z-0">
       <div>
         <div className="overflow-y-auto w-1/5 hidden md:flex bg-fourth gap-10 py-10 flex-col items-center h-screen fixed">
-          <h1 className="pt-16">Available Metrics</h1>
+          <h1 className="documentation-left-title pt-16">Available Metrics</h1>
           <ul className="flex flex-col w-full rounded-box gap-1">
             {documents.map((document, index) => {
               return displayListElementLink(index, document.metricName);
@@ -136,7 +138,7 @@ function Documentation() {
         </div>
         <div className="md:w-4/5 w-full bg-second flex flex-col fixed right-0 overflow-y-auto h-screen top-16">
           <div className="flex justify-center">
-            <h1 className="title py-10 underline underline-offset-8">
+            <h1 className="component-title py-10 underline underline-offset-8">
               Documentation
             </h1>
           </div>
