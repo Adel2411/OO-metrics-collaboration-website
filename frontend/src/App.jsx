@@ -30,7 +30,7 @@ function App() {
 
     async function isAuthorized() {
         try {
-            const load = await fetch(`${url.host}/app/metrics`);
+            await fetch(`${url.host}/app/documents`);
             setLoad(false);
 
             const response = await fetch(`${url.host}/auth/verify` , {

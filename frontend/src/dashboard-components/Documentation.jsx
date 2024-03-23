@@ -20,7 +20,6 @@ function Documentation() {
     fetch(`${url.host}/app/documents`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setDocuments(data.data);
       });
   }, []);
