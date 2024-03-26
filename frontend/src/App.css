@@ -1,122 +1,123 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Madimi+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Madimi+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Madimi+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 * {
-    font-family: "JetBrains Mono", sans-serif;
-    scroll-behavior: smooth;
+  font-family: "JetBrains Mono", sans-serif;
+  scroll-behavior: smooth;
 }
 
 .title {
-    font-family: 'Poppins', cursive;
-    font-weight: 800;
-    font-size: 50px;
+  font-family: "Poppins", cursive;
+  font-weight: 800;
+  font-size: 50px;
 }
 
 /* general */
 .component-title {
-    font-family: 'Poppins', cursive;
-    font-weight: 800;
-    font-size: 35px;
+  font-family: "Poppins", cursive;
+  font-weight: 800;
+  font-size: 35px;
 }
 
 /* navbar */
 .navbar-logo {
-    font-family: 'Poppins', cursive;
-    font-weight: 800;
-    font-size: 25px;
+  font-family: "Poppins", cursive;
+  font-weight: 800;
+  font-size: 25px;
 }
 
 .navbar-options {
-    font-family: 'Poppins', cursive;
-    font-weight: 400;
-    font-size: 15px;
+  font-family: "Poppins", cursive;
+  font-weight: 400;
+  font-size: 15px;
 }
 
 /* documentation-left */
 .documentation-left-title {
-    font-family: 'Poppins', cursive;
-    font-weight: 300;
-    font-size: 15px;
+  font-family: "Poppins", cursive;
+  font-weight: 300;
+  font-size: 15px;
 }
 .documentation-left-content {
-    font-family: 'Poppins', cursive;
-    font-weight: 400;
-    font-size: 15px;
+  font-family: "Poppins", cursive;
+  font-weight: 400;
+  font-size: 15px;
 }
 
 /* documentation-right */
 .documentation-right-title {
-    font-family: 'Poppins', cursive;
-    font-weight: 700;
-    font-size: 25px;
+  font-family: "Poppins", cursive;
+  font-weight: 700;
+  font-size: 25px;
 }
 .documentation-right-subtitle {
-    font-family: 'Poppins', cursive;
-    font-weight: 600;
-    font-size: 15px;
+  font-family: "Poppins", cursive;
+  font-weight: 600;
+  font-size: 15px;
 }
 .documentation-right-description {
-    font-family: "Proza L", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
+  font-family: "Proza L", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 /* Metrics */
 .metrics-title {
-    font-family: 'Poppins', cursive;
-    font-weight: 600;
-    font-size: 18px;
+  font-family: "Poppins", cursive;
+  font-weight: 600;
+  font-size: 18px;
 }
 .metrics-status {
-    font-family: 'JetBrains Mono', cursive;
-    font-weight: 800;
-    font-size: 10px;
+  font-family: "JetBrains Mono", cursive;
+  font-weight: 800;
+  font-size: 10px;
 }
 .metrics-add-button {
-    font-family: 'Poppins', cursive;
-    font-weight: 700;
-    font-size: 20px;
+  font-family: "Poppins", cursive;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 /* Researches */
 .researches-title {
-    font-family: 'Poppins', cursive;
-    font-weight: 600;
-    font-size: 18px;
+  font-family: "Poppins", cursive;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 /* Implementations */
 .implementations-title {
-    font-family: 'Poppins', cursive;
-    font-weight: 600;
-    font-size: 18px;
+  font-family: "Poppins", cursive;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 /* Modals */
 .modal-title {
-    font-family: 'Poppins', cursive;
-    font-weight: 700;
-    font-size: 25px;
+  font-family: "Poppins", cursive;
+  font-weight: 700;
+  font-size: 25px;
 }
 .modal-subtitle {
-    font-family: 'Poppins', cursive;
-    font-weight: 600;
-    font-size: 15px;
+  font-family: "Poppins", cursive;
+  font-weight: 600;
+  font-size: 15px;
 }
 .modal-input {
-    font-family: 'Poppins', cursive;
-    font-weight: 400;
-    font-size: 12px;
+  font-family: "Poppins", cursive;
+  font-weight: 400;
+  font-size: 12px;
 }
 .modal-button {
-    font-family: 'Poppins', cursive;
-    font-weight: 700;
-    font-size: 15px;
+  font-family: "Poppins", cursive;
+  font-weight: 700;
+  font-size: 15px;
 }
+

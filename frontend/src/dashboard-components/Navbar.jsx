@@ -5,7 +5,7 @@ function Navbar({ name, logout, setPage }) {
     return (
       <li className="h-full">
         <a
-          onClick={(e) => setPage(page)}
+          onClick={() => setPage(page)}
           className="border-2 btn btn-ghost navbar-options"
         >
           {title}
@@ -39,22 +39,22 @@ function Navbar({ name, logout, setPage }) {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-second rounded-box w-52"
           >
             <li>
-              <a onClick={(e) => setPage(1)} className="navbar-options">
+              <a onClick={() => setPage(1)} className="navbar-options">
                 Documentation
               </a>
             </li>
             <li>
-              <a onClick={(e) => setPage(2)} className="navbar-options">
+              <a onClick={() => setPage(2)} className="navbar-options">
                 Metrics
               </a>
             </li>
             <li>
-              <a onClick={(e) => setPage(3)} className="navbar-options">
+              <a onClick={() => setPage(3)} className="navbar-options">
                 Researches
               </a>
             </li>
             <li>
-              <a onClick={(e) => setPage(4)} className="navbar-options">
+              <a onClick={() => setPage(4)} className="navbar-options">
                 Implementations
               </a>
             </li>
@@ -63,7 +63,7 @@ function Navbar({ name, logout, setPage }) {
 
         <div>
           <a
-            onClick={(e) => setPage(1)}
+            onClick={() => setPage(1)}
             className="btn btn-ghost text-xl navbar-logo"
           >
             OO-Metrics

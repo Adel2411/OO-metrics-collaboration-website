@@ -19,14 +19,11 @@ const Dashboard = ({ setAuth }) => {
 
   async function getName() {
     try {
-      const response = await fetch(
-        `${url.host}/auth/getuser`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token: localStorage.getItem("token") }),
-        },
-      );
+      const response = await fetch(`${url.host}/auth/getuser`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: localStorage.getItem("token") }),
+      });
 
       const jsonResponse = await response.json();
 
