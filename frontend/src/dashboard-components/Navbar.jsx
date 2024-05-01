@@ -58,6 +58,11 @@ function Navbar({ name, logout, setPage }) {
                 Implementations
               </a>
             </li>
+            <li>
+              <a onClick={() => setPage(5)} className="navbar-options">
+                Test
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -77,6 +82,7 @@ function Navbar({ name, logout, setPage }) {
           {displayListElement(2, "Metrics")}
           {displayListElement(3, "Researches")}
           {displayListElement(4, "Implementations")}
+          {displayListElement(5, "Test")}
         </ul>
       </div>
 

@@ -51,7 +51,6 @@ function Research() {
   }
 
   useEffect(() => {
-    console.log("fetching metrics");
     fetch(`${url.host}/app/metrics`)
       .then((response) => response.json())
       .then((data) => setMetrics(data.data));

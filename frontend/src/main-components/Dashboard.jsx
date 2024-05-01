@@ -8,6 +8,7 @@ import Implement from "../dashboard-components/Implement.jsx";
 import Navbar from "../dashboard-components/Navbar.jsx";
 import Metric from "../dashboard-components/Metric.jsx";
 import Research from "../dashboard-components/Research.jsx";
+import Test from "../dashboard-components/Test.jsx";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
@@ -56,6 +57,7 @@ const Dashboard = ({ setAuth }) => {
         {currentPage === 2 && <Metric />}
         {currentPage === 3 && <Research />}
         {currentPage === 4 && <Implement />}
+        {currentPage === 5 && <Test />}
       </div>
     </Fragment>
   );
