@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/app")
-@CrossOrigin({ "https://oo-metrics-collaboration-website-frontend.onrender.com" , "http://localhost:3000" })
+@CrossOrigin({ "https://oo-metrics-collaboration-website-frontend.onrender.com" , "http://localhost:5173" })
 public class ModelConfig {
 
     private ModelService modelService;
