@@ -8,10 +8,10 @@ export default {
     extend: {
       colors: {
         // Theme 1 : Default Dark
-        first: "#000000",
-        second: "#0C1821",
-        third: "#1B2A41",
-        fourth: "#324A5F",
+        // first: "#1A1A1A",
+        // second: "#333333",
+        // third: "#4D4D4D",
+        // fourth: "#666666",
 
         // Theme 2 : Nord
         // first: "#2E3440",
@@ -19,29 +19,23 @@ export default {
         // third: "#434C5E",
         // fourth: "#4C566A",
 
-        // Theme 3 : Dracula
-        // first: "#282A36",
-        // second: "#44475A",
-        // third: "#44475A",
-        // fourth: "#44475A",
+        // Theme 3 : Space Blue
+        // first: "#0A2647",
+        // second: "#144272",
+        // third: "#205295",
+        // fourth: "#2C74B3",
 
-        // Theme 4 : Solarized Dark
-        // first: "#002B36",
-        // second: "#073642",
-        // third: "#073642",
-        // fourth: "#073642",
+        // Theme 4 : Purple
+        first: "#371B58",
+        second: "#4C3575",
+        third: "#5B4B8A",
+        fourth: "#7858A6",
 
-        // Theme 5 : Gruvbox Dark
-        // first: "#282828",
-        // second: "#3C3836",
-        // third: "#3C3836",
-        // fourth: "#3C3836",
-
-        // Theme 6 : One Dark
-        // first: "#282C34",
-        // second: "#353B45",
-        // third: "#353B45",
-        // fourth: "#353B45",
+        // Theme 5 : Grey
+        // first: "#404258",
+        // second: "#474E68",
+        // third: "#50577A",
+        // fourth: "#6B728E",
       },
     },
   },

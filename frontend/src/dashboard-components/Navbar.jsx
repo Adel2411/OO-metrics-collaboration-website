@@ -81,6 +81,8 @@ function Navbar({ name, logout, setPage }) {
       </div>
 
       <div className="flex justify-end pr-5 lg:pr-10">
+        <p className="hidden lg:flex navbar-options">{name}</p>
+
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <svg
@@ -109,8 +111,6 @@ function Navbar({ name, logout, setPage }) {
             </li>
           </ul>
         </div>
-
-        <p className="hidden lg:flex navbar-options">{name}</p>
       </div>
     </div>
   );
