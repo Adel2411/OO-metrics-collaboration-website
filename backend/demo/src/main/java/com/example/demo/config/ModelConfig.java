@@ -8,18 +8,17 @@ import com.example.demo.Requests.CodeImplementationPutRequest;
 import com.example.demo.Requests.CodeImplementationRequest;
 import com.example.demo.Requests.ResearchPutRequest;
 import com.example.demo.Requests.ResearchRequest;
-import com.example.demo.Service.DocumentService;
 import com.example.demo.Service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/api/v1/app")
-@CrossOrigin(origins = "https://oo-metrics-collaboration-website-frontend.onrender.com")
+@CrossOrigin({ "https://oo-metrics-collaboration-website-frontend.onrender.com" , "http://localhost:3000" })
 public class ModelConfig {
 
     private ModelService modelService;

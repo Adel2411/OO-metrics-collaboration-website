@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://oo-metrics-collaboration-website-frontend.onrender.com")
+@CrossOrigin({ "https://oo-metrics-collaboration-website-frontend.onrender.com" , "http://localhost:3000" })
 
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
