@@ -1,5 +1,3 @@
-import React from "react";
-
 function Navbar({ name, logout, setPage }) {
   function displayListElement(page, title) {
     return (
@@ -15,9 +13,9 @@ function Navbar({ name, logout, setPage }) {
   }
 
   return (
-    <div className="navbar bg-first z-10 top-0 fixed grid grid-cols-2 lg:grid-cols-3">
+    <div className="navbar bg-first z-10 top-0 fixed grid grid-cols-2 xl:grid-cols-5">
       <div>
-        <div className="dropdown visible lg:hidden">
+        <div className="dropdown visible xl:hidden">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -63,6 +61,11 @@ function Navbar({ name, logout, setPage }) {
                 Test
               </a>
             </li>
+            <li>
+              <a onClick={() => setPage(6)} className="navbar-options">
+                Users
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -76,18 +79,19 @@ function Navbar({ name, logout, setPage }) {
         </div>
       </div>
 
-      <div className="hidden lg:flex justify-center h-full">
+      <div className="hidden xl:flex justify-center h-full col-span-3">
         <ul className="flex h-full items-center gap-5">
           {displayListElement(1, "Documentation")}
           {displayListElement(2, "Metrics")}
           {displayListElement(3, "Researches")}
           {displayListElement(4, "Implementations")}
           {displayListElement(5, "Test")}
+          {displayListElement(6, "Users")}
         </ul>
       </div>
 
-      <div className="flex justify-end pr-5 lg:pr-10">
-        <p className="hidden lg:flex navbar-options">{name}</p>
+      <div className="flex justify-end pr-5 xl:pr-10">
+        <p className="hidden xl:flex navbar-options">{name}</p>
 
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

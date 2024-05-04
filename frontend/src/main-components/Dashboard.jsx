@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import url from "../url.json";
 
@@ -9,6 +9,7 @@ import Navbar from "../dashboard-components/Navbar.jsx";
 import Metric from "../dashboard-components/Metric.jsx";
 import Research from "../dashboard-components/Research.jsx";
 import Test from "../dashboard-components/Test.jsx";
+import Users from "../dashboard-components/Users.jsx";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
@@ -58,6 +59,7 @@ const Dashboard = ({ setAuth }) => {
         {currentPage === 3 && <Research />}
         {currentPage === 4 && <Implement />}
         {currentPage === 5 && <Test />}
+        {currentPage === 6 && <Users />}
       </div>
     </Fragment>
   );
