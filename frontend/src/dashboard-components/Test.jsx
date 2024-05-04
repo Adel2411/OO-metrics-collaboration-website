@@ -11,7 +11,7 @@ function Test() {
         });
     }, [files]);
 
-    const { getRootProps, getInputProps } = useDropzone({ onDrop });
+    const { getRootProps, getInputProps } = useDropzone({ onDrop, noClick: files.length > 0});
 
     const deleteFile = (path) => {
         setFiles(files.filter(file => file.path !== path));
@@ -23,21 +23,29 @@ function Test() {
                 <h1 className="component-title pt-4 underline">Test</h1>
             </div>
             <div className="h-3/4 sm:h-2/3 flex flex-col items-center gap-10 sm:gap-5">
-                <div {...getRootProps(
-                    {className: "dropzone border-2 border-dashed p-10"}
-                )}>
-                    <input {...getInputProps()} directory="" webkitdirectory=""/>
-                    <p>Drag the package to test...</p>
-                </div>
+                {files.length === 0 ? (
+                    <div {...getRootProps(
+                        {className: "dropzone border-2 border-dashed p-10"}
+                    )}>
+                        <input {...getInputProps()} directory="" webkitdirectory=""/>
+                        <p>Drag the package to test...</p>
+                    </div>
+                ) : (
+                    <div className="overflow-y-auto max-h-[500px]">
+                        <ul {...getRootProps(
+                            {className: "flex flex-col justify-center items-center"}
+                        )}>
+                            <input {...getInputProps()} directory="" webkitdirectory=""/>
+                            {files.map((file, index) => (
+                                <li key={index} className="flex justify-between w-full border-2 p-2 mb-2">
+                                    <div>{file.name}</div>
+                                    <button className="btn btn-ghost" onClick={() => deleteFile(file.path)}>🗑️</button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
                 <button className="btn btn-primary">Submit</button>
-                <ul className="flex flex-col justify-center items-center textarea-md">
-                    {files.map((file, index) => (
-                        <li key={index} className="flex justify-between w-full border-2 p-2 mb-2">
-                            <div>{file.path}</div>
-                            <button onClick={() => deleteFile(file.path)}>🗑️</button>
-                        </li>
-                    ))}
-                </ul>
             </div>
         </div>
     );
