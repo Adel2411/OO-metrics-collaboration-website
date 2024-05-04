@@ -23,29 +23,29 @@ function Test() {
                 <h1 className="component-title pt-4 underline">Test</h1>
             </div>
             <div className="h-3/4 sm:h-2/3 flex flex-col items-center gap-10 sm:gap-5">
+                <div className="h-1/2 w-full md:w-1/2 border-first bg-second border-4 rounded-box">
                 {files.length === 0 ? (
                     <div {...getRootProps(
-                        {className: "dropzone border-2 border-dashed p-10"}
+                        {className: "h-full dropzone flex flex-col justify-center items-center"}
                     )}>
                         <input {...getInputProps()} directory="" webkitdirectory=""/>
                         <p>Drag the package to test...</p>
                     </div>
                 ) : (
-                    <div className="overflow-y-auto max-h-[500px]">
-                        <ul {...getRootProps(
-                            {className: "flex flex-col justify-center items-center"}
-                        )}>
-                            <input {...getInputProps()} directory="" webkitdirectory=""/>
-                            {files.map((file, index) => (
-                                <li key={index} className="flex justify-between w-full border-2 p-2 mb-2">
-                                    <div>{file.name}</div>
-                                    <button className="btn btn-ghost" onClick={() => deleteFile(file.path)}>🗑️</button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <ul {...getRootProps(
+                        {className: "flex flex-col items-center gap-2 h-full overflow-y-auto"}
+                    )}>
+                        <input {...getInputProps()} directory="" webkitdirectory=""/>
+                        {files.map((file, index) => (
+                            <li key={index} className="flex justify-between items-center w-full rounded-box bg-first p-5">
+                                <div>{file.name}</div>
+                                <button className="btn btn-ghost" onClick={() => deleteFile(file.path)}>🗑️</button>
+                            </li>
+                        ))}
+                    </ul>
                 )}
-                <button className="btn btn-primary">Submit</button>
+                </div>
+                <button className="btn btn-primary w-1/3 text-white">Submit</button>
             </div>
         </div>
     );
