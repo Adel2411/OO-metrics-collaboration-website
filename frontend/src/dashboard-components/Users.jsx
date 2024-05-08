@@ -65,7 +65,7 @@ function Users() {
                           ? "Joueur"
                           : "Bnadem"}
                     </summary>
-                    <ul className="p-2 shadow menu dropdown-content z-[1] bg-fourth rounded-box w-42 lg:w-52">
+                    <ul className="p-2 shadow menu dropdown-content z-[1] bg-fourth rounded-box w-32 lg:w-52">
                       <li
                         className={
                           roles[user] === 1
