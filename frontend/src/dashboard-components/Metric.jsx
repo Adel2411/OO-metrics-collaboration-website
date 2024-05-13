@@ -10,6 +10,14 @@ function Metric() {
   });
   let { name } = inputs;
 
+  function getShortCut(title) {
+    return title
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
+  }
+
   const handleInputChange = (e) => {
     setInputs({
       name: e.target.value,
@@ -17,7 +25,7 @@ function Metric() {
   };
 
   useEffect(() => {
-    fetch(`${url.host}/app/metrics`)
+    fetch(`${url.current}/app/metrics`)
       .then((response) => response.json())
       .then((data) => setMetrics(data.data));
   }, []);
@@ -26,7 +34,7 @@ function Metric() {
     try {
       const body = { name };
 
-      fetch(`${url.host}/app/add/metric`, {
+      fetch(`${url.current}/app/add/metric`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -46,7 +54,7 @@ function Metric() {
     }
   }
   function handleDeleteMetric(id) {
-    fetch(`${url.host}/app/delete/metric/${id}`, {
+    fetch(`${url.current}/app/delete/metric/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -160,7 +168,9 @@ function Metric() {
   const displayListElement = (metric) => {
     return (
       <div className="py-3 shadow shadow-black grid grid-cols-3 rounded-box bg-second">
-        <li className="px-10 flex items-center metrics-title">{metric.name}</li>
+        <li className="px-10 flex items-center metrics-title">
+          {getShortCut(metric.name)}
+        </li>
         {displayStatus(metric)}
         <span className="px-10">
           <button

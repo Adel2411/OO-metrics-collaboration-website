@@ -22,7 +22,7 @@ const Login = ({ setAuth }) => {
     try {
       const body = { username, password };
 
-      const response = await fetch(`${url.host}/auth/login`, {
+      const response = await fetch(`${url.current}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -100,4 +100,3 @@ const Login = ({ setAuth }) => {
 };
 
 export default Login;
-

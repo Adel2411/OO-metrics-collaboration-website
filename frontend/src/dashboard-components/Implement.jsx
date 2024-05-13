@@ -46,7 +46,7 @@ function Implement() {
   }
 
   useEffect(() => {
-    fetch(`${url.host}/app/metrics`)
+    fetch(`${url.current}/app/metrics`)
       .then((response) => response.json())
       .then((data) => setMetrics(data.data));
   }, []);
@@ -55,7 +55,7 @@ function Implement() {
     if (activeModal.codeImplementationId) {
       console.log(activeModal.codeImplementationId);
       fetch(
-        `${url.host}/app/codeimplementation/${activeModal.codeImplementationId}`,
+        `${url.current}/app/codeimplementation/${activeModal.codeImplementationId}`,
       )
         .then((response) => response.json())
         .then((data) => {
@@ -69,7 +69,7 @@ function Implement() {
       const body = { research_id: id, code: code };
       console.log(body);
 
-      fetch(`${url.host}/app/add/codeimplementation`, {
+      fetch(`${url.current}/app/add/codeimplementation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -94,7 +94,7 @@ function Implement() {
       const body = { id: id, code: editCode };
       console.log(body);
 
-      fetch(`${url.host}/app/update/codeimplementation`, {
+      fetch(`${url.current}/app/update/codeimplementation`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

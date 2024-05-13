@@ -23,7 +23,7 @@ const Register = ({ setAuth }) => {
     try {
       const body = { username, email, password };
 
-      const response = await fetch(`${url.host}/auth/register`, {
+      const response = await fetch(`${url.current}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -109,4 +109,3 @@ const Register = ({ setAuth }) => {
 };
 
 export default Register;
-

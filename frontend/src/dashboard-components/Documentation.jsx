@@ -9,6 +9,14 @@ function Documentation() {
   const [documents, setDocuments] = useState([]);
   const [showImplementation, setShowImplementation] = useState(false);
 
+  function getShortCut(title) {
+    return title
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
+  }
+
   function handleCopy(id, codeString) {
     navigator.clipboard.writeText(codeString);
     setCopy((prevState) => ({ ...prevState, [id]: true }));
@@ -18,7 +26,7 @@ function Documentation() {
   }
 
   useEffect(() => {
-    fetch(`${url.host}/app/documents`)
+    fetch(`${url.current}/app/documents`)
       .then((response) => response.json())
       .then((data) => {
         setDocuments(data.data);
@@ -45,7 +53,7 @@ function Documentation() {
     return (
       <div>
         <li id={id} className="px-3 md:px-16 flex flex-col gap-10">
-          <h1 className="documentation-right-title">{title}</h1>
+          <h1 className="documentation-right-title">{`${title.toUpperCase()} : (${getShortCut(title)})`}</h1>
           <div>
             <h1 className="documentation-right-subtitle">Description :</h1>
             <p className="documentation-right-description">{description}</p>

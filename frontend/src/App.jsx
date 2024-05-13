@@ -29,10 +29,10 @@ function App() {
 
   async function isAuthorized() {
     try {
-      await fetch(`${url.host}/app/documents`);
+      await fetch(`${url.current}/app/documents`);
       setLoad(false);
 
-      const response = await fetch(`${url.host}/auth/verify`, {
+      const response = await fetch(`${url.current}/auth/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: localStorage.getItem("token") }),
