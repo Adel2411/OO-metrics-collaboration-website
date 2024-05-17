@@ -42,7 +42,7 @@
 /* documentation-left */
 .documentation-left-title {
   font-family: "Poppins", cursive;
-  font-weight: 300;
+  font-weight: 600;
   font-size: 15px;
 }
 .documentation-left-content {
@@ -170,4 +170,9 @@
 .toggleCheckbox + .toggleContainer div:last-child {
   color: white;
   transition: color 0.3s;
+}
+
+/* Scroll Bar */
+.customScrollbar {
+  scrollbar-color: #371b58 #7858a6;
 }

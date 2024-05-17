@@ -20,6 +20,19 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // Redirect the user to "/" when he refreshes the page
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      window.location.href = "/";
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
@@ -61,7 +74,7 @@ function App() {
         <LoadingPage /> // Render the loading page if loading is true
       ) : (
         <Router>
-          <div className="Router bg-third text-white">
+          <div className="Router customScrollbar bg-third text-white">
             <ToastContainer
               theme="colored"
               transition={Slide}
