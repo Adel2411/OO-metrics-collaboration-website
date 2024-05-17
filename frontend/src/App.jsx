@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
