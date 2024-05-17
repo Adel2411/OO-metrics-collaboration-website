@@ -25,7 +25,7 @@ function App() {
     const handleBeforeUnload = (event) => {
       event.preventDefault();
       event.returnValue = "";
-      window.location.href = "/";
+      window.location.href = "/dashboard";
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
@@ -73,7 +73,7 @@ function App() {
       {loading ? (
         <LoadingPage /> // Render the loading page if loading is true
       ) : (
-        <Router>
+        <Router basename="/">
           <div className="Router customScrollbar bg-third text-white">
             <ToastContainer
               theme="colored"
