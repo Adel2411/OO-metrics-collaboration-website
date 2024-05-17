@@ -19,7 +19,7 @@ public class MetricController {
     private final MetricResultService MetricResultService;
 
     @PostMapping("/analyze")
-    public ResponseEntity<ArrayList<FileMetricResult>> analyze(@RequestParam("files")ArrayList<MultipartFile> files) {
+    public ResponseEntity<ArrayList<FileMetricResult>> analyze(@RequestParam("files") ArrayList<MultipartFile> files) {
         // ignore all the files that are not java files
         files.removeIf(file -> !Objects.requireNonNull(file.getOriginalFilename()).endsWith(".java") && !Objects.requireNonNull(file.getOriginalFilename()).endsWith(".git"));
         ArrayList<FileMetricResult> result = MetricResultService.analyze(files);
