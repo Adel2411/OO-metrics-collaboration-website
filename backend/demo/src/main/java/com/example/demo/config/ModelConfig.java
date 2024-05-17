@@ -1,13 +1,16 @@
 package com.example.demo.config;
 
+import com.example.demo.CodeImplementation.CodeImplementation;
 import com.example.demo.DTO.CodeImplementationDTO;
-import com.example.demo.DTO.MetricDTO;
+import com.example.demo.Metric.MetricDTO;
 import com.example.demo.DTO.ResearchDTO;
+import com.example.demo.Metric.Metric;
 import com.example.demo.Model.*;
 import com.example.demo.Requests.CodeImplementationPutRequest;
 import com.example.demo.Requests.CodeImplementationRequest;
-import com.example.demo.Requests.ResearchPutRequest;
-import com.example.demo.Requests.ResearchRequest;
+import com.example.demo.Research.Research;
+import com.example.demo.Research.ResearchPutRequest;
+import com.example.demo.Research.ResearchRequest;
 import com.example.demo.Service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +24,7 @@ import java.util.List;
 @CrossOrigin({ "https://oo-metrics-collaboration-website-frontend.onrender.com" , "http://localhost:5173" })
 public class ModelConfig {
 
-    private ModelService modelService;
+    private final ModelService modelService;
 
     @Autowired
     public ModelConfig(ModelService modelService) {
@@ -160,6 +163,7 @@ public class ModelConfig {
         ResponseModel responseModel ;
         try {
             List<Document> documents = modelService.getDocuments();
+            System.out.println(documents);
             responseModel = ResponseModelBuilder.okResponse(documents);
         }
         catch (Exception e){

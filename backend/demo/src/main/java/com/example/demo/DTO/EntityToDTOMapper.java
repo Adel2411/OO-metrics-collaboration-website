@@ -1,8 +1,6 @@
 package com.example.demo.DTO;
 
-import com.example.demo.repository.codeImplementationRepository;
-import com.example.demo.repository.researchRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.Metric.MetricDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

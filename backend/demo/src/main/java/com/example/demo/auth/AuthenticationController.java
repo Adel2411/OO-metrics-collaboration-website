@@ -1,6 +1,6 @@
 package com.example.demo.auth;
 import com.example.demo.Requests.TokenRequest;
-import com.example.demo.configuration.JwtService;
+import com.example.demo.Jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

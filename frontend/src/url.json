@@ -1,5 +1,5 @@
 {
-  "current": "https://oo-metrics-collaboration-website.onrender.com/api/v1",
+  "current": "http://localhost:8080/api/v1",
 
   "local": "http://localhost:8080/api/v1",
   "host1": "https://oo-metrics-collaboration-website.onrender.com/api/v1"

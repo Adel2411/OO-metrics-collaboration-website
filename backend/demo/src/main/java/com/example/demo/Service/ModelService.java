@@ -1,17 +1,16 @@
 package com.example.demo.Service;
-
+import com.example.demo.CodeImplementation.CodeImplementationService;
 import com.example.demo.DTO.CodeImplementationDTO;
-import com.example.demo.DTO.MetricDTO;
 import com.example.demo.DTO.ResearchDTO;
-import com.example.demo.Model.CodeImplementation;
 import com.example.demo.Model.Document;
-import com.example.demo.Model.Metric;
-import com.example.demo.Model.Research;
+import com.example.demo.Research.*;
+import com.example.demo.CodeImplementation.*;
 import com.example.demo.Requests.CodeImplementationPutRequest;
 import com.example.demo.Requests.CodeImplementationRequest;
-import com.example.demo.Requests.ResearchPutRequest;
-import com.example.demo.Requests.ResearchRequest;
-import com.example.demo.repository.*;
+import com.example.demo.Research.ResearchPutRequest;
+import com.example.demo.Research.ResearchRequest;
+import com.example.demo.Research.ResearchService;
+import com.example.demo.Metric.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

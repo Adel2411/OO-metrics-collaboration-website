@@ -1,8 +1,9 @@
 package com.example.demo.auth;
 
-import com.example.demo.Model.User;
-import com.example.demo.configuration.JwtService;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.User.RoleRepository;
+import com.example.demo.User.User;
+import com.example.demo.Jwt.JwtService;
+import com.example.demo.User.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,13 +17,17 @@ public class AuthenticationService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final JwtService JwtService;
     private final AuthenticationManager authenticationManager;
-    public AuthenticationResponse register(RegisterRequest request) {
+
+
+    public AuthenticationResponse register(RegisterRequest request ) {
         var user =  User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .role(roleRepository.findById(3).orElseThrow())
                 .build();
 
         userRepository.save(user);

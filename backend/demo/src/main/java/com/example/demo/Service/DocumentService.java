@@ -14,10 +14,10 @@ public class DocumentService {
     private EntityManager entityManager;
 
     public List<Document> getDocuments() {
-        String jpql = "SELECT NEW com.example.demo.Model.Document (m.name, r.description, r.MathFormula , c.code) " +
+        String jpql = "SELECT NEW com.example.demo.Model.Document (m.name, r.description, r.MathFormula , coalesce(c.code , '')) " +
                 "FROM Metric m " +
                 "JOIN Research r ON m.id = r.metricId.id " +
-                "JOIN CodeImplementation c ON r.id = c.researchId.id";
+                 "LEFT JOIN CodeImplementation c ON r.id = c.researchId.id";
         TypedQuery<Document> query = entityManager.createQuery(jpql, Document.class);
         return query.getResultList();
     }
