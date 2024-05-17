@@ -1,5 +1,6 @@
 package com.example.demo.configuration;
 
+import com.example.demo.User.Model.Roles;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +25,11 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/api/v1/auth/**" ,
-                                "/api/v1/app/**" , "/api/v1/metric/**")
+                        req.requestMatchers("/api/v1/manager/**").hasRole(Roles.SUPER_ADMIN.name())
+                                .requestMatchers("/api/v1/admin/**").hasAnyRole(Roles.ADMIN.name() , Roles.SUPER_ADMIN.name())
+                                .requestMatchers("/api/v1/client/**").hasAnyRole(Roles.USER.name() , Roles.ADMIN.name() , Roles.SUPER_ADMIN.name())
+                                .requestMatchers("/api/v1/metric/**").hasAnyRole(Roles.USER.name() , Roles.ADMIN.name() , Roles.SUPER_ADMIN.name())
+                                .requestMatchers("/api/v1/auth/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
@@ -33,12 +37,7 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(Auth)
                 .addFilterBefore(JWTauthFilter, UsernamePasswordAuthenticationFilter.class);
-//                .logout(logout ->
-//                        logout.logoutUrl("/api/v1/auth/logout")
-//                                .addLogoutHandler(logoutHandler)
-//                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-//                );
-                
+
         return http.build();
     }
 

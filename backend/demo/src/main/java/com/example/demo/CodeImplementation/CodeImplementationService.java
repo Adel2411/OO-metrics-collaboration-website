@@ -87,5 +87,7 @@ public class CodeImplementationService {
     }
 
 
-
+    public void deleteCodeImplementation(String id) {
+        codeImplementationRepository.deleteById(UUID.fromString(id));
+    }
 }

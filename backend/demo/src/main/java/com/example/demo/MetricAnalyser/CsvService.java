@@ -1,14 +1,12 @@
-package com.example.demo.Metric;
+package com.example.demo.MetricAnalyser;
 
-import com.example.demo.MetricAnalyser.FileMetricResult;
-import com.example.demo.MetricAnalyser.MetricResultModel;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 @Service
 public class CsvService {

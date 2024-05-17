@@ -1,49 +1,32 @@
-package com.example.demo.config;
+package com.example.demo.admin;
+
 
 import com.example.demo.CodeImplementation.CodeImplementation;
 import com.example.demo.DTO.CodeImplementationDTO;
-import com.example.demo.Metric.Model.MetricDTO;
 import com.example.demo.DTO.ResearchDTO;
 import com.example.demo.Metric.Model.Metric;
-import com.example.demo.Model.*;
+import com.example.demo.Model.ResponseModel;
+import com.example.demo.Model.ResponseModelBuilder;
 import com.example.demo.Requests.CodeImplementationPutRequest;
 import com.example.demo.Requests.CodeImplementationRequest;
 import com.example.demo.Research.Research;
 import com.example.demo.Research.ResearchPutRequest;
 import com.example.demo.Research.ResearchRequest;
 import com.example.demo.Service.ModelService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
-@RequestMapping("/api/v1/app")
-public class ModelConfig {
-
+@RequestMapping("/api/v1/admin")
+@RequiredArgsConstructor
+public class AdminController {
     private final ModelService modelService;
+    //TODO implement admin controller
 
-    @Autowired
-    public ModelConfig(ModelService modelService) {
-        this.modelService = modelService;
-    }
-
-
-    @GetMapping("/metrics")
-    ResponseEntity<?> getMetrics(){
-        ResponseModel responseModel ;
-        try {
-            List<MetricDTO> metrics = modelService.getMetrics();
-            responseModel = ResponseModelBuilder.okResponse(metrics);
-        }
-        catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
-        }
-        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
-    }
-
+    //TODO 1: CRUD operations for Metrics
     @PostMapping("/add/metric")
     ResponseEntity<?> addMetric(@RequestBody Metric metric){
         ResponseModel responseModel ;
@@ -79,6 +62,7 @@ public class ModelConfig {
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
+    //TODO 2: CRUD operations for Research
 
     @GetMapping("research/{id}")
     ResponseEntity<?> getResearch(@PathVariable String id){
@@ -118,6 +102,21 @@ public class ModelConfig {
     }
 
 
+    @DeleteMapping("/delete/research/{id}")
+    ResponseEntity<?> deleteResearch(@PathVariable String id){
+        ResponseModel responseModel ;
+        try{
+            modelService.deleteResearch(id);
+            responseModel = ResponseModelBuilder.okResponse("Research deleted");
+        }catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse("failed deleting this research");
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
+    }
+
+    //TODO 3: CRUD operations for CodeImplementation
+
+
     @GetMapping("codeimplementation/{id}")
     ResponseEntity<?> getCodeImplementation(@PathVariable String id){
         ResponseModel responseModel ;
@@ -131,7 +130,7 @@ public class ModelConfig {
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
-      @PostMapping("/add/codeimplementation")
+    @PostMapping("/add/codeimplementation")
     ResponseEntity<?> addCodeImplementation(@RequestBody CodeImplementationRequest codeImplementation){
         ResponseModel responseModel ;
         try {
@@ -155,21 +154,17 @@ public class ModelConfig {
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
-
-    @GetMapping ("/documents")
-    ResponseEntity<?> getDocuments(){
+    @DeleteMapping("/delete/codeimplementation/{id}")
+    ResponseEntity<?> deleteCodeImplementation(@PathVariable String id){
         ResponseModel responseModel ;
-        try {
-            List<Document> documents = modelService.getDocuments();
-            System.out.println(documents);
-            responseModel = ResponseModelBuilder.okResponse(documents);
-        }
-        catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse("failed getting documents");
+        try{
+            modelService.deleteCodeImplementation(id);
+            responseModel = ResponseModelBuilder.okResponse("Code Implementation deleted");
+        }catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse("failed deleting this code implementation");
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
-
 
     @GetMapping ("/codeimplementations")
     ResponseEntity<?> getCodeImplementations(){
@@ -184,17 +179,4 @@ public class ModelConfig {
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
-
-    @GetMapping("/re/{id}")
-    ResponseEntity<?> getResearches(@PathVariable String id){
-        ResponseModel responseModel ;
-        try {
-            List<?> research = modelService.getRe(id);
-            responseModel = ResponseModelBuilder.okResponse(research);
-        }
-        catch (Exception e){
-            responseModel = ResponseModelBuilder.badRequestResponse("failed getting research");
-        }
-        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
-    }
 }

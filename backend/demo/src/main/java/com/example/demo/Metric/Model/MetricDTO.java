@@ -1,4 +1,4 @@
-package com.example.demo.Metric;
+package com.example.demo.Metric.Model;
 
 import lombok.Builder;
 import lombok.Data;

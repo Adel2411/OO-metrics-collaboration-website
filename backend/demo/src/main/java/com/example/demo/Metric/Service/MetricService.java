@@ -1,5 +1,6 @@
-package com.example.demo.Metric;
+package com.example.demo.Metric.Service;
 import com.example.demo.DTO.*;
+import com.example.demo.Metric.Model.MetricDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;

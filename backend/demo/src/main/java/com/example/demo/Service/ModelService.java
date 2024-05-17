@@ -2,6 +2,10 @@ package com.example.demo.Service;
 import com.example.demo.CodeImplementation.CodeImplementationService;
 import com.example.demo.DTO.CodeImplementationDTO;
 import com.example.demo.DTO.ResearchDTO;
+import com.example.demo.Metric.Model.Metric;
+import com.example.demo.Metric.Model.MetricDTO;
+import com.example.demo.Metric.Repository.metricRepository;
+import com.example.demo.Metric.Service.MetricService;
 import com.example.demo.Model.Document;
 import com.example.demo.Research.*;
 import com.example.demo.CodeImplementation.*;
@@ -10,7 +14,6 @@ import com.example.demo.Requests.CodeImplementationRequest;
 import com.example.demo.Research.ResearchPutRequest;
 import com.example.demo.Research.ResearchRequest;
 import com.example.demo.Research.ResearchService;
-import com.example.demo.Metric.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +23,7 @@ import java.util.UUID;
 @Service
 public class ModelService {
 
-    private final metricRepository metricRepository;
+    private final com.example.demo.Metric.Repository.metricRepository metricRepository;
     private final researchRepository researchRepository;
     private final codeImplementationRepository codeImplementationRepository;
     private final ResearchService researchService;
@@ -112,5 +115,13 @@ public class ModelService {
 
     public List<?> getRe(String id){
         return List.of(researchService.getResearches(UUID.fromString(id)));
+    }
+
+    public void deleteResearch(String id) {
+        researchService.deleteResearch(id);
+    }
+
+    public void deleteCodeImplementation(String id) {
+        codeImplementationService.deleteCodeImplementation(id);
     }
 }

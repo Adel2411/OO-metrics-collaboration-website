@@ -1,6 +1,6 @@
 package com.example.demo.DTO;
 
-import com.example.demo.Metric.MetricDTO;
+import com.example.demo.Metric.Model.MetricDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

@@ -4,11 +4,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class MetricResultService {
     private final MetricRepository metricRepository = new MetricRepository();
-    public  ArrayList<FileMetricResult> analyze(ArrayList<MultipartFile> files) {
+    public  List<FileMetricResult> analyze(List<MultipartFile> files) {
         ArrayList<FileMetricResult> fileMetricResults = new ArrayList<>();
         for (MultipartFile file : files) {
             FileMetricResult fileMetricResult = FileMetricResult.builder()

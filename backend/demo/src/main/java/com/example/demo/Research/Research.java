@@ -1,6 +1,6 @@
 package com.example.demo.Research;
 
-import com.example.demo.Metric.Metric;
+import com.example.demo.Metric.Model.Metric;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

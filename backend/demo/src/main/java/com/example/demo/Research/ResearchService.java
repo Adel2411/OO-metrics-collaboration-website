@@ -1,8 +1,9 @@
 package com.example.demo.Research;
 
 import com.example.demo.DTO.ResearchDTO;
-import com.example.demo.Metric.*;
 import com.example.demo.DTO.ResearchToResearchDTO;
+import com.example.demo.Metric.Model.Metric;
+import com.example.demo.Metric.Repository.metricRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -16,7 +17,7 @@ import java.util.UUID;
 public class ResearchService {
 
     private final researchRepository researchRepository;
-    private final metricRepository metricRepository;
+    private final com.example.demo.Metric.Repository.metricRepository metricRepository;
 
     private final ResearchToResearchDTO entityToDTOMapper;
 
@@ -94,4 +95,10 @@ public class ResearchService {
     }
 
 
+    public void deleteResearch(String id) {
+        UUID researchID = researchRepository.findIdByMetricId(UUID.fromString(id));
+        if (researchID != null) {
+            researchRepository.deleteById(researchID);
+        }
+    }
 }
