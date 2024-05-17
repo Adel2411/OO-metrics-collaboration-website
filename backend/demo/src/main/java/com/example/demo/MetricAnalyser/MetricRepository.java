@@ -15,9 +15,8 @@ public class MetricRepository {
 //                        new InterfaceCounter("InterfaceCounter"),
                         new NumberOfImportedClasses("NumberOfImportedClasses"),
                         new NumberOfImportedClassesUsed("NumberOfImportedClassesUsed"),
-                        new NumberOfInterfacesImplemented("NumberOfInterfacesImplemented"),
                         new NumberOfUsedMethodsFromImports("NumberOfUsedMethodsFromImports"),
-                        new TestUsedMethodsFromImports("TestUsedMethodsFromImports")
+                        new NumberOfInterfacesImplemented("NumberOfInterfacesImplemented")
                 )
         );
     }

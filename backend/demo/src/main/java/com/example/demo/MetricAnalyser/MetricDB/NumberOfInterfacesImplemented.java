@@ -1,9 +1,7 @@
 package com.example.demo.MetricAnalyser.MetricDB;
-
 import com.example.demo.MetricAnalyser.MetricResultModel;
 import com.example.demo.MetricAnalyser.MetricStructure;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,27 +10,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NumberOfInterfacesImplemented extends MetricStructure {
-
     public NumberOfInterfacesImplemented(String metricName) {
         super(metricName);
     }
-
-    public float numberOfInterfacesImpl(InputStream inputStream) throws IOException {
+    public float numberOfInterfacesImpl(String fileContent) {
         int interfaceCount = 0;
+        Pattern pattern = Pattern.compile(".*implements\\s+((\\w+)(\\s*,\\s*\\w+)*)\\s*.*");
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new java.io.ByteArrayInputStream(fileContent.getBytes())))) {
             String line;
-
-            // Regular expression pattern to match interface implementations sentence
-            Pattern pattern = Pattern.compile(".*implements\\s+((\\w+)(\\s*,\\s*\\w+)*)\\s*.*");
-
             while ((line = br.readLine()) != null) {
                 Matcher matcher = pattern.matcher(line);
-
                 if (matcher.matches()) {
                     interfaceCount += matcher.group(1).split("\\s*,\\s*").length;
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
         }
         return interfaceCount;
     }
@@ -40,8 +35,10 @@ public class NumberOfInterfacesImplemented extends MetricStructure {
     @Override
     public float calculate(MultipartFile file) {
         try (InputStream inputStream = file.getInputStream()) {
-            return numberOfInterfacesImpl(inputStream);
-        } catch (IOException e) {
+            // Read the entire file content as a string
+            String fileContent = new String(inputStream.readAllBytes());
+            return numberOfInterfacesImpl(fileContent);
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
