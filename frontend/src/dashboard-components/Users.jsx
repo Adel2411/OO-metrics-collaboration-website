@@ -22,6 +22,7 @@ method: "GET",
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setUsers(data);
       });
   }, []);
@@ -33,34 +34,37 @@ method: "GET",
     });
   }
 
-  const handleAddAdmin = (e) => {
-    e.preventDefault();
+  const handleAddAdmin = () => {
     try {
       const token = localStorage.getItem("token");
       fetch(`${url.current}/manager/add/admin`, {
         method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ username, email, password })
+        body: JSON.stringify(inputs)
       })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === 200) {
-              toast.success(data.data + ", Refresh the page to see the result");
-            } else {
-              toast.error(data.data);
+          .then((response) => {
+            if (!response.ok) {
+              toast.error("Failed to add admin");
+                throw new Error("Failed to add admin");
             }
+            return response.json();
+          })
+          .then((data) => {
+            toast.success(data.message);
           });
+      username = "";
+        email = "";
+        password = "";
       setShowModal(false);
     } catch (err) {
       console.error(err.message);
     }
   }
 
-  const handleDelete = (e, id) => {
-    e.preventDefault();
+  const handleDelete = (id) => {
     try {
       const token = localStorage.getItem("token");
       fetch(`${url.current}/manager/delete/admin/${id}`, {
@@ -69,16 +73,17 @@ method: "GET",
           'Authorization': `Bearer ${token}`,
         }
       })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === 200) {
-              toast.success(data.data + ", Refresh the page to see the result");
-            } else {
-              toast.error(data.data);
+          .then((response) => {
+            if (!response.ok) {
+              toast.error("Failed to delete admin");
+              throw new Error("Failed to delete admin");
             }
+            return response.json();
+          })
+          .then((data) => {
+            toast.success("Admin deleted successfully");
           });
       setUsers(users.filter((user) => user.id !== id));
-
 
       }catch (err) {
       console.error(err.message);
@@ -89,16 +94,16 @@ method: "GET",
     <div className="h-full pt-16">
       <div className="overflow-auto w-full flex flex-col items-center h-full">
         <h1 className="component-title pt-4 underline">Users</h1>
-        <div className="py-32 w-full h-fit px-3 lg:px-36 flex justify-center">
+        <div className="py-32 w-full h-fit px-3 lg:px-36 flex flex-col items-center gap-10">
           <ul className="w-full flex flex-col items-center gap-3">
             {users.map((user) => (
               <li
-                key={user}
+                key={user.id}
                 className="bg-second w-full h-20 rounded-box flex justify-between items-center px-10 lg:px-16"
               >
-                <p className="metrics-title">{user}</p>
+                <p className="metrics-title">{user.username}</p>
                 <button
-                  onClick={(e) => handleDelete(e, user.id)}
+                  onClick={() => handleDelete(user.id)}
                   className="btn btn-ghost bg-red-500 text-xs lg:text-sm"
                 >
                   Delete
@@ -106,6 +111,26 @@ method: "GET",
               </li>
             ))}
           </ul>
+          <div className="flex justify-center pb-10 w-full">
+            <button
+                className="btn btn-success flex flex-row text-white w-1/3 sm:w-1/4 h-10 sm:h-16"
+                onClick={() => setShowModal(true)}
+            >
+              <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
+              >
+                <path
+                    fillRule="evenodd"
+                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
+                    clipRule="evenodd"
+                />
+              </svg>
+              <span className="metrics-add-button">Add</span>
+            </button>
+          </div>
         </div>
       </div>
 

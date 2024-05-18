@@ -46,9 +46,15 @@ function Implement() {
   }
 
   useEffect(() => {
-    fetch(`${url.current}/admin/metrics`)
-      .then((response) => response.json())
-      .then((data) => setMetrics(data.data));
+    const token = localStorage.getItem("token");
+    fetch(`${url.current}/admin/metrics`, {
+      "method": "GET",
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+        .then((response) => response.json())
+        .then((data) => setMetrics(data.data));
   }, []);
 
   useEffect(() => {

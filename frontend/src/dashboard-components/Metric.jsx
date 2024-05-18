@@ -38,7 +38,6 @@ headers: {
 
   function handleAddMetric() {
     try {
-      const body = { name };
       const token = localStorage.getItem("token");
 
       fetch(`${url.current}/admin/add/metric`, {
@@ -46,7 +45,7 @@ headers: {
         headers: { "Content-Type": "application/json",
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(inputs),
       })
         .then((response) => response.json())
         .then((data) => {
