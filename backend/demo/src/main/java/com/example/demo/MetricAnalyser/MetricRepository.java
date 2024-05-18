@@ -10,7 +10,6 @@ public class MetricRepository {
     public MetricRepository() {
         this.analyse_metrics = new ArrayList<>(
                 List.of(
-                        new ExampleMetric("ExampleMetric"),
                         new HandledExceptions("HandledExceptions"),
 //                        new InterfaceCounter("InterfaceCounter"),
                         new NumberOfImportedClasses("NumberOfImportedClasses"),
