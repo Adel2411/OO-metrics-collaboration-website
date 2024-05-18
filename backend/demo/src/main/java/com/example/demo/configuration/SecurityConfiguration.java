@@ -27,11 +27,11 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers( "/api/v1/** ").permitAll()
-//                        .requestMatchers("/api/v1/manager/**").hasRole(Roles.SUPER_ADMIN.name())
-//                        .requestMatchers("/api/v1/admin/**").hasAnyRole(Roles.ADMIN.name(), Roles.SUPER_ADMIN.name())
-//                        .requestMatchers("/api/v1/client/**").hasAnyRole("USER", "ADMIN", "SUPER_ADMIN")
-//                        .requestMatchers("/api/v1/metric/**").hasAnyRole(Roles.USER.name(), Roles.ADMIN.name(), Roles.SUPER_ADMIN.name())
+                        .requestMatchers( "/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/manager/**").hasAuthority(Roles.SUPER_ADMIN.name())
+                        .requestMatchers("/api/v1/admin/**").hasAnyAuthority(Roles.ADMIN.name(), Roles.SUPER_ADMIN.name())
+                        .requestMatchers("/api/v1/client/**").hasAnyAuthority(Roles.USER.name(), Roles.ADMIN.name(), Roles.SUPER_ADMIN.name())
+                        .requestMatchers("/api/v1/metric/**").hasAnyAuthority(Roles.USER.name(), Roles.ADMIN.name(), Roles.SUPER_ADMIN.name())
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
