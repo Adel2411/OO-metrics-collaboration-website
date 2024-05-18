@@ -32,43 +32,96 @@ function Navbar({ name, role, logout, setPage }) {
               />
             </svg>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-second rounded-box w-52"
-          >
-            <li>
-              <a onClick={() => setPage(1)} className="navbar-options">
-                Documentation
-              </a>
-            </li>
-            <li>
-                <a onClick={() => setPage(2)} className="navbar-options">
-                    Metrics
-                </a>
-            </li>
-            <li>
-                <a onClick={() => setPage(3)} className="navbar-options">
-                    Researches
-                </a>
-            </li>
-            <li>
-                <a onClick={() => setPage(4)} className="navbar-options">
-                    Implementations
-                </a>
-            </li>
-            <li>
-              <a onClick={() => setPage(5)} className="navbar-options">
-                Test
-              </a>
-            </li>
-            <li>
-              <a onClick={() => setPage(6)} className="navbar-options">
-                Users
-              </a>
-            </li>
-          </ul>
-        </div>
 
+          {role === "USER" && (
+              <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-second rounded-box w-52"
+              >
+                <li>
+                  <a onClick={() => setPage(1)} className="navbar-options">
+                    Documentation
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setPage(5)} className="navbar-options">
+                    Test
+                  </a>
+                </li>
+              </ul>
+          )}
+
+            {role === "ADMIN" && (
+                <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-second rounded-box w-52"
+                >
+                  <li>
+                    <a onClick={() => setPage(1)} className="navbar-options">
+                      Documentation
+                    </a>
+                  </li>
+                  <li>
+                    <a onClick={() => setPage(2)} className="navbar-options">
+                      Metrics
+                    </a>
+                  </li>
+                  <li>
+                    <a onClick={() => setPage(3)} className="navbar-options">
+                      Researches
+                    </a>
+                  </li>
+                  <li>
+                    <a onClick={() => setPage(4)} className="navbar-options">
+                      Implementations
+                    </a>
+                  </li>
+                  <li>
+                    <a onClick={() => setPage(5)} className="navbar-options">
+                      Test
+                    </a>
+                  </li>
+                </ul>
+            )}
+
+          {role === "SUPER_ADMIN" && (
+              <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-second rounded-box w-52"
+              >
+                <li>
+                  <a onClick={() => setPage(1)} className="navbar-options">
+                    Documentation
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setPage(2)} className="navbar-options">
+                    Metrics
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setPage(3)} className="navbar-options">
+                    Researches
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setPage(4)} className="navbar-options">
+                    Implementations
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setPage(5)} className="navbar-options">
+                    Test
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setPage(6)} className="navbar-options">
+                    Users
+                  </a>
+                </li>
+              </ul>
+          )}
+        </div>
         <div>
           <a
             onClick={() => setPage(1)}
@@ -80,14 +133,33 @@ function Navbar({ name, role, logout, setPage }) {
       </div>
 
       <div className="hidden xl:flex justify-center h-full col-span-3">
-        <ul className="flex h-full items-center gap-5">
-          {displayListElement(1, "Documentation")}
-          {displayListElement(5, "Test")}
-          {displayListElement(2, "Metrics")}
-          {displayListElement(3, "Researches")}
-          {displayListElement(4, "Implementations")}
-          {displayListElement(6, "Users")}
-        </ul>
+        {role === "USER" && (
+          <ul className="flex h-full items-center gap-5">
+            {displayListElement(1, "Documentation")}
+            {displayListElement(5, "Test")}
+          </ul>
+        )}
+
+        {role === "ADMIN" && (
+            <ul className="flex h-full items-center gap-5">
+                {displayListElement(1, "Documentation")}
+                {displayListElement(2, "Metrics")}
+                {displayListElement(3, "Researches")}
+                {displayListElement(4, "Implementations")}
+                {displayListElement(5, "Test")}
+            </ul>
+            )}
+
+        {role === "SUPER_ADMIN" && (
+            <ul className="flex h-full items-center gap-5">
+                {displayListElement(1, "Documentation")}
+                {displayListElement(2, "Metrics")}
+                {displayListElement(3, "Researches")}
+                {displayListElement(4, "Implementations")}
+                {displayListElement(5, "Test")}
+                {displayListElement(6, "Users")}
+            </ul>
+            )}
       </div>
 
       <div className="flex justify-end pr-5 xl:pr-10">
