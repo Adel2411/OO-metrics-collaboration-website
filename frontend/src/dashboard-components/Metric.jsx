@@ -85,7 +85,7 @@ headers: {
       if (metric.codeImplementationId) {
         return (
           <div className="flex flex-col justify-center items-center text-green-500">
-            <div className="flex gap-2">
+            <div className="flex gap-2 justify-center items-center">
               <p className="metrics-status">Researched</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ headers: {
                 <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
               </svg>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 justify-center items-center">
               <p className="metrics-status">Implemented</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +122,7 @@ headers: {
       }
       return (
         <div className="flex flex-col justify-center items-center">
-          <div className="flex gap-2 text-green-500">
+          <div className="flex gap-2 text-green-500 justify-center items-center">
             <p className="metrics-status">Researched</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +138,7 @@ headers: {
               <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
             </svg>
           </div>
-          <div className="flex gap-2 text-red-500">
+          <div className="flex gap-2 text-red-500 justify-center items-center">
             <p className="metrics-status">Not implemented</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +158,7 @@ headers: {
     }
     return (
       <div className="flex flex-col justify-center items-center">
-        <div className="flex gap-2 text-red-500">
+        <div className="flex gap-2 text-red-500 justify-center items-center">
           <p className="metrics-status">Not researched</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import MathJax from "react-mathjax2";
 import url from "../url.json";
@@ -20,6 +20,15 @@ function Research() {
   let { Description, MathFormula } = inputs;
   let { description: editDescription, mathFormula: editMathFormula } =
     editInputs;
+
+
+  function getShortCut(title) {
+    return title
+        .split(" ")
+        .map((word) => word[0])
+        .join("")
+        .toUpperCase();
+  }
 
   const handleInputChange = (e) => {
     setInputs({
@@ -64,7 +73,13 @@ function Research() {
 
   useEffect(() => {
     if (activeModal.researchId) {
-      fetch(`${url.current}/admin/research/${activeModal.researchId}`)
+      const token = localStorage.getItem("token");
+      fetch(`${url.current}/admin/research/${activeModal.researchId}`, {
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      })
         .then((response) => response.json())
         .then((data) => {
           setResearch(data.data);
@@ -79,12 +94,16 @@ function Research() {
         MathFormula: MathFormula,
         MetricId: id,
       };
+      const token = localStorage.getItem("token");
 
       fetch(`${url.current}/admin/add/research`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
+        },
         body: JSON.stringify(body),
-      })
+        })
         .then((response) => response.json())
         .then((data) => {
           setActiveModal({});
@@ -108,11 +127,15 @@ function Research() {
         description: editDescription,
         mathFormula: editMathFormula,
       };
-      fetch(`${url.current}/admin/update/research`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      })
+        const token = localStorage.getItem("token");
+        fetch(`${url.current}/admin/update/research`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify(body),
+        })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -140,7 +163,7 @@ function Research() {
           console.log(activeModal);
         }}
       >
-        <li className="researches-title">{metric.name}</li>
+        <li className="researches-title">{getShortCut(metric.name)}</li>
         {metric.researchId ? (
           <div className="text-green-500">
             <svg

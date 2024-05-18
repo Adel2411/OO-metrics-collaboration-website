@@ -19,6 +19,14 @@ function Implement() {
   let { code } = inputs;
   let { code: editCode } = editInputs;
 
+  function getShortCut(title) {
+    return title
+        .split(" ")
+        .map((word) => word[0])
+        .join("")
+        .toUpperCase();
+  }
+
   const handleInputChange = (e) => {
     setInputs({
       code: e.target.value,
@@ -59,9 +67,14 @@ function Implement() {
 
   useEffect(() => {
     if (activeModal.codeImplementationId) {
-      console.log(activeModal.codeImplementationId);
+      const token = localStorage.getItem("token");
       fetch(
-        `${url.current}/app/codeimplementation/${activeModal.codeImplementationId}`,
+        `${url.current}/admin/codeimplementation/${activeModal.codeImplementationId}`, {
+            method: "GET",
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            }
+          }
       )
         .then((response) => response.json())
         .then((data) => {
@@ -73,11 +86,13 @@ function Implement() {
   function handleAddCode(id) {
     try {
       const body = { research_id: id, code: code };
-      console.log(body);
+      const token = localStorage.getItem("token");
 
       fetch(`${url.current}/admin/add/codeimplementation`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
+        },
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
@@ -98,11 +113,13 @@ function Implement() {
   function handleEditCode(id) {
     try {
       const body = { id: id, code: editCode };
-      console.log(body);
+      const token = localStorage.getItem("token");
 
       fetch(`${url.current}/admin/update/codeimplementation`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
+        },
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
@@ -130,7 +147,7 @@ function Implement() {
           console.log(activeModal);
         }}
       >
-        <li className="implementations-title">{metric.name}</li>
+        <li className="implementations-title">{getShortCut(metric.name)}</li>
         {metric.codeImplementationId ? (
           <div className="text-green-500">
             <svg
