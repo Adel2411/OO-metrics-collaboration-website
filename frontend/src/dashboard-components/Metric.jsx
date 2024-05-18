@@ -25,7 +25,13 @@ function Metric() {
   };
 
   useEffect(() => {
-    fetch(`${url.current}/app/metrics`)
+    const token = localStorage.getItem("token");
+    fetch(`${url.current}/admin/metrics`, {
+      "method": "GET",
+headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => setMetrics(data.data));
   }, []);
@@ -33,10 +39,13 @@ function Metric() {
   function handleAddMetric() {
     try {
       const body = { name };
+      const token = localStorage.getItem("token");
 
-      fetch(`${url.current}/app/add/metric`, {
+      fetch(`${url.current}/admin/add/metric`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
@@ -54,8 +63,12 @@ function Metric() {
     }
   }
   function handleDeleteMetric(id) {
-    fetch(`${url.current}/app/delete/metric/${id}`, {
+    const token = localStorage.getItem("token");
+    fetch(`${url.current}/admin/delete/metric/${id}`, {
       method: "DELETE",
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
     })
       .then((response) => response.json())
       .then((data) => {

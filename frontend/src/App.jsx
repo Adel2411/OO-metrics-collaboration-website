@@ -42,8 +42,11 @@ function App() {
 
   async function isAuthorized() {
     try {
-      await fetch(`${url.current}/app/documents`);
-      setLoad(false);
+      await fetch(`${url.current}/hello`).then((response) => {
+        if (response.status === 200) {
+          setLoad(false);
+        }
+      })
 
       const response = await fetch(`${url.current}/auth/verify`, {
         method: "POST",
@@ -51,9 +54,7 @@ function App() {
         body: JSON.stringify({ token: localStorage.getItem("token") }),
       });
 
-      const jsonResponse = await response.json();
-
-      if (!jsonResponse || jsonResponse.status !== 200) {
+      if (response.status !== 200) {
         localStorage.removeItem("token");
       } else {
         setAuth(true);

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function LoadingPage() {
   return (
     <div className="bg-first text-white flex flex-col justify-center items-center h-screen gap-10">

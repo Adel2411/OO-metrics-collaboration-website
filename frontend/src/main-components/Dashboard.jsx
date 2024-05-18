@@ -13,6 +13,7 @@ import Users from "../dashboard-components/Users.jsx";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
+  const [role, setRole] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
   function setPage(page) {
@@ -21,18 +22,22 @@ const Dashboard = ({ setAuth }) => {
 
   async function getName() {
     try {
-      const response = await fetch(`${url.current}/auth/getuser`, {
+      const response = await fetch(`${url.current}/client/getuser`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
+        },
         body: JSON.stringify({ token: localStorage.getItem("token") }),
       });
 
-      const jsonResponse = await response.json();
+        const jsonResponse = await response.json();
 
-      if (jsonResponse.status !== 200) {
-        toast.error(jsonResponse.response);
+      if (response.status !== 200) {
+        toast.error("An error occurred, please try again");
       } else {
-        setName(jsonResponse.response);
+        setName(jsonResponse.username);
+        setRole(jsonResponse.role);
       }
     } catch (err) {
       console.error(err.message);
@@ -53,7 +58,7 @@ const Dashboard = ({ setAuth }) => {
   return (
     <Fragment>
       <div className="h-screen">
-        <Navbar name={name} logout={Logout} setPage={setPage} />
+        <Navbar name={name} role={role} logout={Logout} setPage={setPage} />
         {currentPage === 1 && <Documentation />}
         {currentPage === 2 && <Metric />}
         {currentPage === 3 && <Research />}

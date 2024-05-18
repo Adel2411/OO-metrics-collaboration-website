@@ -26,7 +26,12 @@ function Documentation() {
   }
 
   useEffect(() => {
-    fetch(`${url.current}/app/documents`)
+    const token = localStorage.getItem("token");
+    fetch(`${url.current}/client/documents`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setDocuments(data.data);

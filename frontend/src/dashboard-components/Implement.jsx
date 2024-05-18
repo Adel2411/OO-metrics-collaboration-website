@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { atomOneDark } from "react-syntax-highlighter/dist/cjs/styles/hljs/index.js";
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -46,7 +46,7 @@ function Implement() {
   }
 
   useEffect(() => {
-    fetch(`${url.current}/app/metrics`)
+    fetch(`${url.current}/admin/metrics`)
       .then((response) => response.json())
       .then((data) => setMetrics(data.data));
   }, []);
@@ -69,7 +69,7 @@ function Implement() {
       const body = { research_id: id, code: code };
       console.log(body);
 
-      fetch(`${url.current}/app/add/codeimplementation`, {
+      fetch(`${url.current}/admin/add/codeimplementation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -94,7 +94,7 @@ function Implement() {
       const body = { id: id, code: editCode };
       console.log(body);
 
-      fetch(`${url.current}/app/update/codeimplementation`, {
+      fetch(`${url.current}/admin/update/codeimplementation`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

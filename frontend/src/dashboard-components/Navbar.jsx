@@ -1,4 +1,4 @@
-function Navbar({ name, logout, setPage }) {
+function Navbar({ name, role, logout, setPage }) {
   function displayListElement(page, title) {
     return (
       <li className="h-full">
@@ -42,19 +42,19 @@ function Navbar({ name, logout, setPage }) {
               </a>
             </li>
             <li>
-              <a onClick={() => setPage(2)} className="navbar-options">
-                Metrics
-              </a>
+                <a onClick={() => setPage(2)} className="navbar-options">
+                    Metrics
+                </a>
             </li>
             <li>
-              <a onClick={() => setPage(3)} className="navbar-options">
-                Researches
-              </a>
+                <a onClick={() => setPage(3)} className="navbar-options">
+                    Researches
+                </a>
             </li>
             <li>
-              <a onClick={() => setPage(4)} className="navbar-options">
-                Implementations
-              </a>
+                <a onClick={() => setPage(4)} className="navbar-options">
+                    Implementations
+                </a>
             </li>
             <li>
               <a onClick={() => setPage(5)} className="navbar-options">
@@ -82,10 +82,10 @@ function Navbar({ name, logout, setPage }) {
       <div className="hidden xl:flex justify-center h-full col-span-3">
         <ul className="flex h-full items-center gap-5">
           {displayListElement(1, "Documentation")}
+          {displayListElement(5, "Test")}
           {displayListElement(2, "Metrics")}
           {displayListElement(3, "Researches")}
           {displayListElement(4, "Implementations")}
-          {displayListElement(5, "Test")}
           {displayListElement(6, "Users")}
         </ul>
       </div>
