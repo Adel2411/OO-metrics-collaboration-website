@@ -4,6 +4,7 @@ import com.example.demo.CodeImplementation.CodeImplementation;
 import com.example.demo.DTO.CodeImplementationDTO;
 import com.example.demo.DTO.ResearchDTO;
 import com.example.demo.Metric.Model.Metric;
+import com.example.demo.Metric.Model.MetricDTO;
 import com.example.demo.Model.ResponseModel;
 import com.example.demo.Model.ResponseModelBuilder;
 import com.example.demo.Requests.CodeImplementationPutRequest;
@@ -25,7 +26,23 @@ public class AdminController {
     private final ModelService modelService;
     //TODO implement admin controller
 
+
+
     //TODO 1: CRUD operations for Metrics
+
+    @GetMapping("/metrics")
+    ResponseEntity<?> getMetrics(){
+        ResponseModel responseModel ;
+        try {
+            List<MetricDTO> metrics = modelService.getMetrics();
+            responseModel = ResponseModelBuilder.okResponse(metrics);
+        }
+        catch (Exception e){
+            responseModel = ResponseModelBuilder.badRequestResponse(e.getMessage());
+        }
+        return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
+    }
+
     @PostMapping("/add/metric")
     ResponseEntity<?> addMetric(@RequestBody Metric metric){
         ResponseModel responseModel ;

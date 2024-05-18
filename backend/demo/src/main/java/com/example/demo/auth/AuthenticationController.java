@@ -34,7 +34,6 @@ public class AuthenticationController {
         return ResponseEntity.status(token.getStatus()).body(token);
     }
 
-
     @PostMapping("/login")
     public ResponseEntity<?> login(
             @RequestBody LoginRequest request
@@ -49,7 +48,6 @@ public class AuthenticationController {
         return ResponseEntity.status(token.getStatus()).body(token);
     }
 
-
     @PostMapping("/verify")
     public ResponseEntity<?> verify(
             @RequestBody TokenRequest token
@@ -60,8 +58,4 @@ public class AuthenticationController {
         }
         return ResponseEntity.ok(Map.of("response", "Token is valid"));
     }
-
-
-
-
 }
