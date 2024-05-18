@@ -28,6 +28,7 @@ public class ClientController {
     //TODO 1: READ METRICS WITH RESEARCHES
     @GetMapping("/documents")
     ResponseEntity<?> getDocuments(){
+        System.out.println("get documents");
         ResponseModel responseModel ;
         try {
             List<Document> documents = modelService.getDocuments();

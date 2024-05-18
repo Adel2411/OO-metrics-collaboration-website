@@ -14,7 +14,7 @@ public class UserRoleRepository {
     private EntityManager entityManager;
 
     public List<UserID> findAdminUsers(){
-        String jpql = "SELECT NEW com.example.demo.User.UserID (u.id, u.username) " +
+        String jpql = "SELECT NEW com.example.demo.User.Model.UserID (u.id, u.username) " +
                 "FROM User u WHERE u.role.id = 1";
         return entityManager.createQuery(jpql, UserID.class).getResultList();
     }

@@ -49,8 +49,8 @@ public class ManagerController {
         }
     }
 
-    @DeleteMapping("/delete/admin")
-    public ResponseEntity<?> deleteAdmin(@RequestParam("adminId") String adminId){
+    @DeleteMapping("/delete/admin/{adminId}")
+    public ResponseEntity<?> deleteAdmin(@PathVariable("adminId") String adminId){
         try{
             managerService.deleteAdmin(adminId);
             return ResponseEntity.ok(Map.of(
