@@ -49,11 +49,12 @@ public class ClientController {
         AuthenticationResponse response = new AuthenticationResponse();
         try {
             String username = jwtService.extractUsername(token.getToken());
-            int roleId = jwtService.extractUserRoleID(token.getToken());
+            System.out.println(username);
+            String role = jwtService.extractUserRoleID(token.getToken());
             return ResponseEntity.ok(
                     Map.of(
                             "username", username,
-                            "role", roleId
+                            "role", role
                     )
             );
         } catch (Exception e) {
