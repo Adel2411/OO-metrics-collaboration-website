@@ -26,11 +26,9 @@ public class AdminController {
     private final ModelService modelService;
     //TODO implement admin controller
 
-
-
     //TODO 1: CRUD operations for Metrics
 
-    @GetMapping("/metrics")
+    @GetMapping("/get/metrics")
     ResponseEntity<?> getMetrics(){
         ResponseModel responseModel ;
         try {
@@ -80,7 +78,7 @@ public class AdminController {
     }
     //TODO 2: CRUD operations for Research
 
-    @GetMapping("research/{id}")
+    @GetMapping("/get/research/{id}")
     ResponseEntity<?> getResearch(@PathVariable String id){
         ResponseModel responseModel ;
         try {
@@ -133,7 +131,7 @@ public class AdminController {
     //TODO 3: CRUD operations for CodeImplementation
 
 
-    @GetMapping("codeimplementation/{id}")
+    @GetMapping("/get/codeimplementation/{id}")
     ResponseEntity<?> getCodeImplementation(@PathVariable String id){
         ResponseModel responseModel ;
         try {
@@ -182,7 +180,7 @@ public class AdminController {
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
 
-    @GetMapping ("/codeimplementations")
+    @GetMapping ("/get/codeimplementations")
     ResponseEntity<?> getCodeImplementations(){
         ResponseModel responseModel ;
         try {
