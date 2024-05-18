@@ -50,6 +50,18 @@ public class AuthenticationController {
     }
 
 
+    @PostMapping("/verify")
+    public ResponseEntity<?> verify(
+            @RequestBody TokenRequest token
+    ){
+        boolean isExpired = jwtService.isTokenExpired(token.getToken());
+        if(isExpired){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("response", "Token expired"));
+        }
+        return ResponseEntity.ok(Map.of("response", "Token is valid"));
+    }
+
+
 
 
 }
