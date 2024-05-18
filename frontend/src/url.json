@@ -1,6 +1,9 @@
 {
   "current": "http://localhost:8080/api/v1",
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5014134 (added /admin/metrics endpoint)
   "local": "http://localhost:8080/api/v1",
   "host1": "https://oo-metrics-collaboration-website.onrender.com/api/v1"
 }
