@@ -27,9 +27,9 @@ function Metric() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     fetch(`${url.current}/admin/get/metrics`, {
-      "method": "GET",
-headers: {
-        'Authorization': `Bearer ${token}`,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => response.json())
@@ -42,8 +42,9 @@ headers: {
 
       fetch(`${url.current}/admin/add/metric`, {
         method: "POST",
-        headers: { "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(inputs),
       })
@@ -66,8 +67,8 @@ headers: {
     fetch(`${url.current}/admin/delete/metric/${id}`, {
       method: "DELETE",
       headers: {
-        'Authorization': `Bearer ${token}`,
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((response) => response.json())
       .then((data) => {

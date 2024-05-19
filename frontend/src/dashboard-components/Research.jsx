@@ -21,13 +21,12 @@ function Research() {
   let { description: editDescription, mathFormula: editMathFormula } =
     editInputs;
 
-
   function getShortCut(title) {
     return title
-        .split(" ")
-        .map((word) => word[0])
-        .join("")
-        .toUpperCase();
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
   }
 
   const handleInputChange = (e) => {
@@ -62,13 +61,13 @@ function Research() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     fetch(`${url.current}/admin/get/metrics`, {
-      "method": "GET",
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
-        .then((response) => response.json())
-        .then((data) => setMetrics(data.data));
+      .then((response) => response.json())
+      .then((data) => setMetrics(data.data));
   }, []);
 
   useEffect(() => {
@@ -77,8 +76,8 @@ function Research() {
       fetch(`${url.current}/admin/get/research/${activeModal.researchId}`, {
         method: "GET",
         headers: {
-          'Authorization': `Bearer ${token}`,
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
         .then((response) => response.json())
         .then((data) => {
@@ -100,10 +99,10 @@ function Research() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(body),
-        })
+      })
         .then((response) => response.json())
         .then((data) => {
           setActiveModal({});
@@ -127,15 +126,15 @@ function Research() {
         description: editDescription,
         mathFormula: editMathFormula,
       };
-        const token = localStorage.getItem("token");
-        fetch(`${url.current}/admin/update/research`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify(body),
-        })
+      const token = localStorage.getItem("token");
+      fetch(`${url.current}/admin/update/research`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -159,23 +158,21 @@ function Research() {
       fetch(`${url.current}/admin/delete/research/${id}`, {
         method: "DELETE",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-      })
-          .then((response) => {
-            setActiveModal({});
-            if (!response.ok) {
-              toast.error("Research could not be deleted");
-                throw new Error("Network response was not ok");
-            }
-            toast.success("Research deleted successfully");
-            return response.json();
-          });
+      }).then((response) => {
+        setActiveModal({});
+        if (!response.ok) {
+          toast.error("Research could not be deleted");
+          throw new Error("Network response was not ok");
+        }
+        toast.success("Research deleted successfully");
+        return response.json();
+      });
     } catch (err) {
       console.error(err.message);
     }
   }
-
 
   const displayResearchElement = (metric) => {
     return (
@@ -357,16 +354,16 @@ function Research() {
                 </div>
                 <div className="flex items-center justify-between p-6 border-t border-solid border-blueGray-200 rounded-b">
                   <button
-                      className="modal-button bg-red-600 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => handleDeleteResearch(metric.researchId)}
+                    className="modal-button bg-red-600 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => handleDeleteResearch(metric.researchId)}
                   >
                     Delete
                   </button>
                   <button
-                      className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => setEditMode(true)}
+                    className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setEditMode(true)}
                   >
                     Edit
                   </button>
@@ -384,9 +381,8 @@ function Research() {
   function displayEditModal(metric) {
     if (research && metric === activeModal) {
       return (
-          <div>
-            <div
-                className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        <div>
+          <div className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-full my-6 mx-auto max-w-sm">
               <div className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">

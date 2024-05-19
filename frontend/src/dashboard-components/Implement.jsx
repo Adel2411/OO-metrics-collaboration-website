@@ -21,10 +21,10 @@ function Implement() {
 
   function getShortCut(title) {
     return title
-        .split(" ")
-        .map((word) => word[0])
-        .join("")
-        .toUpperCase();
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
   }
 
   const handleInputChange = (e) => {
@@ -56,25 +56,26 @@ function Implement() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     fetch(`${url.current}/admin/get/metrics`, {
-      "method": "GET",
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
-        .then((response) => response.json())
-        .then((data) => setMetrics(data.data));
+      .then((response) => response.json())
+      .then((data) => setMetrics(data.data));
   }, []);
 
   useEffect(() => {
     if (activeModal.codeImplementationId) {
       const token = localStorage.getItem("token");
       fetch(
-        `${url.current}/admin/get/codeimplementation/${activeModal.codeImplementationId}`, {
-            method: "GET",
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            }
-          }
+        `${url.current}/admin/get/codeimplementation/${activeModal.codeImplementationId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
       )
         .then((response) => response.json())
         .then((data) => {
@@ -90,8 +91,9 @@ function Implement() {
 
       fetch(`${url.current}/admin/add/codeimplementation`, {
         method: "POST",
-        headers: { "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(body),
       })
@@ -117,8 +119,9 @@ function Implement() {
 
       fetch(`${url.current}/admin/update/codeimplementation`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(body),
       })
@@ -144,23 +147,21 @@ function Implement() {
       fetch(`${url.current}/admin/delete/codeimplementation/${id}`, {
         method: "DELETE",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-      })
-        .then((response) => {
-          setActiveModal({});
-          if (!response.ok) {
-            toast.error("Failed to delete");
-            throw new Error("Failed to delete");
-          }
-          toast.success("Deleted successfully");
-            return response.json();
-        });
+      }).then((response) => {
+        setActiveModal({});
+        if (!response.ok) {
+          toast.error("Failed to delete");
+          throw new Error("Failed to delete");
+        }
+        toast.success("Deleted successfully");
+        return response.json();
+      });
     } catch (err) {
       console.error(err.message);
     }
   }
-
 
   const displayCodeElement = (metric) => {
     return (
@@ -327,16 +328,18 @@ function Implement() {
                 </div>
                 <div className="flex items-center justify-between p-6 border-t border-solid border-blueGray-200 rounded-b">
                   <button
-                      className="modal-button bg-red-600 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                        onClick={() => handleDeleteCode(metric.codeImplementationId)}
+                    className="modal-button bg-red-600 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() =>
+                      handleDeleteCode(metric.codeImplementationId)
+                    }
                   >
                     Delete
                   </button>
                   <button
-                      className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => setEditMode(true)}
+                    className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setEditMode(true)}
                   >
                     Edit
                   </button>
@@ -354,9 +357,8 @@ function Implement() {
   function displayEditModal(metric) {
     if (implement && metric === activeModal) {
       return (
-          <div>
-            <div
-                className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        <div>
+          <div className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-full my-6 mx-auto max-w-sm">
               <div className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">

@@ -46,7 +46,7 @@ function App() {
         if (response.status === 200) {
           setLoad(false);
         }
-      })
+      });
 
       const response = await fetch(`${url.current}/auth/verify`, {
         method: "POST",

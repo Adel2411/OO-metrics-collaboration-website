@@ -29,7 +29,7 @@ function Documentation() {
     const token = localStorage.getItem("token");
     fetch(`${url.current}/client/documents`, {
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => response.json())
