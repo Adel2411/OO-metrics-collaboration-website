@@ -79,7 +79,7 @@ function Documentation() {
               </div>
             )}
           </div>
-          {!showImplementation ? null : (
+          {!showImplementation || code === "" ? null : (
             <div className="min-w-sm  overflow-auto rounded-md max-h-96 shadow-2xl">
               <div className="flex justify-between px-4 bg-first text-white text-xs items-center">
                 <p className="documentation-right-subtitle">Implementation :</p>

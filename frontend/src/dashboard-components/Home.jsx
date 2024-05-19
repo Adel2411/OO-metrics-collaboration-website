@@ -51,7 +51,7 @@ function Home({ setPage }) {
     <div className="mt-16 h-full w-full fixed overflow-y-auto">
       <div className="w-full flex flex-col items-center mb-16 h-screen">
         <div className="h-1/3 flex items-center justify-center">
-          <h1 className="pt-4 text-xl lg:text-4xl font-black">
+          <h1 className="text-center pt-4 text-xl lg:text-4xl font-black">
             WELCOME TO OO-Metrics Website !
           </h1>
         </div>
@@ -62,7 +62,7 @@ function Home({ setPage }) {
               métriques utilisées pour évaluer la qualité des projets logiciels.
             </p>
             <button
-              className="btn btn-ghost bg-third hover:bg-fourth w-1/2 lg:text-xl"
+              className="btn btn-ghost bg-third hover:bg-fourth w-1/2 lg:text-lg h-16"
               onClick={() => setPage(2)}
             >
               Go to Documentation
@@ -75,7 +75,7 @@ function Home({ setPage }) {
               votre projet.
             </p>
             <button
-              className="btn btn-ghost bg-third hover:bg-fourth w-1/2 lg:text-xl"
+              className="btn btn-ghost bg-third hover:bg-fourth w-1/2 lg:text-lg h-16"
               onClick={() => setPage(3)}
             >
               Go to Test
