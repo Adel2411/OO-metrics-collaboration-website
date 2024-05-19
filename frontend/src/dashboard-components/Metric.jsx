@@ -26,7 +26,7 @@ function Metric() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch(`${url.current}/admin/metrics`, {
+    fetch(`${url.current}/admin/get/metrics`, {
       "method": "GET",
 headers: {
         'Authorization': `Bearer ${token}`,

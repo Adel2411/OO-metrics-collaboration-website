@@ -13,9 +13,9 @@ function Navbar({ name, role, logout, setPage }) {
   }
 
   return (
-    <div className="navbar bg-first z-10 top-0 fixed grid grid-cols-2 xl:grid-cols-5">
+    <div className="navbar bg-first z-10 top-0 fixed grid grid-cols-2 2xl:grid-cols-5">
       <div>
-        <div className="dropdown visible xl:hidden">
+        <div className="dropdown visible 2xl:hidden">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -39,12 +39,17 @@ function Navbar({ name, role, logout, setPage }) {
                   className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-second rounded-box w-52"
               >
                 <li>
-                  <a onClick={() => setPage(1)} className="navbar-options">
+                    <a onClick={() => setPage(1)} className="navbar-options">
+                        Home
+                    </a>
+                </li>
+                <li>
+                  <a onClick={() => setPage(2)} className="navbar-options">
                     Documentation
                   </a>
                 </li>
                 <li>
-                  <a onClick={() => setPage(5)} className="navbar-options">
+                  <a onClick={() => setPage(3)} className="navbar-options">
                     Test
                   </a>
                 </li>
@@ -58,27 +63,32 @@ function Navbar({ name, role, logout, setPage }) {
                 >
                   <li>
                     <a onClick={() => setPage(1)} className="navbar-options">
-                      Documentation
+                      Home
                     </a>
                   </li>
                   <li>
                     <a onClick={() => setPage(2)} className="navbar-options">
-                      Metrics
+                      Documentation
                     </a>
                   </li>
                   <li>
                     <a onClick={() => setPage(3)} className="navbar-options">
-                      Researches
+                      Test
                     </a>
                   </li>
                   <li>
                     <a onClick={() => setPage(4)} className="navbar-options">
-                      Implementations
+                      Metrics
                     </a>
                   </li>
                   <li>
                     <a onClick={() => setPage(5)} className="navbar-options">
-                      Test
+                      Researches
+                    </a>
+                  </li>
+                  <li>
+                    <a onClick={() => setPage(6)} className="navbar-options">
+                      Implementations
                     </a>
                   </li>
                 </ul>
@@ -91,31 +101,36 @@ function Navbar({ name, role, logout, setPage }) {
               >
                 <li>
                   <a onClick={() => setPage(1)} className="navbar-options">
-                    Documentation
+                    Home
                   </a>
                 </li>
                 <li>
                   <a onClick={() => setPage(2)} className="navbar-options">
-                    Metrics
+                    Documentation
                   </a>
                 </li>
                 <li>
                   <a onClick={() => setPage(3)} className="navbar-options">
-                    Researches
-                  </a>
-                </li>
-                <li>
-                  <a onClick={() => setPage(4)} className="navbar-options">
-                    Implementations
-                  </a>
-                </li>
-                <li>
-                  <a onClick={() => setPage(5)} className="navbar-options">
                     Test
                   </a>
                 </li>
                 <li>
+                  <a onClick={() => setPage(4)} className="navbar-options">
+                    Metrics
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setPage(5)} className="navbar-options">
+                    Researches
+                  </a>
+                </li>
+                <li>
                   <a onClick={() => setPage(6)} className="navbar-options">
+                    Implementations
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setPage(7)} className="navbar-options">
                     Users
                   </a>
                 </li>
@@ -132,38 +147,41 @@ function Navbar({ name, role, logout, setPage }) {
         </div>
       </div>
 
-      <div className="hidden xl:flex justify-center h-full col-span-3">
+      <div className="hidden 2xl:flex justify-center h-full col-span-3">
         {role === "USER" && (
           <ul className="flex h-full items-center gap-5">
-            {displayListElement(1, "Documentation")}
-            {displayListElement(5, "Test")}
+            {displayListElement(1, "Home")}
+            {displayListElement(2, "Documentation")}
+            {displayListElement(3, "Test")}
           </ul>
         )}
 
         {role === "ADMIN" && (
             <ul className="flex h-full items-center gap-5">
-                {displayListElement(1, "Documentation")}
-                {displayListElement(2, "Metrics")}
-                {displayListElement(3, "Researches")}
-                {displayListElement(4, "Implementations")}
-                {displayListElement(5, "Test")}
+              {displayListElement(1, "Home")}
+              {displayListElement(2, "Documentation")}
+              {displayListElement(3, "Test")}
+              {displayListElement(4, "Metrics")}
+                {displayListElement(5, "Researches")}
+                {displayListElement(6, "Implementations")}
             </ul>
             )}
 
         {role === "SUPER_ADMIN" && (
             <ul className="flex h-full items-center gap-5">
-                {displayListElement(1, "Documentation")}
-                {displayListElement(2, "Metrics")}
-                {displayListElement(3, "Researches")}
-                {displayListElement(4, "Implementations")}
-                {displayListElement(5, "Test")}
-                {displayListElement(6, "Users")}
+              {displayListElement(1, "Home")}
+              {displayListElement(2, "Documentation")}
+              {displayListElement(3, "Test")}
+              {displayListElement(4, "Metrics")}
+              {displayListElement(5, "Researches")}
+              {displayListElement(6, "Implementations")}
+                {displayListElement(7, "Users")}
             </ul>
             )}
       </div>
 
-      <div className="flex justify-end pr-5 xl:pr-10">
-        <p className="hidden xl:flex navbar-options">{name}</p>
+      <div className="flex justify-end pr-5 2xl:pr-10">
+        <p className="hidden 2xl:flex navbar-options">{name}</p>
 
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

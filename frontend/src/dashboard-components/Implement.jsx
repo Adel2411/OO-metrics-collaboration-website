@@ -55,7 +55,7 @@ function Implement() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch(`${url.current}/admin/metrics`, {
+    fetch(`${url.current}/admin/get/metrics`, {
       "method": "GET",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -69,7 +69,7 @@ function Implement() {
     if (activeModal.codeImplementationId) {
       const token = localStorage.getItem("token");
       fetch(
-        `${url.current}/admin/codeimplementation/${activeModal.codeImplementationId}`, {
+        `${url.current}/admin/get/codeimplementation/${activeModal.codeImplementationId}`, {
             method: "GET",
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -136,6 +136,31 @@ function Implement() {
       console.error(err.message);
     }
   }
+
+  function handleDeleteCode(id) {
+    try {
+      const token = localStorage.getItem("token");
+
+      fetch(`${url.current}/admin/delete/codeimplementation/${id}`, {
+        method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          setActiveModal({});
+          if (!response.ok) {
+            toast.error("Failed to delete");
+            throw new Error("Failed to delete");
+          }
+          toast.success("Deleted successfully");
+            return response.json();
+        });
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
 
   const displayCodeElement = (metric) => {
     return (
@@ -300,11 +325,18 @@ function Implement() {
                     </SyntaxHighlighter>
                   </div>
                 </div>
-                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                <div className="flex items-center justify-between p-6 border-t border-solid border-blueGray-200 rounded-b">
                   <button
-                    className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setEditMode(true)}
+                      className="modal-button bg-red-600 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                        onClick={() => handleDeleteCode(metric.codeImplementationId)}
+                  >
+                    Delete
+                  </button>
+                  <button
+                      className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setEditMode(true)}
                   >
                     Edit
                   </button>
@@ -322,8 +354,9 @@ function Implement() {
   function displayEditModal(metric) {
     if (implement && metric === activeModal) {
       return (
-        <div>
-          <div className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div>
+            <div
+                className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-full my-6 mx-auto max-w-sm">
               <div className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">

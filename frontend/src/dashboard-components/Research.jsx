@@ -61,7 +61,7 @@ function Research() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch(`${url.current}/admin/metrics`, {
+    fetch(`${url.current}/admin/get/metrics`, {
       "method": "GET",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -74,7 +74,7 @@ function Research() {
   useEffect(() => {
     if (activeModal.researchId) {
       const token = localStorage.getItem("token");
-      fetch(`${url.current}/admin/research/${activeModal.researchId}`, {
+      fetch(`${url.current}/admin/get/research/${activeModal.researchId}`, {
         method: "GET",
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -152,6 +152,30 @@ function Research() {
       console.error(err.message);
     }
   }
+
+  function handleDeleteResearch(id) {
+    try {
+      const token = localStorage.getItem("token");
+      fetch(`${url.current}/admin/delete/research/${id}`, {
+        method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+          .then((response) => {
+            setActiveModal({});
+            if (!response.ok) {
+              toast.error("Research could not be deleted");
+                throw new Error("Network response was not ok");
+            }
+            toast.success("Research deleted successfully");
+            return response.json();
+          });
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
 
   const displayResearchElement = (metric) => {
     return (
@@ -331,11 +355,18 @@ function Research() {
                     </MathJax.Context>
                   </div>
                 </div>
-                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                <div className="flex items-center justify-between p-6 border-t border-solid border-blueGray-200 rounded-b">
                   <button
-                    className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setEditMode(true)}
+                      className="modal-button bg-red-600 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => handleDeleteResearch(metric.researchId)}
+                  >
+                    Delete
+                  </button>
+                  <button
+                      className="modal-button bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setEditMode(true)}
                   >
                     Edit
                   </button>
@@ -353,8 +384,9 @@ function Research() {
   function displayEditModal(metric) {
     if (research && metric === activeModal) {
       return (
-        <div>
-          <div className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div>
+            <div
+                className="text-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-full my-6 mx-auto max-w-sm">
               <div className="border-0 rounded-lg shadow-md shadow-black relative flex flex-col bg-first text-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
