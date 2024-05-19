@@ -173,7 +173,7 @@ public class AdminController {
     ResponseEntity<?> deleteCodeImplementation(@PathVariable String id){
         ResponseModel responseModel ;
         try{
-            modelService.deleteCodeImplementation(id);
+                modelService.deleteCodeImplementation(id);
             responseModel = ResponseModelBuilder.okResponse("Code Implementation deleted");
         }catch (Exception e){
             responseModel = ResponseModelBuilder.badRequestResponse("failed deleting this code implementation");
