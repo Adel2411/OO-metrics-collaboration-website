@@ -58,15 +58,26 @@ function Documentation() {
     return (
       <div>
         <li id={id} className="px-3 md:px-16 flex flex-col gap-10">
-          <h1 className="documentation-right-title">{`${title.toUpperCase()} : (${getShortCut(title)})`}</h1>
-          <div>
-            <h1 className="documentation-right-subtitle">Description :</h1>
-            <p className="documentation-right-description">{description}</p>
-            <MathJax.Context input="tex">
-              <div>
-                <MathJax.Node>{formula}</MathJax.Node>
+          <h1 className="documentation-right-title underline underline-offset-4">{`${title.toUpperCase()} : (${getShortCut(title)})`}</h1>
+          <div className="flex flex-col gap-5">
+            <div>
+              <h1 className="documentation-right-subtitle underline">
+                Description :
+              </h1>
+              <p className="documentation-right-description">{description}</p>
+            </div>
+            {formula === "" ? null : (
+              <div className="shadow shadow-first p-5 rounded-box">
+                <h1 className="documentation-right-subtitle underline">
+                  Formule :
+                </h1>
+                <MathJax.Context input="tex">
+                  <div>
+                    <MathJax.Node>{formula}</MathJax.Node>
+                  </div>
+                </MathJax.Context>
               </div>
-            </MathJax.Context>
+            )}
           </div>
           {!showImplementation ? null : (
             <div className="min-w-sm  overflow-auto rounded-md max-h-96 shadow-2xl">

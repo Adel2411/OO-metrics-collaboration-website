@@ -25,17 +25,23 @@ export default {
         // third: "#205295",
         // fourth: "#2C74B3",
 
-        // Theme 4 : Grey
+        // Theme 4 : Dark Blue
+        first: "#0D1B2A",
+        second: "#153047",
+        third: "#1E435F",
+        fourth: "#2A5B7A",
+
+        // Theme 5 : Grey
         // first: "#404258",
         // second: "#474E68",
         // third: "#50577A",
         // fourth: "#6B728E",
 
-        // Theme 5 : Purple1
-        first: "#371B58",
-        second: "#4C3575",
-        third: "#5B4B8A",
-        fourth: "#7858A6",
+        // Theme 6 : Purple1
+        // first: "#371B58",
+        // second: "#4C3575",
+        // third: "#5B4B8A",
+        // fourth: "#7858A6",
       },
     },
   },
