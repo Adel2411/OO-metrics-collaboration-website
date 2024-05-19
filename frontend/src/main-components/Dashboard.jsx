@@ -60,7 +60,7 @@ const Dashboard = ({ setAuth }) => {
     <Fragment>
       <div className="h-screen">
         <Navbar name={name} role={role} logout={Logout} setPage={setPage} />
-        {currentPage === 1 && <Home />}
+        {currentPage === 1 && <Home setPage={setPage} />}
         {currentPage === 2 && <Documentation />}
         {currentPage === 3 && <Test />}
         {currentPage === 4 && <Metric />}
