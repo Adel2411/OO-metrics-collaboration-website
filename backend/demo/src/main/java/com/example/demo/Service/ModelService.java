@@ -64,12 +64,6 @@ public class ModelService {
 
     public void deleteMetric(String id) {
         UUID researchID = researchRepository.findIdByMetricId(UUID.fromString(id));
-        UUID codeImplementationID = codeImplementationRepository.findIdByResearchId(researchID);
-        System.out.printf("researchID: %s, codeImplementationID: %s\n", researchID, codeImplementationID);
-        if (codeImplementationID != null) {
-            codeImplementationRepository.deleteById(codeImplementationID);
-        }
-
         if (researchID != null) {
             System.out.println("Deleting research");
             researchRepository.deleteById(researchID);
@@ -118,10 +112,16 @@ public class ModelService {
     }
 
     public void deleteResearch(String id) {
-        researchService.deleteResearch(id);
+        UUID codeImplementationID = codeImplementationRepository.findIdByResearchId(UUID.fromString(id));
+        if (codeImplementationID != null) {
+            System.out.println("Deleting code implementation");
+            codeImplementationRepository.deleteById(codeImplementationID);
+        }
+        researchRepository.deleteById(UUID.fromString(id));
     }
 
+
     public void deleteCodeImplementation(String id) {
-        codeImplementationService.deleteCodeImplementation(id);
+        codeImplementationRepository.deleteById(UUID.fromString(id));
     }
 }

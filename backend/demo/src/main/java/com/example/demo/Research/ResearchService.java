@@ -96,9 +96,6 @@ public class ResearchService {
 
 
     public void deleteResearch(String id) {
-        UUID researchID = researchRepository.findIdByMetricId(UUID.fromString(id));
-        if (researchID != null) {
-            researchRepository.deleteById(researchID);
-        }
+        researchRepository.deleteById(UUID.fromString(id));
     }
 }

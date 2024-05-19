@@ -120,6 +120,7 @@ public class AdminController {
     ResponseEntity<?> deleteResearch(@PathVariable String id){
         ResponseModel responseModel ;
         try{
+            System.out.println("deleting research" + id);
             modelService.deleteResearch(id);
             responseModel = ResponseModelBuilder.okResponse("Research deleted");
         }catch (Exception e){
@@ -192,5 +193,8 @@ public class AdminController {
         }
         return ResponseEntity.status(responseModel.getStatus()).body(responseModel);
     }
+
+
+
 
 }
