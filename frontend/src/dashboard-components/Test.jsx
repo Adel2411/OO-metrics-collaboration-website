@@ -8,6 +8,7 @@ function Test() {
   const [isUploading, setIsUploading] = useState(false);
   const [showDownloadButton, setShowDownloadButton] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [url, setUrl] = useState(null);
 
   useEffect(() => {
     let timer;
@@ -66,6 +67,9 @@ function Test() {
           }
           toast.success("File uploaded successfully");
           setIsUploading(true);
+          const csvBlob = await response.blob();
+          const url = window.URL.createObjectURL(csvBlob);
+          setUrl(url);
         })
         .catch((error) => {
           console.error("Error handling response:", error);
@@ -77,41 +81,12 @@ function Test() {
 
   const HandleDownload = async (e) => {
     e.preventDefault();
-    try {
-      const formData = new FormData();
-      files.forEach((file) => {
-        formData.append("files", file);
-      });
-      const token = localStorage.getItem("token");
-      fetch(`${url.current}/metric/generate-csv`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      })
-        .then(async (response) => {
-          if (!response.ok) {
-            toast.error("Failed to generate CSV");
-            throw new Error("Failed to generate CSV");
-          }
-          toast.success("CSV generated successfully");
-          setIsUploading(true);
-          const csvBlob = await response.blob();
-          const url = window.URL.createObjectURL(csvBlob);
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", "Metrics-analyzer.csv"); // Replace with the desired file name
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        })
-        .catch((error) => {
-          console.error("Error handling response:", error);
-        });
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "Metrics-analyzer.csv"); // Replace with the desired file name
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
