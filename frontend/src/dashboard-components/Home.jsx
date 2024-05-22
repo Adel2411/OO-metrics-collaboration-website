@@ -55,9 +55,9 @@ function Home({ setPage }) {
             WELCOME TO OO-Metrics Website !
           </h1>
         </div>
-        <div className="px-3 w-full h-2/3 flex flex-col lg:flex-row items-center justify-evenly lg:px-10">
-          <div className="lg:w-1/3 bg-second p-5 lg:p-10 flex flex-col items-center gap-5 lg:gap-10 shadow-lg shadow-first rounded-box">
-            <p className="text-sm lg:text-lg xl:text-xl">
+        <div className="px-5 w-full h-2/3 flex flex-col lg:flex-row items-center justify-evenly lg:px-10">
+          <div className="transition hover:-translate-y-2 lg:w-1/3 bg-second p-5 lg:p-10 flex flex-col items-center gap-5 lg:gap-10 shadow-lg hover:shadow-lg hover:shadow-first rounded-box">
+            <p className="text-sm md:text-lg xl:text-xl">
               L'espace Documentation propose des définitions des principales
               métriques utilisées pour évaluer la qualité des projets logiciels.
             </p>
@@ -68,7 +68,7 @@ function Home({ setPage }) {
               Go to Documentation
             </button>
           </div>
-          <div className="lg:w-1/3 bg-second p-5 lg:p-10 flex flex-col items-center gap-5 lg:gap-10 shadow-lg shadow-first rounded-box">
+          <div className="transition hover:-translate-y-2 lg:w-1/3 bg-second p-5 lg:p-10 flex flex-col items-center gap-5 lg:gap-10 shadow-lg hover:shadow-lg hover:shadow-first rounded-box">
             <p className="text-sm md:text-lg lg:text-xl">
               L'espace Test vous permet d'évaluer les métriques sur vos projets.
               Analysez votre code et obtenez des résultats précis pour optimiser
