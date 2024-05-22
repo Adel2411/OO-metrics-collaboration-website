@@ -9,14 +9,6 @@ function Documentation() {
   const [documents, setDocuments] = useState([]);
   const [showImplementation, setShowImplementation] = useState(false);
 
-  function getShortCut(title) {
-    return title
-      .split(" ")
-      .map((word) => word[0])
-      .join("")
-      .toUpperCase();
-  }
-
   function handleCopy(id, codeString) {
     navigator.clipboard.writeText(codeString);
     setCopy((prevState) => ({ ...prevState, [id]: true }));
@@ -187,8 +179,7 @@ function Documentation() {
       <div className="fixed bottom-4 right-4">
         <label className="autoSaverSwitch relative inline-flex cursor-pointer select-none items-center">
           <span className="label flex items-center text-sm font-medium text-white">
-            Implementations{" "}
-            <span className="pl-1"> {showImplementation ? "On" : "Off"} </span>
+            {showImplementation ? "Hide " : "Show "} Implementations
           </span>
           <input
             type="checkbox"
