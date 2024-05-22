@@ -8,7 +8,7 @@ function Test() {
   const [isUploading, setIsUploading] = useState(false);
   const [showDownloadButton, setShowDownloadButton] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [url, setUrl] = useState(null);
+  const [blobUrl, setBlobUrl] = useState(null);
 
   useEffect(() => {
     let timer;
@@ -69,7 +69,7 @@ function Test() {
           setIsUploading(true);
           const csvBlob = await response.blob();
           const url = window.URL.createObjectURL(csvBlob);
-          setUrl(url);
+          setBlobUrl(url);
         })
         .catch((error) => {
           console.error("Error handling response:", error);
@@ -82,7 +82,7 @@ function Test() {
   const HandleDownload = async (e) => {
     e.preventDefault();
     const link = document.createElement("a");
-    link.href = url;
+    link.href = blobUrl;
     link.setAttribute("download", "Metrics-analyzer.csv"); // Replace with the desired file name
     document.body.appendChild(link);
     link.click();
