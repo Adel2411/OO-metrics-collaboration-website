@@ -45,7 +45,7 @@ function Documentation() {
         <li className="w-full">
           <a
             href={id}
-            className="documentation-left-content w-full md:h-10 lg:h-16 btn btn-ghost subtitle rounded-box bg-third hover:bg-second"
+            className="documentation-left-content w-full lg:h-16 btn btn-ghost subtitle rounded-box bg-third hover:bg-second"
           >
             {title}
           </a>
@@ -57,8 +57,10 @@ function Documentation() {
   const displayListElement = (id, title, description, formula, code) => {
     return (
       <div>
-        <li id={id} className="px-3 md:px-16 flex flex-col gap-10">
-          <h1 className="documentation-right-title underline underline-offset-4">{`${title.toUpperCase()} : (${getShortCut(title)})`}</h1>
+        <li id={id} className="px-3 lg:px-16 flex flex-col gap-10">
+          <h1 className="documentation-right-title underline underline-offset-4">
+            {title} :
+          </h1>
           <div className="flex flex-col gap-5">
             <div>
               <h1 className="documentation-right-subtitle underline">
@@ -72,7 +74,7 @@ function Documentation() {
                   Formule :
                 </h1>
                 <MathJax.Context input="tex">
-                  <div>
+                  <div className="md:text-md lg:text-lg documentation-right-formula">
                     <MathJax.Node>{formula}</MathJax.Node>
                   </div>
                 </MathJax.Context>
@@ -155,7 +157,7 @@ function Documentation() {
   return (
     <div className="z-0">
       <div>
-        <div className="overflow-y-auto w-1/5 hidden md:flex bg-fourth gap-10 py-10 flex-col items-center h-screen fixed">
+        <div className="overflow-y-auto w-1/5 hidden lg:flex bg-fourth gap-10 py-10 flex-col items-center h-screen fixed">
           <h1 className="documentation-left-title pt-16">Available Metrics</h1>
           <ul className="flex flex-col w-full rounded-box gap-1">
             {documents.map((document, index) => {
@@ -163,7 +165,7 @@ function Documentation() {
             })}
           </ul>
         </div>
-        <div className="md:w-4/5 w-full bg-second flex flex-col fixed right-0 overflow-y-auto h-screen top-16">
+        <div className="lg:w-4/5 w-full bg-second flex flex-col fixed right-0 overflow-y-auto h-screen top-16">
           <div className="flex justify-center">
             <h1 className="component-title py-10 underline underline-offset-8">
               Documentation

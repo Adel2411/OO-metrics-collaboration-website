@@ -51,31 +51,31 @@ function Home({ setPage }) {
     <div className="mt-16 h-full w-full fixed overflow-y-auto">
       <div className="w-full flex flex-col items-center mb-16 h-screen">
         <div className="h-1/3 flex items-center justify-center">
-          <h1 className="text-center pt-4 text-xl lg:text-4xl font-black">
+          <h1 className="text-center pt-4 text-2xl md:text-3xl lg:text-4xl font-black">
             WELCOME TO OO-Metrics Website !
           </h1>
         </div>
-        <div className="px-3 w-full h-2/3 flex flex-col md:flex-row items-center justify-evenly lg:px-10">
+        <div className="px-3 w-full h-2/3 flex flex-col lg:flex-row items-center justify-evenly lg:px-10">
           <div className="lg:w-1/3 bg-second p-5 lg:p-10 flex flex-col items-center gap-5 lg:gap-10 shadow-lg shadow-first rounded-box">
-            <p className="text-sm lg:text-2xl">
+            <p className="text-sm lg:text-lg xl:text-xl">
               L'espace Documentation propose des définitions des principales
               métriques utilisées pour évaluer la qualité des projets logiciels.
             </p>
             <button
-              className="btn btn-ghost bg-third hover:bg-fourth w-1/2 lg:text-lg h-16"
+              className="btn btn-ghost bg-third hover:bg-fourth w-1/2 text-sm lg:text-md h-16"
               onClick={() => setPage(2)}
             >
               Go to Documentation
             </button>
           </div>
           <div className="lg:w-1/3 bg-second p-5 lg:p-10 flex flex-col items-center gap-5 lg:gap-10 shadow-lg shadow-first rounded-box">
-            <p className="text-sm lg:text-2xl">
+            <p className="text-sm md:text-lg lg:text-xl">
               L'espace Test vous permet d'évaluer les métriques sur vos projets.
               Analysez votre code et obtenez des résultats précis pour optimiser
               votre projet.
             </p>
             <button
-              className="btn btn-ghost bg-third hover:bg-fourth w-1/2 lg:text-lg h-16"
+              className="btn btn-ghost bg-third hover:bg-fourth w-1/2 text-sm lg:text-md h-16"
               onClick={() => setPage(3)}
             >
               Go to Test
@@ -88,7 +88,7 @@ function Home({ setPage }) {
           <h1 className="documentation-right-title underline underline-offset-2">
             Introduction to OO-metrics:
           </h1>
-          <p>{introduction}</p>
+          <p className="text-sm md:text-md lg:text-lg">{introduction}</p>
         </div>
         <div className="w-full flex flex-col justify-center gap-10">
           <p className="documentation-right-title underline">Q&A :</p>
