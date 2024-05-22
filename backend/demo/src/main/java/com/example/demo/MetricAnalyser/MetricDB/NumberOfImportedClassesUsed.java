@@ -32,30 +32,23 @@ public class NumberOfImportedClassesUsed extends MetricStructure {
 
     public boolean classUsed(String className, String fileContent) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new java.io.ByteArrayInputStream(fileContent.getBytes())))) {
-            String line;
+            String line, lineTrim;
             boolean inComment = false;
-            boolean inString = false;
             while ((line = reader.readLine()) != null) {
-                line = line.trim();
-                if (line.startsWith("//")) {
+                lineTrim = line.trim();
+                if (lineTrim.isEmpty() || lineTrim.startsWith("//")) {
                     continue; // Skip the line if it is a comment
                 }
-                if (line.contains("\"")) {
-                    inString = !inString; // Toggle the inString flag
-                }
-                if (line.contains("/*")) {
+                if (lineTrim.startsWith("/*")) {
                     inComment = true; // Start of the block comment
                 }
                 if (inComment) {
-                    if (line.contains("*/")) {
+                    if (lineTrim.endsWith("*/")) {
                         inComment = false; // End of the block comment
                     }
                     continue;
                 }
-                if (line.contains(className) && !line.contains("import")) {
-                    if (inString) {
-                        continue;
-                    }
+                if (line.contains(" "+className) && !line.contains("import")) {
                     return true;
                 }
             }

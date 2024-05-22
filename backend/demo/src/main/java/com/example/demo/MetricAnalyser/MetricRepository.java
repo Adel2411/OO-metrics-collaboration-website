@@ -16,7 +16,7 @@ public class MetricRepository {
                         new NumberOfUsedMethodsFromImports("Number Of Used Methods From Imports"),
                         new NumberOfInterfacesImplemented("Number Of Interfaces Implemented"),
                         // TODO : try to fix the error
-//                        new AUC("Attribute Usage Count"),
+                        new AUC("Attribute Usage Count"),
                         new RUEMetric("RUE Metric"),
                         new WebImportCounter("Web Import Counter"),
                         new NonPrimitiveVariableCounter("Non Primitive Variable Counter")

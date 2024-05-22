@@ -17,11 +17,10 @@ import java.util.*;
 
 public class AUC extends MetricStructure {
 
-    private Map<String, Integer> attributeUsageCount = new HashMap<>();
-    private Map<String, Set<String>> methodAttributeUsage = new HashMap<>();
-    @Getter
+    private final Map<String, Integer> attributeUsageCount = new HashMap<>();
+    private final Map<String, Set<String>> methodAttributeUsage = new HashMap<>();
     private int numberOfMethods = 0;
-    private ArrayList<String> methodsNames = new ArrayList<>();
+    private final ArrayList<String> methodsNames = new ArrayList<>();
 
     public AUC(String metricName) {
         super(metricName);
@@ -37,10 +36,12 @@ public class AUC extends MetricStructure {
                     for (MethodDeclaration method : n.getMethods()) {
                         method.accept(this, null);
                         numberOfMethods++;
+                        System.out.println("Method " + numberOfMethods);
                         methodsNames.add(method.getNameAsString());
                     }
                     super.visit(n, arg);
                 }
+
 
                 @Override
                 public void visit(FieldDeclaration n, Object arg) {
@@ -90,11 +91,10 @@ public class AUC extends MetricStructure {
         }
     }
 
-
     public float utilisationAttribute() {
         float x = 0;
         for (Map.Entry<String, Set<String>> entry : methodAttributeUsage.entrySet()) {
-            x = x + entry.getValue().size();
+            x += entry.getValue().size();
         }
         return x;
     }
@@ -102,16 +102,24 @@ public class AUC extends MetricStructure {
     @Override
     public float calculate(MultipartFile file) {
         try (InputStream inputStream = file.getInputStream()) {
-            countAttributeUsage(inputStream);
+            this.countAttributeUsage(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if (this.getNumberOfMethods() == 0) {
+            return 0;
         }
         return this.utilisationAttribute() / this.getNumberOfMethods();
     }
 
     @Override
     public MetricResultModel execute(MultipartFile file) {
-        return new MetricResultModel(this.metricName, String.valueOf(calculate(file)).substring(0, 4));
+        return new MetricResultModel(this.metricName, String.valueOf(calculate(file)));
+    }
+
+    // Getter for numberOfMethods to match the second code snippet
+    public int getNumberOfMethods() {
+       return numberOfMethods;
     }
 
 }

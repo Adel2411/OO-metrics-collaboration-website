@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class MetricResultService {
-    private final MetricRepository metricRepository = new MetricRepository();
+
     public  List<FileMetricResult> analyze(List<MultipartFile> files) {
         ArrayList<FileMetricResult> fileMetricResults = new ArrayList<>();
         for (MultipartFile file : files) {
@@ -16,6 +16,7 @@ public class MetricResultService {
                     .file_name(file.getOriginalFilename())
                     .results(new ArrayList<>())
                     .build();
+            final MetricRepository metricRepository = new MetricRepository();
             for (MetricAnalyser metric : metricRepository.analyse_metrics) {
                 MetricResultModel metricResultModel = metric.execute(file);
                 fileMetricResult.getResults().add(metricResultModel);
