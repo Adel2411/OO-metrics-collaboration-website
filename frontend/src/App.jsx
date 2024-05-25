@@ -15,6 +15,7 @@ import Dashboard from "./main-components/Dashboard";
 import Login from "./main-components/Login";
 import Register from "./main-components/Register";
 import LoadingPage from "./main-components/LoadingPage";
+import Reset from "./main-components/Reset";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -82,6 +83,7 @@ function App() {
               position="bottom-right"
             />
             <Routes>
+              <Route path="/*" element=<Navigate to={"/dashboard"} /> />
               <Route
                 path="/dashboard"
                 element={
@@ -120,6 +122,12 @@ function App() {
                   ) : (
                     <Navigate to="/login" />
                   )
+                }
+              />
+              <Route
+                path="/reset-password"
+                element={
+                  isAuthenticated ? <Navigate to="/dashboard" /> : <Reset />
                 }
               />
             </Routes>
