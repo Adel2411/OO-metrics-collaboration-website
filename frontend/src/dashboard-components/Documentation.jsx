@@ -7,6 +7,7 @@ import url from "../url.json";
 function Documentation() {
   const [copy, setCopy] = useState({});
   const [documents, setDocuments] = useState([]);
+  const [filteredDocuments, setFilteredDocuments] = useState([documents]);
   const [showImplementation, setShowImplementation] = useState(false);
 
   function handleCopy(id, codeString) {
@@ -15,6 +16,14 @@ function Documentation() {
     setTimeout(() => {
       setCopy((prevState) => ({ ...prevState, [id]: false }));
     }, 3000);
+  }
+
+  function handleSearch(e) {
+    let search = e.target.value;
+    let filteredDocuments = documents.filter((document) =>
+      document.metricName.toLowerCase().includes(search.toLowerCase()),
+    );
+    setFilteredDocuments(filteredDocuments);
   }
 
   useEffect(() => {
@@ -151,8 +160,34 @@ function Documentation() {
       <div>
         <div className="overflow-y-auto w-1/5 hidden lg:flex bg-fourth gap-10 py-10 flex-col items-center h-screen fixed">
           <h1 className="documentation-left-title pt-16">Available Metrics</h1>
+          <div className="mx-5 input input-bordered bg-second flex items-center">
+            <input
+              type="text"
+              className="w-full h-10"
+              name="Search"
+              placeholder="Search..."
+              onChange={handleSearch}
+            />
+            <span className="text-xs text-gray-400">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div className="divider"></div>
           <ul className="flex flex-col w-full rounded-box gap-1">
-            {documents.map((document, index) => {
+            {filteredDocuments.map((document, index) => {
               return displayListElementLink(index, document.metricName);
             })}
           </ul>
@@ -164,7 +199,7 @@ function Documentation() {
             </h1>
           </div>
           <ul className="flex flex-col gap-y-3 py-20 ">
-            {documents.map((document, index) => {
+            {filteredDocuments.map((document, index) => {
               return displayListElement(
                 index,
                 document.metricName,
