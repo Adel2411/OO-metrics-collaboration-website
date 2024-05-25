@@ -138,7 +138,7 @@ const Login = ({ setAuth }) => {
                   </Link>
                 </div>
                 <div className="flex flex-row gap-3">
-                  <p>Forget Password ?</p>
+                  <p>Forgot Password ?</p>
                   <Link className="link link-info" to="/reset-password">
                     Reset
                   </Link>
