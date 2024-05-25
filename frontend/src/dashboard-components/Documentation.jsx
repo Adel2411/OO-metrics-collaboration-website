@@ -36,6 +36,7 @@ function Documentation() {
       .then((response) => response.json())
       .then((data) => {
         setDocuments(data.data);
+        setFilteredDocuments(data.data);
       });
   }, []);
 
